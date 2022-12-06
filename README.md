@@ -63,7 +63,7 @@ Import-Module -Name '.\src\GrommunioAdmin' -Verbose
 
 ```powershell
 # Import grommunioAdmin Powershell module
-Import-Module -Name '.\powershell\src\GrommunioAdmin' -Verbose
+Import-Module -Name '.\src\GrommunioAdmin' -Verbose
 
 # Define grommunio Admin API credentials
 $grommunioHost="https://mail.example.com:8443"
