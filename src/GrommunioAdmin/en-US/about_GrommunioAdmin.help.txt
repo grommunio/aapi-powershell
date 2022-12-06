@@ -1,0 +1,17 @@
+PSTOPIC
+    about_GrommunioAdmin
+
+SHORT DESCRIPTION
+    GrommunioAdmin - the PowerShell module for the grommunio Admin API
+
+LONG DESCRIPTION
+    grommunio administration REST API
+
+
+    - API version: 1.9.2
+    - SDK version: 1.9.2
+
+    Frameworks supported:
+
+    * PowerShell 6.2 or later
+    * .NET 4.0 or later

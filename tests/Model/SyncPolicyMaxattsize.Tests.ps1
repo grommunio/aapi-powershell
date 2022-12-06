@@ -1,0 +1,16 @@
+#
+# grommunio Admin API
+# grommunio administration REST API
+# Version: 1.9.2
+#
+
+Describe -tag 'GrommunioAdmin' -name 'GroAdminSyncPolicyMaxattsize' {
+    Context 'GroAdminSyncPolicyMaxattsize' {
+        It 'Initialize-GroAdminSyncPolicyMaxattsize' {
+            # a simple test to create an object
+            #$NewObject = Initialize-GroAdminSyncPolicyMaxattsize
+            #$NewObject | Should -BeOfType SyncPolicyMaxattsize
+            #$NewObject.property | Should -Be 0
+        }
+    }
+}
