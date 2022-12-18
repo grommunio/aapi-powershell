@@ -7,7 +7,7 @@
 [![code with love by grommunio](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-grommunio-ff1414.svg)](https://grommunio.com)
 [![twitter](https://img.shields.io/twitter/follow/grommunio?style=social)](https://twitter.com/grommunio)
 
-**grommunio AAPIPS (Admin API Powershell) is the Powershell interface to the REST-based [grommunio Admin API](https://github.com/grommunio/admin-api) to manage entire grommunio installations from Powershell**
+grommunio AAPIPS (Admin API Powershell) is the Powershell interface to the REST-based [grommunio Admin API](https://github.com/grommunio/admin-api) to manage entire grommunio installations from Powershell
 
 <details open="open">
 <summary>Overview</summary>
@@ -36,11 +36,11 @@
 
 ## About grommunio AAPIPS
 
-- **Simple** management of grommunio for Microsoft Administrators
-- **Well-documented** interface descriptions
-- **Powerful** Powershell interface allows simple and complex management tasks with grommunio
-- **Standardized** calls enable full compliance with grommunio Admin API
-- **Standalone**, requiring no dependencies to run
+- Simple management of grommunio for Microsoft Administrators
+- Well-documented interface descriptions
+- Powerful Powershell interface allows simple and complex management tasks with grommunio
+- Standardized calls enable full compliance with grommunio Admin API
+- Standalone, requiring no dependencies to run
 
 ## Getting Started
 
@@ -132,154 +132,154 @@ All URIs are relative to */api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*GroAdminDefaultsApi* | [**Get-GroAdminCreateParams**](docs/GroAdminDefaultsApi.md#Get-GroAdminCreateParams) | **GET** /defaults/createParams | getCreateParams
-*GroAdminDefaultsApi* | [**Get-GroAdminDomainDefaultParams**](docs/GroAdminDefaultsApi.md#Get-GroAdminDomainDefaultParams) | **GET** /defaults/createParams/{domainID} | getDomainDefaultParams
-*GroAdminDefaultsApi* | [**Get-GroAdminStoreLangs**](docs/GroAdminDefaultsApi.md#Get-GroAdminStoreLangs) | **GET** /defaults/storeLangs | getStoreLangs
-*GroAdminDefaultsApi* | [**Invoke-GroAdminPatchCreateParams**](docs/GroAdminDefaultsApi.md#Invoke-GroAdminPatchCreateParams) | **PATCH** /defaults/createParams | patchCreateParams
-*GroAdminDefaultsApi* | [**Invoke-GroAdminPatchDomainDefaultParams**](docs/GroAdminDefaultsApi.md#Invoke-GroAdminPatchDomainDefaultParams) | **PATCH** /defaults/createParams/{domainID} | patchDomainDefaultParams
-*GroAdminDefaultsApi* | [**Send-GroAdminCreateParams**](docs/GroAdminDefaultsApi.md#Send-GroAdminCreateParams) | **PUT** /defaults/createParams | putCreateParams
-*GroAdminDefaultsApi* | [**Send-GroAdminDomainDefaultParams**](docs/GroAdminDefaultsApi.md#Send-GroAdminDomainDefaultParams) | **PUT** /defaults/createParams/{domainID} | putDomainDefaultParams
-*GroAdminDomainAdminClassesApi* | [**Invoke-GroAdminDeleteClass**](docs/GroAdminDomainAdminClassesApi.md#Invoke-GroAdminDeleteClass) | **DELETE** /domains/{domainID}/classes/{ID} | deleteClass
-*GroAdminDomainAdminClassesApi* | [**Get-GroAdminClass**](docs/GroAdminDomainAdminClassesApi.md#Get-GroAdminClass) | **GET** /domains/{domainID}/classes/{ID} | getClass
-*GroAdminDomainAdminClassesApi* | [**Get-GroAdminClasses**](docs/GroAdminDomainAdminClassesApi.md#Get-GroAdminClasses) | **GET** /domains/{domainID}/classes | getClasses
-*GroAdminDomainAdminClassesApi* | [**Get-GroAdminClassesTree**](docs/GroAdminDomainAdminClassesApi.md#Get-GroAdminClassesTree) | **GET** /domains/{domainID}/classes/tree | getClassesTree
-*GroAdminDomainAdminClassesApi* | [**Invoke-GroAdminPatchClass**](docs/GroAdminDomainAdminClassesApi.md#Invoke-GroAdminPatchClass) | **PATCH** /domains/{domainID}/classes/{ID} | patchClass
-*GroAdminDomainAdminClassesApi* | [**Submit-GroAdminClass**](docs/GroAdminDomainAdminClassesApi.md#Submit-GroAdminClass) | **POST** /domains/{domainID}/classes | postClass
-*GroAdminDomainAdminClassesApi* | [**Test-GroAdminFilter**](docs/GroAdminDomainAdminClassesApi.md#Test-GroAdminFilter) | **POST** /domains/{domainID}/classes/testFilter | testFilter
-*GroAdminDomainAdminFoldersApi* | [**Invoke-GroAdminDeleteFolder**](docs/GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminDeleteFolder) | **DELETE** /domains/{domainID}/folders/{folderID} | deleteFolder
-*GroAdminDomainAdminFoldersApi* | [**Invoke-GroAdminDeleteMember**](docs/GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminDeleteMember) | **DELETE** /domains/{domainID}/folders/{folderID}/owners/{memberID} | deleteMember
-*GroAdminDomainAdminFoldersApi* | [**Get-GroAdminFolder**](docs/GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolder) | **GET** /domains/{domainID}/folders/{folderID} | getFolder
-*GroAdminDomainAdminFoldersApi* | [**Get-GroAdminFolderTree**](docs/GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolderTree) | **GET** /domains/{domainID}/folders/tree | getFolderTree
-*GroAdminDomainAdminFoldersApi* | [**Get-GroAdminFolders**](docs/GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolders) | **GET** /domains/{domainID}/folders | getFolders
-*GroAdminDomainAdminFoldersApi* | [**Get-GroAdminOwners**](docs/GroAdminDomainAdminFoldersApi.md#Get-GroAdminOwners) | **GET** /domains/{domainID}/folders/{folderID}/owners | getOwners
-*GroAdminDomainAdminFoldersApi* | [**Invoke-GroAdminPatchFolder**](docs/GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminPatchFolder) | **PATCH** /domains/{domainID}/folders/{folderID} | patchFolder
-*GroAdminDomainAdminFoldersApi* | [**Submit-GroAdminFolders**](docs/GroAdminDomainAdminFoldersApi.md#Submit-GroAdminFolders) | **POST** /domains/{domainID}/folders | postFolders
-*GroAdminDomainAdminFoldersApi* | [**Submit-GroAdminOwner**](docs/GroAdminDomainAdminFoldersApi.md#Submit-GroAdminOwner) | **POST** /domains/{domainID}/folders/{folderID}/owners | postOwner
-*GroAdminDomainAdminFoldersApi* | [**Set-GroAdminMember**](docs/GroAdminDomainAdminFoldersApi.md#Set-GroAdminMember) | **PUT** /domains/{domainID}/folders/{folderID}/owners/{memberID} | setMember
-*GroAdminDomainAdminMListsApi* | [**Invoke-GroAdminDeleteMlist**](docs/GroAdminDomainAdminMListsApi.md#Invoke-GroAdminDeleteMlist) | **DELETE** /domains/{domainID}/mlists/{ID} | deleteMlist
-*GroAdminDomainAdminMListsApi* | [**Get-GroAdminMlist**](docs/GroAdminDomainAdminMListsApi.md#Get-GroAdminMlist) | **GET** /domains/{domainID}/mlists/{ID} | getMlist
-*GroAdminDomainAdminMListsApi* | [**Get-GroAdminMlists**](docs/GroAdminDomainAdminMListsApi.md#Get-GroAdminMlists) | **GET** /domains/{domainID}/mlists | getMlists
-*GroAdminDomainAdminMListsApi* | [**Invoke-GroAdminPatchMlist**](docs/GroAdminDomainAdminMListsApi.md#Invoke-GroAdminPatchMlist) | **PATCH** /domains/{domainID}/mlists/{ID} | patchMlist
-*GroAdminDomainAdminMListsApi* | [**Submit-GroAdminMlists**](docs/GroAdminDomainAdminMListsApi.md#Submit-GroAdminMlists) | **POST** /domains/{domainID}/mlists | postMlists
-*GroAdminDomainAdminUsersApi* | [**Stop-GroAdminWipe**](docs/GroAdminDomainAdminUsersApi.md#Stop-GroAdminWipe) | **DELETE** /domains/{domainID}/users/{userID}/sync/{deviceID}/wipe | cancelWipe
-*GroAdminDomainAdminUsersApi* | [**Invoke-GroAdminDeleteStoreAccessUser**](docs/GroAdminDomainAdminUsersApi.md#Invoke-GroAdminDeleteStoreAccessUser) | **DELETE** /domains/{domainID}/users/{userID}/storeAccess/{username} | deleteStoreAccessUser
-*GroAdminDomainAdminUsersApi* | [**Invoke-GroAdminDeleteStoreProps**](docs/GroAdminDomainAdminUsersApi.md#Invoke-GroAdminDeleteStoreProps) | **DELETE** /domains/{domainID}/users/{userID}/storeProps | deleteStoreProps
-*GroAdminDomainAdminUsersApi* | [**Invoke-GroAdminDeleteUser**](docs/GroAdminDomainAdminUsersApi.md#Invoke-GroAdminDeleteUser) | **DELETE** /domains/{domainID}/users/{userID} | deleteUser
-*GroAdminDomainAdminUsersApi* | [**Get-GroAdminDelegates**](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminDelegates) | **GET** /domains/{domainID}/users/{userID}/delegates | getDelegates
-*GroAdminDomainAdminUsersApi* | [**Get-GroAdminDomainSyncPolicy**](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminDomainSyncPolicy) | **GET** /domains/{domainID}/syncPolicy | getDomainSyncPolicy
-*GroAdminDomainAdminUsersApi* | [**Get-GroAdminSendas**](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminSendas) | **GET** /domains/{domainID}/users/{userID}/sendas | getSendas
-*GroAdminDomainAdminUsersApi* | [**Get-GroAdminStoreAccessUsers**](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminStoreAccessUsers) | **GET** /domains/{domainID}/users/{userID}/storeAccess | getStoreAccessUsers
-*GroAdminDomainAdminUsersApi* | [**Get-GroAdminStoreProps**](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminStoreProps) | **GET** /domains/{domainID}/users/{userID}/storeProps | getStoreProps
-*GroAdminDomainAdminUsersApi* | [**Get-GroAdminSyncedDevices**](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminSyncedDevices) | **GET** /domains/{domainID}/users/{userID}/sync | getSyncedDevices
-*GroAdminDomainAdminUsersApi* | [**Get-GroAdminUser**](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminUser) | **GET** /domains/{domainID}/users/{userID} | getUser
-*GroAdminDomainAdminUsersApi* | [**Get-GroAdminUsers**](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminUsers) | **GET** /domains/{domainID}/users | getUsers
-*GroAdminDomainAdminUsersApi* | [**Invoke-GroAdminOofSizeLarge**](docs/GroAdminDomainAdminUsersApi.md#Invoke-GroAdminOofSizeLarge) | **GET** /domains/{domainID}/users/{userID}/oof | oofSizeLarge
-*GroAdminDomainAdminUsersApi* | [**Invoke-GroAdminPatchStoreProps**](docs/GroAdminDomainAdminUsersApi.md#Invoke-GroAdminPatchStoreProps) | **PATCH** /domains/{domainID}/users/{userID}/storeProps | patchStoreProps
-*GroAdminDomainAdminUsersApi* | [**Invoke-GroAdminPatchUser**](docs/GroAdminDomainAdminUsersApi.md#Invoke-GroAdminPatchUser) | **PATCH** /domains/{domainID}/users/{userID} | patchUser
-*GroAdminDomainAdminUsersApi* | [**Submit-GroAdminDeviceWipe**](docs/GroAdminDomainAdminUsersApi.md#Submit-GroAdminDeviceWipe) | **POST** /domains/{domainID}/users/{userID}/sync/{deviceID}/wipe | postDeviceWipe
-*GroAdminDomainAdminUsersApi* | [**Submit-GroAdminStoreAccessUser**](docs/GroAdminDomainAdminUsersApi.md#Submit-GroAdminStoreAccessUser) | **POST** /domains/{domainID}/users/{userID}/storeAccess | postStoreAccessUser
-*GroAdminDomainAdminUsersApi* | [**Submit-GroAdminUser**](docs/GroAdminDomainAdminUsersApi.md#Submit-GroAdminUser) | **POST** /domains/{domainID}/users | postUser
-*GroAdminDomainAdminUsersApi* | [**Send-GroAdminDelegates**](docs/GroAdminDomainAdminUsersApi.md#Send-GroAdminDelegates) | **PUT** /domains/{domainID}/users/{userID}/delegates | putDelegates
-*GroAdminDomainAdminUsersApi* | [**Send-GroAdminDeviceResync**](docs/GroAdminDomainAdminUsersApi.md#Send-GroAdminDeviceResync) | **PUT** /domains/{domainID}/users/{userID}/sync/{deviceID}/resync | putDeviceResync
-*GroAdminDomainAdminUsersApi* | [**Send-GroAdminDownsync**](docs/GroAdminDomainAdminUsersApi.md#Send-GroAdminDownsync) | **PUT** /domains/{domainID}/users/{userID}/downsync | putDownsync
-*GroAdminDomainAdminUsersApi* | [**Send-GroAdminSendas**](docs/GroAdminDomainAdminUsersApi.md#Send-GroAdminSendas) | **PUT** /domains/{domainID}/users/{userID}/sendas | putSendas
-*GroAdminDomainAdminUsersApi* | [**Send-GroAdminStoreAccessUser**](docs/GroAdminDomainAdminUsersApi.md#Send-GroAdminStoreAccessUser) | **PUT** /domains/{domainID}/users/{userID}/storeAccess | putStoreAccessUser
-*GroAdminDomainAdminUsersApi* | [**Remove-GroAdminDeviceResync**](docs/GroAdminDomainAdminUsersApi.md#Remove-GroAdminDeviceResync) | **DELETE** /domains/{domainID}/users/{userID}/sync/{deviceID} | removeDeviceResync
-*GroAdminDomainAdminUsersApi* | [**Remove-GroAdminDeviceStates**](docs/GroAdminDomainAdminUsersApi.md#Remove-GroAdminDeviceStates) | **DELETE** /domains/{domainID}/users/{userID}/sync | removeDeviceStates
-*GroAdminDomainAdminUsersApi* | [**Set-GroAdminOofSize**](docs/GroAdminDomainAdminUsersApi.md#Set-GroAdminOofSize) | **PUT** /domains/{domainID}/users/{userID}/oof | setOofSize
-*GroAdminDomainAdminUsersApi* | [**Set-GroAdminPassword**](docs/GroAdminDomainAdminUsersApi.md#Set-GroAdminPassword) | **PUT** /domains/{domainID}/users/{userID}/password | setPassword
-*GroAdminLDAPApi* | [**Invoke-GroAdminCheckUsers**](docs/GroAdminLDAPApi.md#Invoke-GroAdminCheckUsers) | **GET** /domains/ldap/check | checkUsers
-*GroAdminLDAPApi* | [**Invoke-GroAdminDeleteLDAPConf**](docs/GroAdminLDAPApi.md#Invoke-GroAdminDeleteLDAPConf) | **DELETE** /system/mconf/ldap | deleteLDAPConf
-*GroAdminLDAPApi* | [**Invoke-GroAdminDeleteOrgLDAPConf**](docs/GroAdminLDAPApi.md#Invoke-GroAdminDeleteOrgLDAPConf) | **DELETE** /system/orgs/{ID}/ldap | deleteOrgLDAPConf
-*GroAdminLDAPApi* | [**Invoke-GroAdminDeleteOrphaned**](docs/GroAdminLDAPApi.md#Invoke-GroAdminDeleteOrphaned) | **DELETE** /domains/ldap/check | deleteOrphaned
-*GroAdminLDAPApi* | [**Get-GroAdminLDAP**](docs/GroAdminLDAPApi.md#Get-GroAdminLDAP) | **GET** /domains/ldap/dump | dumpLDAP
-*GroAdminLDAPApi* | [**Get-GroAdminLDAPConf**](docs/GroAdminLDAPApi.md#Get-GroAdminLDAPConf) | **GET** /system/mconf/ldap | getLDAPConf
-*GroAdminLDAPApi* | [**Get-GroAdminOrgLDAPConf**](docs/GroAdminLDAPApi.md#Get-GroAdminOrgLDAPConf) | **GET** /system/orgs/{ID}/ldap | getOrgLDAPConf
-*GroAdminLDAPApi* | [**Import-GroAdminLdapUser**](docs/GroAdminLDAPApi.md#Import-GroAdminLdapUser) | **POST** /domains/ldap/importUser | importLdapUser
-*GroAdminLDAPApi* | [**Send-GroAdminDownsync**](docs/GroAdminLDAPApi.md#Send-GroAdminDownsync) | **PUT** /domains/{domainID}/users/{userID}/downsync | putDownsync
-*GroAdminLDAPApi* | [**Search-GroAdminLDAP**](docs/GroAdminLDAPApi.md#Search-GroAdminLDAP) | **GET** /domains/ldap/search | searchLDAP
-*GroAdminLDAPApi* | [**Set-GroAdminLDAPConf**](docs/GroAdminLDAPApi.md#Set-GroAdminLDAPConf) | **PUT** /system/mconf/ldap | setLDAPConf
-*GroAdminLDAPApi* | [**Set-GroAdminOrgLDAPConf**](docs/GroAdminLDAPApi.md#Set-GroAdminOrgLDAPConf) | **PUT** /system/orgs/{ID}/ldap | setOrgLDAPConf
-*GroAdminLDAPApi* | [**Update-GroAdminAllDomainUsers**](docs/GroAdminLDAPApi.md#Update-GroAdminAllDomainUsers) | **POST** /domains/{domainID}/ldap/downsync | updateAllDomainUsers
-*GroAdminLDAPApi* | [**Update-GroAdminAllUsers**](docs/GroAdminLDAPApi.md#Update-GroAdminAllUsers) | **POST** /domains/ldap/downsync | updateAllUsers
-*GroAdminLDAPApi* | [**Update-GroAdminOrgLDAPUsers**](docs/GroAdminLDAPApi.md#Update-GroAdminOrgLDAPUsers) | **POST** /system/orgs/{ID}/ldap/downsync | updateOrgLDAPUsers
-*GroAdminMiscApi* | [**Invoke-GroAdminCheckFormat**](docs/GroAdminMiscApi.md#Invoke-GroAdminCheckFormat) | **GET** /chkFormat | checkFormat
-*GroAdminMiscApi* | [**Invoke-GroAdminDeleteMailq**](docs/GroAdminMiscApi.md#Invoke-GroAdminDeleteMailq) | **POST** /system/mailq/delete | deleteMailq
-*GroAdminMiscApi* | [**Clear-GroAdminMailq**](docs/GroAdminMiscApi.md#Clear-GroAdminMailq) | **POST** /system/mailq/flush | flushMailq
-*GroAdminMiscApi* | [**Get-GroAdminAbout**](docs/GroAdminMiscApi.md#Get-GroAdminAbout) | **GET** /about | getAbout
-*GroAdminMiscApi* | [**Get-GroAdminMailq**](docs/GroAdminMiscApi.md#Get-GroAdminMailq) | **GET** /system/mailq | getMailq
-*GroAdminMiscApi* | [**Get-GroAdminProfile**](docs/GroAdminMiscApi.md#Get-GroAdminProfile) | **GET** /profile | getProfile
-*GroAdminMiscApi* | [**Get-GroAdminStatus**](docs/GroAdminMiscApi.md#Get-GroAdminStatus) | **GET** /status | getStatus
-*GroAdminMiscApi* | [**Get-GroAdminUserDomains**](docs/GroAdminMiscApi.md#Get-GroAdminUserDomains) | **GET** /domains | getUserDomains
-*GroAdminMiscApi* | [**Submit-GroAdminLogin**](docs/GroAdminMiscApi.md#Submit-GroAdminLogin) | **POST** /login | postLogin
-*GroAdminMiscApi* | [**Submit-GroAdminRequeue**](docs/GroAdminMiscApi.md#Submit-GroAdminRequeue) | **POST** /system/mailq/requeue | postRequeue
-*GroAdminMiscApi* | [**Send-GroAdminPasswd**](docs/GroAdminMiscApi.md#Send-GroAdminPasswd) | **PUT** /passwd | putPasswd
-*GroAdminMiscApi* | [**Invoke-GroAdminRemoteCLI**](docs/GroAdminMiscApi.md#Invoke-GroAdminRemoteCLI) | **POST** /system/cli | remoteCLI
-*GroAdminMiscApi* | [**Sync-GroAdminTop**](docs/GroAdminMiscApi.md#Sync-GroAdminTop) | **GET** /system/sync/top | syncTop
-*GroAdminServiceApi* | [**Get-GroAdminUserDeviceWipeStatus**](docs/GroAdminServiceApi.md#Get-GroAdminUserDeviceWipeStatus) | **GET** /service/wipe/{username} | getUserDeviceWipeStatus
-*GroAdminServiceApi* | [**Get-GroAdminUserInformation**](docs/GroAdminServiceApi.md#Get-GroAdminUserInformation) | **GET** /service/userinfo/{username} | getUserInformation
-*GroAdminServiceApi* | [**Get-GroAdminUserSyncPolicy**](docs/GroAdminServiceApi.md#Get-GroAdminUserSyncPolicy) | **GET** /service/syncPolicy/{username} | getUserSyncPolicy
-*GroAdminServiceApi* | [**Send-GroAdminPasswd**](docs/GroAdminServiceApi.md#Send-GroAdminPasswd) | **PUT** /passwd | putPasswd
-*GroAdminServiceApi* | [**Set-GroAdminUserDeviceWipeStatus**](docs/GroAdminServiceApi.md#Set-GroAdminUserDeviceWipeStatus) | **POST** /service/wipe/{username} | setUserDeviceWipeStatus
-*GroAdminSystemAdminDBConfApi* | [**Invoke-GroAdminDeleteConfigFile**](docs/GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminDeleteConfigFile) | **DELETE** /system/dbconf/{service}/{file}/ | deleteConfigFile
-*GroAdminSystemAdminDBConfApi* | [**Invoke-GroAdminDeleteServiceConfig**](docs/GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminDeleteServiceConfig) | **DELETE** /system/dbconf/{service}/ | deleteServiceConfig
-*GroAdminSystemAdminDBConfApi* | [**Get-GroAdminCommandList**](docs/GroAdminSystemAdminDBConfApi.md#Get-GroAdminCommandList) | **GET** /system/dbconf/commands | getCommandList
-*GroAdminSystemAdminDBConfApi* | [**Get-GroAdminConfigFile**](docs/GroAdminSystemAdminDBConfApi.md#Get-GroAdminConfigFile) | **GET** /system/dbconf/{service}/{file}/ | getConfigFile
-*GroAdminSystemAdminDBConfApi* | [**Get-GroAdminServiceFiles**](docs/GroAdminSystemAdminDBConfApi.md#Get-GroAdminServiceFiles) | **GET** /system/dbconf/{service}/ | getServiceFiles
-*GroAdminSystemAdminDBConfApi* | [**Get-GroAdminServicesListDBConf**](docs/GroAdminSystemAdminDBConfApi.md#Get-GroAdminServicesListDBConf) | **GET** /system/dbconf/ | getServicesListDBConf
-*GroAdminSystemAdminDBConfApi* | [**Invoke-GroAdminPatchConfigFile**](docs/GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminPatchConfigFile) | **PATCH** /system/dbconf/{service}/{file}/ | patchConfigFile
-*GroAdminSystemAdminDBConfApi* | [**Invoke-GroAdminPatchServiceFiles**](docs/GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminPatchServiceFiles) | **PATCH** /system/dbconf/{service}/ | patchServiceFiles
-*GroAdminSystemAdminDBConfApi* | [**Send-GroAdminConfigFile**](docs/GroAdminSystemAdminDBConfApi.md#Send-GroAdminConfigFile) | **PUT** /system/dbconf/{service}/{file}/ | putConfigFile
-*GroAdminSystemAdminDashboardApi* | [**Get-GroAdminDashboard**](docs/GroAdminSystemAdminDashboardApi.md#Get-GroAdminDashboard) | **GET** /system/dashboard | getDashboard
-*GroAdminSystemAdminDashboardApi* | [**Get-GroAdminServiceInfo**](docs/GroAdminSystemAdminDashboardApi.md#Get-GroAdminServiceInfo) | **GET** /system/dashboard/services/{unit} | getServiceInfo
-*GroAdminSystemAdminDashboardApi* | [**Get-GroAdminServicesList**](docs/GroAdminSystemAdminDashboardApi.md#Get-GroAdminServicesList) | **GET** /system/dashboard/services | getServicesList
-*GroAdminSystemAdminDashboardApi* | [**Send-GroAdminServiceSignal**](docs/GroAdminSystemAdminDashboardApi.md#Send-GroAdminServiceSignal) | **POST** /system/dashboard/services/{unit}/{action} | sendServiceSignal
-*GroAdminSystemAdminDomainsApi* | [**Invoke-GroAdminDeleteDomain**](docs/GroAdminSystemAdminDomainsApi.md#Invoke-GroAdminDeleteDomain) | **DELETE** /system/domains/{domainID} | deleteDomain
-*GroAdminSystemAdminDomainsApi* | [**Get-GroAdminAllUsers**](docs/GroAdminSystemAdminDomainsApi.md#Get-GroAdminAllUsers) | **GET** /system/users | getAllUsers
-*GroAdminSystemAdminDomainsApi* | [**Get-GroAdminDomainInfo**](docs/GroAdminSystemAdminDomainsApi.md#Get-GroAdminDomainInfo) | **GET** /system/domains/{domainID} | getDomainInfo
-*GroAdminSystemAdminDomainsApi* | [**Get-GroAdminDomains**](docs/GroAdminSystemAdminDomainsApi.md#Get-GroAdminDomains) | **GET** /system/domains | getDomains
-*GroAdminSystemAdminDomainsApi* | [**Invoke-GroAdminPatchDomain**](docs/GroAdminSystemAdminDomainsApi.md#Invoke-GroAdminPatchDomain) | **PATCH** /system/domains/{domainID} | patchDomain
-*GroAdminSystemAdminDomainsApi* | [**Submit-GroAdminDomain**](docs/GroAdminSystemAdminDomainsApi.md#Submit-GroAdminDomain) | **POST** /system/domains | postDomain
-*GroAdminSystemAdminLicenseApi* | [**Invoke-GroAdminDownloadCert**](docs/GroAdminSystemAdminLicenseApi.md#Invoke-GroAdminDownloadCert) | **GET** /system/license/certificate.pem | downloadCert
-*GroAdminSystemAdminLicenseApi* | [**Get-GroAdminLicense**](docs/GroAdminSystemAdminLicenseApi.md#Get-GroAdminLicense) | **GET** /system/license | getLicense
-*GroAdminSystemAdminLicenseApi* | [**Send-GroAdminLicense**](docs/GroAdminSystemAdminLicenseApi.md#Send-GroAdminLicense) | **PUT** /system/license | putLicense
-*GroAdminSystemAdminLogsApi* | [**Get-GroAdminLog**](docs/GroAdminSystemAdminLogsApi.md#Get-GroAdminLog) | **GET** /system/logs/{file} | getLog
-*GroAdminSystemAdminLogsApi* | [**Get-GroAdminLogs**](docs/GroAdminSystemAdminLogsApi.md#Get-GroAdminLogs) | **GET** /system/logs | getLogs
-*GroAdminSystemAdminMConfApi* | [**Invoke-GroAdminDeleteAuthmgr**](docs/GroAdminSystemAdminMConfApi.md#Invoke-GroAdminDeleteAuthmgr) | **DELETE** /system/mconf/authmgr | deleteAuthmgr
-*GroAdminSystemAdminMConfApi* | [**Invoke-GroAdminDeleteLDAPConf**](docs/GroAdminSystemAdminMConfApi.md#Invoke-GroAdminDeleteLDAPConf) | **DELETE** /system/mconf/ldap | deleteLDAPConf
-*GroAdminSystemAdminMConfApi* | [**Get-GroAdminAuthmgr**](docs/GroAdminSystemAdminMConfApi.md#Get-GroAdminAuthmgr) | **GET** /system/mconf/authmgr | getAuthmgr
-*GroAdminSystemAdminMConfApi* | [**Get-GroAdminLDAPConf**](docs/GroAdminSystemAdminMConfApi.md#Get-GroAdminLDAPConf) | **GET** /system/mconf/ldap | getLDAPConf
-*GroAdminSystemAdminMConfApi* | [**Set-GroAdminAuthmgr**](docs/GroAdminSystemAdminMConfApi.md#Set-GroAdminAuthmgr) | **PUT** /system/mconf/authmgr | setAuthmgr
-*GroAdminSystemAdminMConfApi* | [**Set-GroAdminLDAPConf**](docs/GroAdminSystemAdminMConfApi.md#Set-GroAdminLDAPConf) | **PUT** /system/mconf/ldap | setLDAPConf
-*GroAdminSystemAdminOrganizationsApi* | [**Invoke-GroAdminDeleteOrg**](docs/GroAdminSystemAdminOrganizationsApi.md#Invoke-GroAdminDeleteOrg) | **DELETE** /system/orgs/{ID} | deleteOrg
-*GroAdminSystemAdminOrganizationsApi* | [**Invoke-GroAdminDeleteOrgLDAPConf**](docs/GroAdminSystemAdminOrganizationsApi.md#Invoke-GroAdminDeleteOrgLDAPConf) | **DELETE** /system/orgs/{ID}/ldap | deleteOrgLDAPConf
-*GroAdminSystemAdminOrganizationsApi* | [**Get-GroAdminOrg**](docs/GroAdminSystemAdminOrganizationsApi.md#Get-GroAdminOrg) | **GET** /system/orgs/{ID} | getOrg
-*GroAdminSystemAdminOrganizationsApi* | [**Get-GroAdminOrgLDAPConf**](docs/GroAdminSystemAdminOrganizationsApi.md#Get-GroAdminOrgLDAPConf) | **GET** /system/orgs/{ID}/ldap | getOrgLDAPConf
-*GroAdminSystemAdminOrganizationsApi* | [**Get-GroAdminOrgs**](docs/GroAdminSystemAdminOrganizationsApi.md#Get-GroAdminOrgs) | **GET** /system/orgs | getOrgs
-*GroAdminSystemAdminOrganizationsApi* | [**Invoke-GroAdminPatchOrg**](docs/GroAdminSystemAdminOrganizationsApi.md#Invoke-GroAdminPatchOrg) | **PATCH** /system/orgs/{ID} | patchOrg
-*GroAdminSystemAdminOrganizationsApi* | [**Submit-GroAdminOrgs**](docs/GroAdminSystemAdminOrganizationsApi.md#Submit-GroAdminOrgs) | **POST** /system/orgs | postOrgs
-*GroAdminSystemAdminOrganizationsApi* | [**Set-GroAdminOrgLDAPConf**](docs/GroAdminSystemAdminOrganizationsApi.md#Set-GroAdminOrgLDAPConf) | **PUT** /system/orgs/{ID}/ldap | setOrgLDAPConf
-*GroAdminSystemAdminProxiesApi* | [**Get-GroAdminAntispam**](docs/GroAdminSystemAdminProxiesApi.md#Get-GroAdminAntispam) | **GET** /system/antispam/{path} | getAntispam
-*GroAdminSystemAdminProxiesApi* | [**Get-GroAdminVhostStatus**](docs/GroAdminSystemAdminProxiesApi.md#Get-GroAdminVhostStatus) | **GET** /system/vhostStatus/{host} | getVhostStatus
-*GroAdminSystemAdminProxiesApi* | [**Get-GroAdminVhosts**](docs/GroAdminSystemAdminProxiesApi.md#Get-GroAdminVhosts) | **GET** /system/vhostStatus | getVhosts
-*GroAdminSystemAdminRolesApi* | [**Invoke-GroAdminDeleteRole**](docs/GroAdminSystemAdminRolesApi.md#Invoke-GroAdminDeleteRole) | **DELETE** /system/roles/{ID} | deleteRole
-*GroAdminSystemAdminRolesApi* | [**Get-GroAdminPermissions**](docs/GroAdminSystemAdminRolesApi.md#Get-GroAdminPermissions) | **GET** /system/roles/permissions | getPermissions
-*GroAdminSystemAdminRolesApi* | [**Get-GroAdminRole**](docs/GroAdminSystemAdminRolesApi.md#Get-GroAdminRole) | **GET** /system/roles/{ID} | getRole
-*GroAdminSystemAdminRolesApi* | [**Get-GroAdminRoles**](docs/GroAdminSystemAdminRolesApi.md#Get-GroAdminRoles) | **GET** /system/roles | getRoles
-*GroAdminSystemAdminRolesApi* | [**Invoke-GroAdminPatchRole**](docs/GroAdminSystemAdminRolesApi.md#Invoke-GroAdminPatchRole) | **PATCH** /system/roles/{ID} | patchRole
-*GroAdminSystemAdminRolesApi* | [**Invoke-GroAdminPatchUserRoles**](docs/GroAdminSystemAdminRolesApi.md#Invoke-GroAdminPatchUserRoles) | **PATCH** /domains/{domainID}/users/{userID}/roles | patchUserRoles
-*GroAdminSystemAdminRolesApi* | [**Submit-GroAdminRole**](docs/GroAdminSystemAdminRolesApi.md#Submit-GroAdminRole) | **POST** /system/roles | postRole
-*GroAdminSystemAdminServersApi* | [**Invoke-GroAdminDeleteServer**](docs/GroAdminSystemAdminServersApi.md#Invoke-GroAdminDeleteServer) | **DELETE** /system/servers/{ID} | deleteServer
-*GroAdminSystemAdminServersApi* | [**Get-GroAdminServer**](docs/GroAdminSystemAdminServersApi.md#Get-GroAdminServer) | **GET** /system/servers/{ID} | getServer
-*GroAdminSystemAdminServersApi* | [**Get-GroAdminServers**](docs/GroAdminSystemAdminServersApi.md#Get-GroAdminServers) | **GET** /system/servers | getServers
-*GroAdminSystemAdminServersApi* | [**Invoke-GroAdminPatchServer**](docs/GroAdminSystemAdminServersApi.md#Invoke-GroAdminPatchServer) | **PATCH** /system/servers/{ID} | patchServer
-*GroAdminSystemAdminServersApi* | [**Submit-GroAdminServers**](docs/GroAdminSystemAdminServersApi.md#Submit-GroAdminServers) | **POST** /system/servers | postServers
-*GroAdminTasQApi* | [**Get-GroAdminTask**](docs/GroAdminTasQApi.md#Get-GroAdminTask) | **GET** /tasq/tasks/{ID} | getTask
-*GroAdminTasQApi* | [**Get-GroAdminTasks**](docs/GroAdminTasQApi.md#Get-GroAdminTasks) | **GET** /tasq/tasks | getTasks
-*GroAdminTasQApi* | [**Invoke-GroAdminNotify**](docs/GroAdminTasQApi.md#Invoke-GroAdminNotify) | **POST** /tasq/notify | notify
-*GroAdminTasQApi* | [**Start-GroAdminTaskq**](docs/GroAdminTasQApi.md#Start-GroAdminTaskq) | **POST** /tasq/start | startTaskq
-*GroAdminTasQApi* | [**Stop-GroAdminTaskq**](docs/GroAdminTasQApi.md#Stop-GroAdminTaskq) | **POST** /tasq/stop | stopTaskq
-*GroAdminTasQApi* | [**Invoke-GroAdminTaskQStatus**](docs/GroAdminTasQApi.md#Invoke-GroAdminTaskQStatus) | **GET** /tasq/status | taskQStatus
+GroAdminDefaultsApi | [Get-GroAdminCreateParams](docs/GroAdminDefaultsApi.md#Get-GroAdminCreateParams) | GET /defaults/createParams | getCreateParams
+GroAdminDefaultsApi | [Get-GroAdminDomainDefaultParams](docs/GroAdminDefaultsApi.md#Get-GroAdminDomainDefaultParams) | GET /defaults/createParams/{domainID} | getDomainDefaultParams
+GroAdminDefaultsApi | [Get-GroAdminStoreLangs](docs/GroAdminDefaultsApi.md#Get-GroAdminStoreLangs) | GET /defaults/storeLangs | getStoreLangs
+GroAdminDefaultsApi | [Invoke-GroAdminPatchCreateParams](docs/GroAdminDefaultsApi.md#Invoke-GroAdminPatchCreateParams) | PATCH /defaults/createParams | patchCreateParams
+GroAdminDefaultsApi | [Invoke-GroAdminPatchDomainDefaultParams](docs/GroAdminDefaultsApi.md#Invoke-GroAdminPatchDomainDefaultParams) | PATCH /defaults/createParams/{domainID} | patchDomainDefaultParams
+GroAdminDefaultsApi | [Send-GroAdminCreateParams](docs/GroAdminDefaultsApi.md#Send-GroAdminCreateParams) | PUT /defaults/createParams | putCreateParams
+GroAdminDefaultsApi | [Send-GroAdminDomainDefaultParams](docs/GroAdminDefaultsApi.md#Send-GroAdminDomainDefaultParams) | PUT /defaults/createParams/{domainID} | putDomainDefaultParams
+GroAdminDomainAdminClassesApi | [Invoke-GroAdminDeleteClass](docs/GroAdminDomainAdminClassesApi.md#Invoke-GroAdminDeleteClass) | DELETE /domains/{domainID}/classes/{ID} | deleteClass
+GroAdminDomainAdminClassesApi | [Get-GroAdminClass](docs/GroAdminDomainAdminClassesApi.md#Get-GroAdminClass) | GET /domains/{domainID}/classes/{ID} | getClass
+GroAdminDomainAdminClassesApi | [Get-GroAdminClasses](docs/GroAdminDomainAdminClassesApi.md#Get-GroAdminClasses) | GET /domains/{domainID}/classes | getClasses
+GroAdminDomainAdminClassesApi | [Get-GroAdminClassesTree](docs/GroAdminDomainAdminClassesApi.md#Get-GroAdminClassesTree) | GET /domains/{domainID}/classes/tree | getClassesTree
+GroAdminDomainAdminClassesApi | [Invoke-GroAdminPatchClass](docs/GroAdminDomainAdminClassesApi.md#Invoke-GroAdminPatchClass) | PATCH /domains/{domainID}/classes/{ID} | patchClass
+GroAdminDomainAdminClassesApi | [Submit-GroAdminClass](docs/GroAdminDomainAdminClassesApi.md#Submit-GroAdminClass) | POST /domains/{domainID}/classes | postClass
+GroAdminDomainAdminClassesApi | [Test-GroAdminFilter](docs/GroAdminDomainAdminClassesApi.md#Test-GroAdminFilter) | POST /domains/{domainID}/classes/testFilter | testFilter
+GroAdminDomainAdminFoldersApi | [Invoke-GroAdminDeleteFolder](docs/GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminDeleteFolder) | DELETE /domains/{domainID}/folders/{folderID} | deleteFolder
+GroAdminDomainAdminFoldersApi | [Invoke-GroAdminDeleteMember](docs/GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminDeleteMember) | DELETE /domains/{domainID}/folders/{folderID}/owners/{memberID} | deleteMember
+GroAdminDomainAdminFoldersApi | [Get-GroAdminFolder](docs/GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolder) | GET /domains/{domainID}/folders/{folderID} | getFolder
+GroAdminDomainAdminFoldersApi | [Get-GroAdminFolderTree](docs/GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolderTree) | GET /domains/{domainID}/folders/tree | getFolderTree
+GroAdminDomainAdminFoldersApi | [Get-GroAdminFolders](docs/GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolders) | GET /domains/{domainID}/folders | getFolders
+GroAdminDomainAdminFoldersApi | [Get-GroAdminOwners](docs/GroAdminDomainAdminFoldersApi.md#Get-GroAdminOwners) | GET /domains/{domainID}/folders/{folderID}/owners | getOwners
+GroAdminDomainAdminFoldersApi | [Invoke-GroAdminPatchFolder](docs/GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminPatchFolder) | PATCH /domains/{domainID}/folders/{folderID} | patchFolder
+GroAdminDomainAdminFoldersApi | [Submit-GroAdminFolders](docs/GroAdminDomainAdminFoldersApi.md#Submit-GroAdminFolders) | POST /domains/{domainID}/folders | postFolders
+GroAdminDomainAdminFoldersApi | [Submit-GroAdminOwner](docs/GroAdminDomainAdminFoldersApi.md#Submit-GroAdminOwner) | POST /domains/{domainID}/folders/{folderID}/owners | postOwner
+GroAdminDomainAdminFoldersApi | [Set-GroAdminMember](docs/GroAdminDomainAdminFoldersApi.md#Set-GroAdminMember) | PUT /domains/{domainID}/folders/{folderID}/owners/{memberID} | setMember
+GroAdminDomainAdminMListsApi | [Invoke-GroAdminDeleteMlist](docs/GroAdminDomainAdminMListsApi.md#Invoke-GroAdminDeleteMlist) | DELETE /domains/{domainID}/mlists/{ID} | deleteMlist
+GroAdminDomainAdminMListsApi | [Get-GroAdminMlist](docs/GroAdminDomainAdminMListsApi.md#Get-GroAdminMlist) | GET /domains/{domainID}/mlists/{ID} | getMlist
+GroAdminDomainAdminMListsApi | [Get-GroAdminMlists](docs/GroAdminDomainAdminMListsApi.md#Get-GroAdminMlists) | GET /domains/{domainID}/mlists | getMlists
+GroAdminDomainAdminMListsApi | [Invoke-GroAdminPatchMlist](docs/GroAdminDomainAdminMListsApi.md#Invoke-GroAdminPatchMlist) | PATCH /domains/{domainID}/mlists/{ID} | patchMlist
+GroAdminDomainAdminMListsApi | [Submit-GroAdminMlists](docs/GroAdminDomainAdminMListsApi.md#Submit-GroAdminMlists) | POST /domains/{domainID}/mlists | postMlists
+GroAdminDomainAdminUsersApi | [Stop-GroAdminWipe](docs/GroAdminDomainAdminUsersApi.md#Stop-GroAdminWipe) | DELETE /domains/{domainID}/users/{userID}/sync/{deviceID}/wipe | cancelWipe
+GroAdminDomainAdminUsersApi | [Invoke-GroAdminDeleteStoreAccessUser](docs/GroAdminDomainAdminUsersApi.md#Invoke-GroAdminDeleteStoreAccessUser) | DELETE /domains/{domainID}/users/{userID}/storeAccess/{username} | deleteStoreAccessUser
+GroAdminDomainAdminUsersApi | [Invoke-GroAdminDeleteStoreProps](docs/GroAdminDomainAdminUsersApi.md#Invoke-GroAdminDeleteStoreProps) | DELETE /domains/{domainID}/users/{userID}/storeProps | deleteStoreProps
+GroAdminDomainAdminUsersApi | [Invoke-GroAdminDeleteUser](docs/GroAdminDomainAdminUsersApi.md#Invoke-GroAdminDeleteUser) | DELETE /domains/{domainID}/users/{userID} | deleteUser
+GroAdminDomainAdminUsersApi | [Get-GroAdminDelegates](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminDelegates) | GET /domains/{domainID}/users/{userID}/delegates | getDelegates
+GroAdminDomainAdminUsersApi | [Get-GroAdminDomainSyncPolicy](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminDomainSyncPolicy) | GET /domains/{domainID}/syncPolicy | getDomainSyncPolicy
+GroAdminDomainAdminUsersApi | [Get-GroAdminSendas](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminSendas) | GET /domains/{domainID}/users/{userID}/sendas | getSendas
+GroAdminDomainAdminUsersApi | [Get-GroAdminStoreAccessUsers](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminStoreAccessUsers) | GET /domains/{domainID}/users/{userID}/storeAccess | getStoreAccessUsers
+GroAdminDomainAdminUsersApi | [Get-GroAdminStoreProps](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminStoreProps) | GET /domains/{domainID}/users/{userID}/storeProps | getStoreProps
+GroAdminDomainAdminUsersApi | [Get-GroAdminSyncedDevices](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminSyncedDevices) | GET /domains/{domainID}/users/{userID}/sync | getSyncedDevices
+GroAdminDomainAdminUsersApi | [Get-GroAdminUser](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminUser) | GET /domains/{domainID}/users/{userID} | getUser
+GroAdminDomainAdminUsersApi | [Get-GroAdminUsers](docs/GroAdminDomainAdminUsersApi.md#Get-GroAdminUsers) | GET /domains/{domainID}/users | getUsers
+GroAdminDomainAdminUsersApi | [Invoke-GroAdminOofSizeLarge](docs/GroAdminDomainAdminUsersApi.md#Invoke-GroAdminOofSizeLarge) | GET /domains/{domainID}/users/{userID}/oof | oofSizeLarge
+GroAdminDomainAdminUsersApi | [Invoke-GroAdminPatchStoreProps](docs/GroAdminDomainAdminUsersApi.md#Invoke-GroAdminPatchStoreProps) | PATCH /domains/{domainID}/users/{userID}/storeProps | patchStoreProps
+GroAdminDomainAdminUsersApi | [Invoke-GroAdminPatchUser](docs/GroAdminDomainAdminUsersApi.md#Invoke-GroAdminPatchUser) | PATCH /domains/{domainID}/users/{userID} | patchUser
+GroAdminDomainAdminUsersApi | [Submit-GroAdminDeviceWipe](docs/GroAdminDomainAdminUsersApi.md#Submit-GroAdminDeviceWipe) | POST /domains/{domainID}/users/{userID}/sync/{deviceID}/wipe | postDeviceWipe
+GroAdminDomainAdminUsersApi | [Submit-GroAdminStoreAccessUser](docs/GroAdminDomainAdminUsersApi.md#Submit-GroAdminStoreAccessUser) | POST /domains/{domainID}/users/{userID}/storeAccess | postStoreAccessUser
+GroAdminDomainAdminUsersApi | [Submit-GroAdminUser](docs/GroAdminDomainAdminUsersApi.md#Submit-GroAdminUser) | POST /domains/{domainID}/users | postUser
+GroAdminDomainAdminUsersApi | [Send-GroAdminDelegates](docs/GroAdminDomainAdminUsersApi.md#Send-GroAdminDelegates) | PUT /domains/{domainID}/users/{userID}/delegates | putDelegates
+GroAdminDomainAdminUsersApi | [Send-GroAdminDeviceResync](docs/GroAdminDomainAdminUsersApi.md#Send-GroAdminDeviceResync) | PUT /domains/{domainID}/users/{userID}/sync/{deviceID}/resync | putDeviceResync
+GroAdminDomainAdminUsersApi | [Send-GroAdminDownsync](docs/GroAdminDomainAdminUsersApi.md#Send-GroAdminDownsync) | PUT /domains/{domainID}/users/{userID}/downsync | putDownsync
+GroAdminDomainAdminUsersApi | [Send-GroAdminSendas](docs/GroAdminDomainAdminUsersApi.md#Send-GroAdminSendas) | PUT /domains/{domainID}/users/{userID}/sendas | putSendas
+GroAdminDomainAdminUsersApi | [Send-GroAdminStoreAccessUser](docs/GroAdminDomainAdminUsersApi.md#Send-GroAdminStoreAccessUser) | PUT /domains/{domainID}/users/{userID}/storeAccess | putStoreAccessUser
+GroAdminDomainAdminUsersApi | [Remove-GroAdminDeviceResync](docs/GroAdminDomainAdminUsersApi.md#Remove-GroAdminDeviceResync) | DELETE /domains/{domainID}/users/{userID}/sync/{deviceID} | removeDeviceResync
+GroAdminDomainAdminUsersApi | [Remove-GroAdminDeviceStates](docs/GroAdminDomainAdminUsersApi.md#Remove-GroAdminDeviceStates) | DELETE /domains/{domainID}/users/{userID}/sync | removeDeviceStates
+GroAdminDomainAdminUsersApi | [Set-GroAdminOofSize](docs/GroAdminDomainAdminUsersApi.md#Set-GroAdminOofSize) | PUT /domains/{domainID}/users/{userID}/oof | setOofSize
+GroAdminDomainAdminUsersApi | [Set-GroAdminPassword](docs/GroAdminDomainAdminUsersApi.md#Set-GroAdminPassword) | PUT /domains/{domainID}/users/{userID}/password | setPassword
+GroAdminLDAPApi | [Invoke-GroAdminCheckUsers](docs/GroAdminLDAPApi.md#Invoke-GroAdminCheckUsers) | GET /domains/ldap/check | checkUsers
+GroAdminLDAPApi | [Invoke-GroAdminDeleteLDAPConf](docs/GroAdminLDAPApi.md#Invoke-GroAdminDeleteLDAPConf) | DELETE /system/mconf/ldap | deleteLDAPConf
+GroAdminLDAPApi | [Invoke-GroAdminDeleteOrgLDAPConf](docs/GroAdminLDAPApi.md#Invoke-GroAdminDeleteOrgLDAPConf) | DELETE /system/orgs/{ID}/ldap | deleteOrgLDAPConf
+GroAdminLDAPApi | [Invoke-GroAdminDeleteOrphaned](docs/GroAdminLDAPApi.md#Invoke-GroAdminDeleteOrphaned) | DELETE /domains/ldap/check | deleteOrphaned
+GroAdminLDAPApi | [Get-GroAdminLDAP](docs/GroAdminLDAPApi.md#Get-GroAdminLDAP) | GET /domains/ldap/dump | dumpLDAP
+GroAdminLDAPApi | [Get-GroAdminLDAPConf](docs/GroAdminLDAPApi.md#Get-GroAdminLDAPConf) | GET /system/mconf/ldap | getLDAPConf
+GroAdminLDAPApi | [Get-GroAdminOrgLDAPConf](docs/GroAdminLDAPApi.md#Get-GroAdminOrgLDAPConf) | GET /system/orgs/{ID}/ldap | getOrgLDAPConf
+GroAdminLDAPApi | [Import-GroAdminLdapUser](docs/GroAdminLDAPApi.md#Import-GroAdminLdapUser) | POST /domains/ldap/importUser | importLdapUser
+GroAdminLDAPApi | [Send-GroAdminDownsync](docs/GroAdminLDAPApi.md#Send-GroAdminDownsync) | PUT /domains/{domainID}/users/{userID}/downsync | putDownsync
+GroAdminLDAPApi | [Search-GroAdminLDAP](docs/GroAdminLDAPApi.md#Search-GroAdminLDAP) | GET /domains/ldap/search | searchLDAP
+GroAdminLDAPApi | [Set-GroAdminLDAPConf](docs/GroAdminLDAPApi.md#Set-GroAdminLDAPConf) | PUT /system/mconf/ldap | setLDAPConf
+GroAdminLDAPApi | [Set-GroAdminOrgLDAPConf](docs/GroAdminLDAPApi.md#Set-GroAdminOrgLDAPConf) | PUT /system/orgs/{ID}/ldap | setOrgLDAPConf
+GroAdminLDAPApi | [Update-GroAdminAllDomainUsers](docs/GroAdminLDAPApi.md#Update-GroAdminAllDomainUsers) | POST /domains/{domainID}/ldap/downsync | updateAllDomainUsers
+GroAdminLDAPApi | [Update-GroAdminAllUsers](docs/GroAdminLDAPApi.md#Update-GroAdminAllUsers) | POST /domains/ldap/downsync | updateAllUsers
+GroAdminLDAPApi | [Update-GroAdminOrgLDAPUsers](docs/GroAdminLDAPApi.md#Update-GroAdminOrgLDAPUsers) | POST /system/orgs/{ID}/ldap/downsync | updateOrgLDAPUsers
+GroAdminMiscApi | [Invoke-GroAdminCheckFormat](docs/GroAdminMiscApi.md#Invoke-GroAdminCheckFormat) | GET /chkFormat | checkFormat
+GroAdminMiscApi | [Invoke-GroAdminDeleteMailq](docs/GroAdminMiscApi.md#Invoke-GroAdminDeleteMailq) | POST /system/mailq/delete | deleteMailq
+GroAdminMiscApi | [Clear-GroAdminMailq](docs/GroAdminMiscApi.md#Clear-GroAdminMailq) | POST /system/mailq/flush | flushMailq
+GroAdminMiscApi | [Get-GroAdminAbout](docs/GroAdminMiscApi.md#Get-GroAdminAbout) | GET /about | getAbout
+GroAdminMiscApi | [Get-GroAdminMailq](docs/GroAdminMiscApi.md#Get-GroAdminMailq) | GET /system/mailq | getMailq
+GroAdminMiscApi | [Get-GroAdminProfile](docs/GroAdminMiscApi.md#Get-GroAdminProfile) | GET /profile | getProfile
+GroAdminMiscApi | [Get-GroAdminStatus](docs/GroAdminMiscApi.md#Get-GroAdminStatus) | GET /status | getStatus
+GroAdminMiscApi | [Get-GroAdminUserDomains](docs/GroAdminMiscApi.md#Get-GroAdminUserDomains) | GET /domains | getUserDomains
+GroAdminMiscApi | [Submit-GroAdminLogin](docs/GroAdminMiscApi.md#Submit-GroAdminLogin) | POST /login | postLogin
+GroAdminMiscApi | [Submit-GroAdminRequeue](docs/GroAdminMiscApi.md#Submit-GroAdminRequeue) | POST /system/mailq/requeue | postRequeue
+GroAdminMiscApi | [Send-GroAdminPasswd](docs/GroAdminMiscApi.md#Send-GroAdminPasswd) | PUT /passwd | putPasswd
+GroAdminMiscApi | [Invoke-GroAdminRemoteCLI](docs/GroAdminMiscApi.md#Invoke-GroAdminRemoteCLI) | POST /system/cli | remoteCLI
+GroAdminMiscApi | [Sync-GroAdminTop](docs/GroAdminMiscApi.md#Sync-GroAdminTop) | GET /system/sync/top | syncTop
+GroAdminServiceApi | [Get-GroAdminUserDeviceWipeStatus](docs/GroAdminServiceApi.md#Get-GroAdminUserDeviceWipeStatus) | GET /service/wipe/{username} | getUserDeviceWipeStatus
+GroAdminServiceApi | [Get-GroAdminUserInformation](docs/GroAdminServiceApi.md#Get-GroAdminUserInformation) | GET /service/userinfo/{username} | getUserInformation
+GroAdminServiceApi | [Get-GroAdminUserSyncPolicy](docs/GroAdminServiceApi.md#Get-GroAdminUserSyncPolicy) | GET /service/syncPolicy/{username} | getUserSyncPolicy
+GroAdminServiceApi | [Send-GroAdminPasswd](docs/GroAdminServiceApi.md#Send-GroAdminPasswd) | PUT /passwd | putPasswd
+GroAdminServiceApi | [Set-GroAdminUserDeviceWipeStatus](docs/GroAdminServiceApi.md#Set-GroAdminUserDeviceWipeStatus) | POST /service/wipe/{username} | setUserDeviceWipeStatus
+GroAdminSystemAdminDBConfApi | [Invoke-GroAdminDeleteConfigFile](docs/GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminDeleteConfigFile) | DELETE /system/dbconf/{service}/{file}/ | deleteConfigFile
+GroAdminSystemAdminDBConfApi | [Invoke-GroAdminDeleteServiceConfig](docs/GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminDeleteServiceConfig) | DELETE /system/dbconf/{service}/ | deleteServiceConfig
+GroAdminSystemAdminDBConfApi | [Get-GroAdminCommandList](docs/GroAdminSystemAdminDBConfApi.md#Get-GroAdminCommandList) | GET /system/dbconf/commands | getCommandList
+GroAdminSystemAdminDBConfApi | [Get-GroAdminConfigFile](docs/GroAdminSystemAdminDBConfApi.md#Get-GroAdminConfigFile) | GET /system/dbconf/{service}/{file}/ | getConfigFile
+GroAdminSystemAdminDBConfApi | [Get-GroAdminServiceFiles](docs/GroAdminSystemAdminDBConfApi.md#Get-GroAdminServiceFiles) | GET /system/dbconf/{service}/ | getServiceFiles
+GroAdminSystemAdminDBConfApi | [Get-GroAdminServicesListDBConf](docs/GroAdminSystemAdminDBConfApi.md#Get-GroAdminServicesListDBConf) | GET /system/dbconf/ | getServicesListDBConf
+GroAdminSystemAdminDBConfApi | [Invoke-GroAdminPatchConfigFile](docs/GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminPatchConfigFile) | PATCH /system/dbconf/{service}/{file}/ | patchConfigFile
+GroAdminSystemAdminDBConfApi | [Invoke-GroAdminPatchServiceFiles](docs/GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminPatchServiceFiles) | PATCH /system/dbconf/{service}/ | patchServiceFiles
+GroAdminSystemAdminDBConfApi | [Send-GroAdminConfigFile](docs/GroAdminSystemAdminDBConfApi.md#Send-GroAdminConfigFile) | PUT /system/dbconf/{service}/{file}/ | putConfigFile
+GroAdminSystemAdminDashboardApi | [Get-GroAdminDashboard](docs/GroAdminSystemAdminDashboardApi.md#Get-GroAdminDashboard) | GET /system/dashboard | getDashboard
+GroAdminSystemAdminDashboardApi | [Get-GroAdminServiceInfo](docs/GroAdminSystemAdminDashboardApi.md#Get-GroAdminServiceInfo) | GET /system/dashboard/services/{unit} | getServiceInfo
+GroAdminSystemAdminDashboardApi | [Get-GroAdminServicesList](docs/GroAdminSystemAdminDashboardApi.md#Get-GroAdminServicesList) | GET /system/dashboard/services | getServicesList
+GroAdminSystemAdminDashboardApi | [Send-GroAdminServiceSignal](docs/GroAdminSystemAdminDashboardApi.md#Send-GroAdminServiceSignal) | POST /system/dashboard/services/{unit}/{action} | sendServiceSignal
+GroAdminSystemAdminDomainsApi | [Invoke-GroAdminDeleteDomain](docs/GroAdminSystemAdminDomainsApi.md#Invoke-GroAdminDeleteDomain) | DELETE /system/domains/{domainID} | deleteDomain
+GroAdminSystemAdminDomainsApi | [Get-GroAdminAllUsers](docs/GroAdminSystemAdminDomainsApi.md#Get-GroAdminAllUsers) | GET /system/users | getAllUsers
+GroAdminSystemAdminDomainsApi | [Get-GroAdminDomainInfo](docs/GroAdminSystemAdminDomainsApi.md#Get-GroAdminDomainInfo) | GET /system/domains/{domainID} | getDomainInfo
+GroAdminSystemAdminDomainsApi | [Get-GroAdminDomains](docs/GroAdminSystemAdminDomainsApi.md#Get-GroAdminDomains) | GET /system/domains | getDomains
+GroAdminSystemAdminDomainsApi | [Invoke-GroAdminPatchDomain](docs/GroAdminSystemAdminDomainsApi.md#Invoke-GroAdminPatchDomain) | PATCH /system/domains/{domainID} | patchDomain
+GroAdminSystemAdminDomainsApi | [Submit-GroAdminDomain](docs/GroAdminSystemAdminDomainsApi.md#Submit-GroAdminDomain) | POST /system/domains | postDomain
+GroAdminSystemAdminLicenseApi | [Invoke-GroAdminDownloadCert](docs/GroAdminSystemAdminLicenseApi.md#Invoke-GroAdminDownloadCert) | GET /system/license/certificate.pem | downloadCert
+GroAdminSystemAdminLicenseApi | [Get-GroAdminLicense](docs/GroAdminSystemAdminLicenseApi.md#Get-GroAdminLicense) | GET /system/license | getLicense
+GroAdminSystemAdminLicenseApi | [Send-GroAdminLicense](docs/GroAdminSystemAdminLicenseApi.md#Send-GroAdminLicense) | PUT /system/license | putLicense
+GroAdminSystemAdminLogsApi | [Get-GroAdminLog](docs/GroAdminSystemAdminLogsApi.md#Get-GroAdminLog) | GET /system/logs/{file} | getLog
+GroAdminSystemAdminLogsApi | [Get-GroAdminLogs](docs/GroAdminSystemAdminLogsApi.md#Get-GroAdminLogs) | GET /system/logs | getLogs
+GroAdminSystemAdminMConfApi | [Invoke-GroAdminDeleteAuthmgr](docs/GroAdminSystemAdminMConfApi.md#Invoke-GroAdminDeleteAuthmgr) | DELETE /system/mconf/authmgr | deleteAuthmgr
+GroAdminSystemAdminMConfApi | [Invoke-GroAdminDeleteLDAPConf](docs/GroAdminSystemAdminMConfApi.md#Invoke-GroAdminDeleteLDAPConf) | DELETE /system/mconf/ldap | deleteLDAPConf
+GroAdminSystemAdminMConfApi | [Get-GroAdminAuthmgr](docs/GroAdminSystemAdminMConfApi.md#Get-GroAdminAuthmgr) | GET /system/mconf/authmgr | getAuthmgr
+GroAdminSystemAdminMConfApi | [Get-GroAdminLDAPConf](docs/GroAdminSystemAdminMConfApi.md#Get-GroAdminLDAPConf) | GET /system/mconf/ldap | getLDAPConf
+GroAdminSystemAdminMConfApi | [Set-GroAdminAuthmgr](docs/GroAdminSystemAdminMConfApi.md#Set-GroAdminAuthmgr) | PUT /system/mconf/authmgr | setAuthmgr
+GroAdminSystemAdminMConfApi | [Set-GroAdminLDAPConf](docs/GroAdminSystemAdminMConfApi.md#Set-GroAdminLDAPConf) | PUT /system/mconf/ldap | setLDAPConf
+GroAdminSystemAdminOrganizationsApi | [Invoke-GroAdminDeleteOrg](docs/GroAdminSystemAdminOrganizationsApi.md#Invoke-GroAdminDeleteOrg) | DELETE /system/orgs/{ID} | deleteOrg
+GroAdminSystemAdminOrganizationsApi | [Invoke-GroAdminDeleteOrgLDAPConf](docs/GroAdminSystemAdminOrganizationsApi.md#Invoke-GroAdminDeleteOrgLDAPConf) | DELETE /system/orgs/{ID}/ldap | deleteOrgLDAPConf
+GroAdminSystemAdminOrganizationsApi | [Get-GroAdminOrg](docs/GroAdminSystemAdminOrganizationsApi.md#Get-GroAdminOrg) | GET /system/orgs/{ID} | getOrg
+GroAdminSystemAdminOrganizationsApi | [Get-GroAdminOrgLDAPConf](docs/GroAdminSystemAdminOrganizationsApi.md#Get-GroAdminOrgLDAPConf) | GET /system/orgs/{ID}/ldap | getOrgLDAPConf
+GroAdminSystemAdminOrganizationsApi | [Get-GroAdminOrgs](docs/GroAdminSystemAdminOrganizationsApi.md#Get-GroAdminOrgs) | GET /system/orgs | getOrgs
+GroAdminSystemAdminOrganizationsApi | [Invoke-GroAdminPatchOrg](docs/GroAdminSystemAdminOrganizationsApi.md#Invoke-GroAdminPatchOrg) | PATCH /system/orgs/{ID} | patchOrg
+GroAdminSystemAdminOrganizationsApi | [Submit-GroAdminOrgs](docs/GroAdminSystemAdminOrganizationsApi.md#Submit-GroAdminOrgs) | POST /system/orgs | postOrgs
+GroAdminSystemAdminOrganizationsApi | [Set-GroAdminOrgLDAPConf](docs/GroAdminSystemAdminOrganizationsApi.md#Set-GroAdminOrgLDAPConf) | PUT /system/orgs/{ID}/ldap | setOrgLDAPConf
+GroAdminSystemAdminProxiesApi | [Get-GroAdminAntispam](docs/GroAdminSystemAdminProxiesApi.md#Get-GroAdminAntispam) | GET /system/antispam/{path} | getAntispam
+GroAdminSystemAdminProxiesApi | [Get-GroAdminVhostStatus](docs/GroAdminSystemAdminProxiesApi.md#Get-GroAdminVhostStatus) | GET /system/vhostStatus/{host} | getVhostStatus
+GroAdminSystemAdminProxiesApi | [Get-GroAdminVhosts](docs/GroAdminSystemAdminProxiesApi.md#Get-GroAdminVhosts) | GET /system/vhostStatus | getVhosts
+GroAdminSystemAdminRolesApi | [Invoke-GroAdminDeleteRole](docs/GroAdminSystemAdminRolesApi.md#Invoke-GroAdminDeleteRole) | DELETE /system/roles/{ID} | deleteRole
+GroAdminSystemAdminRolesApi | [Get-GroAdminPermissions](docs/GroAdminSystemAdminRolesApi.md#Get-GroAdminPermissions) | GET /system/roles/permissions | getPermissions
+GroAdminSystemAdminRolesApi | [Get-GroAdminRole](docs/GroAdminSystemAdminRolesApi.md#Get-GroAdminRole) | GET /system/roles/{ID} | getRole
+GroAdminSystemAdminRolesApi | [Get-GroAdminRoles](docs/GroAdminSystemAdminRolesApi.md#Get-GroAdminRoles) | GET /system/roles | getRoles
+GroAdminSystemAdminRolesApi | [Invoke-GroAdminPatchRole](docs/GroAdminSystemAdminRolesApi.md#Invoke-GroAdminPatchRole) | PATCH /system/roles/{ID} | patchRole
+GroAdminSystemAdminRolesApi | [Invoke-GroAdminPatchUserRoles](docs/GroAdminSystemAdminRolesApi.md#Invoke-GroAdminPatchUserRoles) | PATCH /domains/{domainID}/users/{userID}/roles | patchUserRoles
+GroAdminSystemAdminRolesApi | [Submit-GroAdminRole](docs/GroAdminSystemAdminRolesApi.md#Submit-GroAdminRole) | POST /system/roles | postRole
+GroAdminSystemAdminServersApi | [Invoke-GroAdminDeleteServer](docs/GroAdminSystemAdminServersApi.md#Invoke-GroAdminDeleteServer) | DELETE /system/servers/{ID} | deleteServer
+GroAdminSystemAdminServersApi | [Get-GroAdminServer](docs/GroAdminSystemAdminServersApi.md#Get-GroAdminServer) | GET /system/servers/{ID} | getServer
+GroAdminSystemAdminServersApi | [Get-GroAdminServers](docs/GroAdminSystemAdminServersApi.md#Get-GroAdminServers) | GET /system/servers | getServers
+GroAdminSystemAdminServersApi | [Invoke-GroAdminPatchServer](docs/GroAdminSystemAdminServersApi.md#Invoke-GroAdminPatchServer) | PATCH /system/servers/{ID} | patchServer
+GroAdminSystemAdminServersApi | [Submit-GroAdminServers](docs/GroAdminSystemAdminServersApi.md#Submit-GroAdminServers) | POST /system/servers | postServers
+GroAdminTasQApi | [Get-GroAdminTask](docs/GroAdminTasQApi.md#Get-GroAdminTask) | GET /tasq/tasks/{ID} | getTask
+GroAdminTasQApi | [Get-GroAdminTasks](docs/GroAdminTasQApi.md#Get-GroAdminTasks) | GET /tasq/tasks | getTasks
+GroAdminTasQApi | [Invoke-GroAdminNotify](docs/GroAdminTasQApi.md#Invoke-GroAdminNotify) | POST /tasq/notify | notify
+GroAdminTasQApi | [Start-GroAdminTaskq](docs/GroAdminTasQApi.md#Start-GroAdminTaskq) | POST /tasq/start | startTaskq
+GroAdminTasQApi | [Stop-GroAdminTaskq](docs/GroAdminTasQApi.md#Stop-GroAdminTaskq) | POST /tasq/stop | stopTaskq
+GroAdminTasQApi | [Invoke-GroAdminTaskQStatus](docs/GroAdminTasQApi.md#Invoke-GroAdminTaskQStatus) | GET /tasq/status | taskQStatus
 
 
 ### Documentation for Models
@@ -522,24 +522,24 @@ Class | Method | HTTP request | Description
 
 ## Support
 
-- Support is available through **[grommunio GmbH](https://grommunio.com)** and its partners.
-- grommunio community is available here: **[grommunio Community](https://community.grommunio.com)**
+- Support is available through [grommunio GmbH](https://grommunio.com) and its partners.
+- grommunio community is available here: [grommunio Community](https://community.grommunio.com)
 
 For direct contact to the maintainers (for example to supply information about a security-related responsible disclosure), you can contact grommunio directly at [dev@grommunio.com](mailto:dev@grommunio.com)
 
 ## Project assistance
 
-If you want to say **thank you** or/and support active development of grommunio AAPIPS:
+If you want to say thank you or/and support active development of grommunio AAPIPS:
 
 - Add a [GitHub Star](https://github.com/grommunio/aapi-powershell) to the project.
 - Tweet about grommunio AAPIPS.
 - Write interesting articles about the project on [Dev.to](https://dev.to/), [Medium](https://medium.com/), your personal blog or any medium you feel comfortable with.
 
-Together, we can make grommunio AAPIPS **better**!
+Together, we can make grommunio AAPIPS better!
 
 ## Contributing
 
-First off, thanks for taking the time to contribute! Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make will benefit everybody else and are **greatly appreciated**.
+First off, thanks for taking the time to contribute! Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make will benefit everybody else and are greatly appreciated.
 
 If you have found an issue and want to report an issue, either reach out to us in our [community](https://community.grommunio.com), or, if you have a subscription, open up a [support case](https://grommunio.com/).
 
@@ -564,10 +564,10 @@ or
 ## Security
 
 grommunio AAPIPS follows good practices of security. grommunio constantly monitors security-related issues.
-grommunio AAPIPS is provided **"as is"** without any **warranty**. For professional support options through subscriptions, head over to [grommunio](https://grommunio.com).
+grommunio AAPIPS is provided "as is" without any warranty. For professional support options through subscriptions, head over to [grommunio](https://grommunio.com).
 
 ## License
 
-This project is licensed under the **GNU Affero General Public License v3**.
+This project is licensed under the GNU Affero General Public License v3.
 
 See [LICENSE.txt](LICENSE.txt) for more information.
