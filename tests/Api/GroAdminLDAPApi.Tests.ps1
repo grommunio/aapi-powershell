@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminLDAPApi' {
@@ -31,7 +31,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminLDAPApi' {
 
     Context 'Invoke-GroAdminDeleteOrphaned' {
         It 'Test Invoke-GroAdminDeleteOrphaned' {
-            #$TestResult = Invoke-GroAdminDeleteOrphaned -XCsrfToken "TEST_VALUE" -DeleteFiles "TEST_VALUE"
+            #$TestResult = Invoke-GroAdminDeleteOrphaned -XCsrfToken "TEST_VALUE" -UserID "TEST_VALUE" -DeleteFiles "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -87,7 +87,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminLDAPApi' {
 
     Context 'Set-GroAdminLDAPConf' {
         It 'Test Set-GroAdminLDAPConf' {
-            #$TestResult = Set-GroAdminLDAPConf -XCsrfToken "TEST_VALUE" -Force "TEST_VALUE" -SetOrgLDAPConfRequest "TEST_VALUE"
+            #$TestResult = Set-GroAdminLDAPConf -XCsrfToken "TEST_VALUE" -Force "TEST_VALUE" -LdapConfig "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -95,7 +95,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminLDAPApi' {
 
     Context 'Set-GroAdminOrgLDAPConf' {
         It 'Test Set-GroAdminOrgLDAPConf' {
-            #$TestResult = Set-GroAdminOrgLDAPConf -ID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -SetOrgLDAPConfRequest "TEST_VALUE"
+            #$TestResult = Set-GroAdminOrgLDAPConf -ID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -LdapConfig "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

@@ -1,13 +1,13 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
 .SYNOPSIS
 
-deleteDomain
+Delete domain
 
 .DESCRIPTION
 
@@ -87,6 +87,16 @@ function Invoke-GroAdminDeleteDomain {
             $LocalVarQueryParameters['deleteFiles'] = $DeleteFiles
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'DELETE' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -110,7 +120,7 @@ function Invoke-GroAdminDeleteDomain {
 <#
 .SYNOPSIS
 
-getAllUsers
+Get list of all users
 
 .DESCRIPTION
 
@@ -131,8 +141,17 @@ Match by substring
 .PARAMETER MatchFields
 Comma separated list of attributes to restrict matching to.
 
+.PARAMETER FilterProp
+Filter by user property
+
+.PARAMETER MatchProps
+Comma separated list of user properties to match
+
 .PARAMETER Properties
 Comma separated list of properties to return
+
+.PARAMETER Mlist
+Hide MList users
 
 .PARAMETER WithHttpInfo
 
@@ -140,7 +159,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-SystemUsersResponse
+GetAllUsers200Response
 #>
 function Get-GroAdminAllUsers {
     [CmdletBinding()]
@@ -162,7 +181,17 @@ function Get-GroAdminAllUsers {
         ${MatchFields},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
+        ${FilterProp},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${MatchProps},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
         ${Properties},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [ValidateSet("")]
+        [String]
+        ${Mlist},
         [Switch]
         $WithHttpInfo
     )
@@ -206,8 +235,30 @@ function Get-GroAdminAllUsers {
             $LocalVarQueryParameters['matchFields'] = $MatchFields
         }
 
+        if ($FilterProp) {
+            $LocalVarQueryParameters['filterProp'] = $FilterProp
+        }
+
+        if ($MatchProps) {
+            $LocalVarQueryParameters['matchProps'] = $MatchProps
+        }
+
         if ($Properties) {
             $LocalVarQueryParameters['properties'] = $Properties
+        }
+
+        if ($Mlist) {
+            $LocalVarQueryParameters['mlist'] = $Mlist
+        }
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
         }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
@@ -219,7 +270,7 @@ function Get-GroAdminAllUsers {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "SystemUsersResponse" `
+                                -ReturnType "GetAllUsers200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -233,7 +284,7 @@ function Get-GroAdminAllUsers {
 <#
 .SYNOPSIS
 
-getDomainInfo
+Get detailed info about domain
 
 .DESCRIPTION
 
@@ -293,6 +344,16 @@ function Get-GroAdminDomainInfo {
             $LocalVarQueryParameters['level'] = $Level
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -316,7 +377,7 @@ function Get-GroAdminDomainInfo {
 <#
 .SYNOPSIS
 
-getDomains
+Get lists of domains
 
 .DESCRIPTION
 
@@ -373,7 +434,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-SystemDomainsResponse
+GetDomains200Response
 #>
 function Get-GroAdminDomains {
     [CmdletBinding()]
@@ -506,6 +567,16 @@ function Get-GroAdminDomains {
             $LocalVarQueryParameters['domainStatus'] = $DomainStatus
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -515,7 +586,7 @@ function Get-GroAdminDomains {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "SystemDomainsResponse" `
+                                -ReturnType "GetDomains200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -529,7 +600,7 @@ function Get-GroAdminDomains {
 <#
 .SYNOPSIS
 
-patchDomain
+Update domain
 
 .DESCRIPTION
 
@@ -541,8 +612,8 @@ ID of the domain
 .PARAMETER XCsrfToken
 CSRF Token
 
-.PARAMETER PostDomainRequest
-
+.PARAMETER DomainWrite
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -563,7 +634,7 @@ function Invoke-GroAdminPatchDomain {
         ${XCsrfToken},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [PSCustomObject]
-        ${PostDomainRequest},
+        ${DomainWrite},
         [Switch]
         $WithHttpInfo
     )
@@ -598,7 +669,17 @@ function Invoke-GroAdminPatchDomain {
             $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
         }
 
-        $LocalVarBodyParameter = $PostDomainRequest | ConvertTo-Json -Depth 100
+        $LocalVarBodyParameter = $DomainWrite | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'PATCH' `
                                 -Uri $LocalVarUri `
@@ -623,7 +704,7 @@ function Invoke-GroAdminPatchDomain {
 <#
 .SYNOPSIS
 
-postDomain
+Create new domain
 
 .DESCRIPTION
 
@@ -635,8 +716,8 @@ CSRF Token
 .PARAMETER CreateRole
 Whether to automatically create a domain admin role for the new domain
 
-.PARAMETER PostDomainRequest
-
+.PARAMETER DomainWrite
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -657,7 +738,7 @@ function Submit-GroAdminDomain {
         ${CreateRole},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [PSCustomObject]
-        ${PostDomainRequest},
+        ${DomainWrite},
         [Switch]
         $WithHttpInfo
     )
@@ -692,7 +773,17 @@ function Submit-GroAdminDomain {
             $LocalVarQueryParameters['createRole'] = $CreateRole
         }
 
-        $LocalVarBodyParameter = $PostDomainRequest | ConvertTo-Json -Depth 100
+        $LocalVarBodyParameter = $DomainWrite | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'POST' `
                                 -Uri $LocalVarUri `

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | **String** |  | [optional] 
 **Description** | **String** |  | [optional] 
 **Permissions** | [**AdminPermission[]**](AdminPermission.md) | List of permissions associated with the role | [optional] 
-**Users** | [**User1[]**](User1.md) | List of users associated with the role | [optional] 
+**Users** | [**CheckUsers200ResponseOrphanedInner[]**](CheckUsers200ResponseOrphanedInner.md) | List of users associated with the role | [optional] 
 
 ## Examples
 

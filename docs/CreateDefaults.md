@@ -3,8 +3,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**User** | [**SystemCollectionsHashtable**](.md) | Default values for user creation | [optional] 
-**Domain** | [**SystemCollectionsHashtable**](.md) | Default values for domain creation | [optional] 
+**User** | [**System.Collections.Hashtable**](AnyType.md) | Default values for user creation | [optional] 
+**Domain** | [**System.Collections.Hashtable**](AnyType.md) | Default values for domain creation | [optional] 
 
 ## Examples
 

@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -34,20 +34,20 @@ function ConvertFrom-GroAdminJsonToImportLdapUser200Response {
         $matchInstance = $null
 
         if ($match -ne 0) { # no match yet
-            # try to match DomainsLdapImportUserResponse defined in the anyOf schemas
+            # try to match ImportLdapUser200ResponseAnyOf defined in the anyOf schemas
             try {
-                $matchInstance = ConvertFrom-GroAdminJsonToDomainsLdapImportUserResponse $Json
+                $matchInstance = ConvertFrom-GroAdminJsonToImportLdapUser200ResponseAnyOf $Json
 
                 foreach($property in $matchInstance.PsObject.Properties) {
                     if ($null -ne $property.Value) {
-                        $matchType = "DomainsLdapImportUserResponse"
+                        $matchType = "ImportLdapUser200ResponseAnyOf"
                         $match++
                         break
                     }
                 }
             } catch {
                 # fail to match the schema defined in anyOf, proceed to the next one
-                Write-Debug "Failed to match 'DomainsLdapImportUserResponse' defined in anyOf (GroAdminImportLdapUser200Response). Proceeding to the next one if any."
+                Write-Debug "Failed to match 'ImportLdapUser200ResponseAnyOf' defined in anyOf (GroAdminImportLdapUser200Response). Proceeding to the next one if any."
             }
         }
 
@@ -73,10 +73,10 @@ function ConvertFrom-GroAdminJsonToImportLdapUser200Response {
             return [PSCustomObject]@{
                 "ActualType" = ${matchType}
                 "ActualInstance" = ${matchInstance}
-                "anyOfSchemas" = @("DomainsLdapImportUserResponse", "User")
+                "anyOfSchemas" = @("ImportLdapUser200ResponseAnyOf", "User")
             }
         } else {
-            throw "Error! The JSON payload doesn't matches any type defined in anyOf schemas ([DomainsLdapImportUserResponse, User]). JSON Payload: $($Json)"
+            throw "Error! The JSON payload doesn't matches any type defined in anyOf schemas ([ImportLdapUser200ResponseAnyOf, User]). JSON Payload: $($Json)"
         }
     }
 }

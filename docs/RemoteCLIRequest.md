@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Command** | **String** | CLI command to execute | 
-**Mode** | [**Mode**](Mode.md) |  | [optional] 
+**Mode** | **String** | CLI mode (execute or complete) | [optional] [default to "exec"]
 **Color** | **Boolean** | Enable terminal colors | [optional] [default to $false]
 **Fs** | **System.Collections.Hashtable** | If not null, enable filesystem redirection. Each property is a file path | [optional] 
 

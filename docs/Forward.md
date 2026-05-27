@@ -3,7 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ForwardType** | [**ForwardType**](ForwardType.md) |  | [optional] 
+**ForwardType** | **Int32** | Forward type (0&#x3D;CC, 1&#x3D;Redirect) | [optional] 
 **Destination** | **String** | Destination mail address | [optional] 
 
 ## Examples

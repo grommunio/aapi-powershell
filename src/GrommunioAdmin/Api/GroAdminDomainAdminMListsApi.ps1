@@ -1,13 +1,13 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
 .SYNOPSIS
 
-deleteMlist
+Delete mailing list
 
 .DESCRIPTION
 
@@ -77,6 +77,16 @@ function Invoke-GroAdminDeleteMlist {
             $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'DELETE' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -100,7 +110,7 @@ function Invoke-GroAdminDeleteMlist {
 <#
 .SYNOPSIS
 
-getMlist
+Get information about a mailing list
 
 .DESCRIPTION
 
@@ -170,6 +180,16 @@ function Get-GroAdminMlist {
             $LocalVarQueryParameters['level'] = $Level
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -193,7 +213,7 @@ function Get-GroAdminMlist {
 <#
 .SYNOPSIS
 
-getMlists
+Get list of mailing lists
 
 .DESCRIPTION
 
@@ -238,7 +258,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-DomainsMlistsResponse
+GetMlists200Response
 #>
 function Get-GroAdminMlists {
     [CmdletBinding()]
@@ -343,6 +363,16 @@ function Get-GroAdminMlists {
             $LocalVarQueryParameters['listPrivilege'] = $ListPrivilege
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -352,7 +382,7 @@ function Get-GroAdminMlists {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "DomainsMlistsResponse" `
+                                -ReturnType "GetMlists200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -366,7 +396,7 @@ function Get-GroAdminMlists {
 <#
 .SYNOPSIS
 
-patchMlist
+Update mailing list
 
 .DESCRIPTION
 
@@ -381,8 +411,8 @@ ID of the object
 .PARAMETER XCsrfToken
 CSRF Token
 
-.PARAMETER PostMlistsRequest
-
+.PARAMETER MlistWrite
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -406,7 +436,7 @@ function Invoke-GroAdminPatchMlist {
         ${XCsrfToken},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [PSCustomObject]
-        ${PostMlistsRequest},
+        ${MlistWrite},
         [Switch]
         $WithHttpInfo
     )
@@ -445,7 +475,17 @@ function Invoke-GroAdminPatchMlist {
             $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
         }
 
-        $LocalVarBodyParameter = $PostMlistsRequest | ConvertTo-Json -Depth 100
+        $LocalVarBodyParameter = $MlistWrite | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'PATCH' `
                                 -Uri $LocalVarUri `
@@ -470,7 +510,7 @@ function Invoke-GroAdminPatchMlist {
 <#
 .SYNOPSIS
 
-postMlists
+Create new mailing list
 
 .DESCRIPTION
 
@@ -482,8 +522,8 @@ ID of the domain
 .PARAMETER XCsrfToken
 CSRF Token
 
-.PARAMETER PostMlistsRequest
-
+.PARAMETER MlistWrite
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -504,7 +544,7 @@ function Submit-GroAdminMlists {
         ${XCsrfToken},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [PSCustomObject]
-        ${PostMlistsRequest},
+        ${MlistWrite},
         [Switch]
         $WithHttpInfo
     )
@@ -539,7 +579,17 @@ function Submit-GroAdminMlists {
             $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
         }
 
-        $LocalVarBodyParameter = $PostMlistsRequest | ConvertTo-Json -Depth 100
+        $LocalVarBodyParameter = $MlistWrite | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'POST' `
                                 -Uri $LocalVarUri `

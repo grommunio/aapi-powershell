@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -52,9 +52,9 @@ function Initialize-GroAdminPutPasswdRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "new" = ${New}
-            "old" = ${Old}
-            "user" = ${User}
+            'new' = ${New}
+            'old' = ${Old}
+            'user' = ${User}
         }
 
 
@@ -92,7 +92,7 @@ function ConvertFrom-GroAdminJsonToPutPasswdRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminPutPasswdRequest
-        $AllProperties = ("new", "old", "user")
+        $AllProperties = ('new', 'old', 'user')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -103,28 +103,28 @@ function ConvertFrom-GroAdminJsonToPutPasswdRequest {
             throw "Error! Empty JSON cannot be serialized due to the required property 'new' missing."
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "new"))) {
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'new'))) {
             throw "Error! JSON cannot be serialized due to the required property 'new' missing."
         } else {
-            $New = $JsonParameters.PSobject.Properties["new"].value
+            $New = $JsonParameters.PSobject.Properties['new'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "old"))) {
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'old'))) {
             throw "Error! JSON cannot be serialized due to the required property 'old' missing."
         } else {
-            $Old = $JsonParameters.PSobject.Properties["old"].value
+            $Old = $JsonParameters.PSobject.Properties['old'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "user"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'user'))) { #optional property not found
             $User = $null
         } else {
-            $User = $JsonParameters.PSobject.Properties["user"].value
+            $User = $JsonParameters.PSobject.Properties['user'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "new" = ${New}
-            "old" = ${Old}
-            "user" = ${User}
+            'new' = ${New}
+            'old' = ${Old}
+            'user' = ${User}
         }
 
         return $PSO

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **BaseDn** | **String** | Base DN to use for user search | [optional] 
 **ObjectID** | **String** | Name of an attribute that uniquely identifies an LDAP object | [optional] 
 **Users** | [**LdapConfigUsers**](LdapConfigUsers.md) |  | [optional] 
+**Groups** | [**LdapConfigGroups**](LdapConfigGroups.md) |  | [optional] 
 
 ## Examples
 
@@ -17,7 +18,8 @@ $LdapConfig = Initialize-GrommunioAdminLdapConfig  -Disabled null `
  -Connection null `
  -BaseDn null `
  -ObjectID null `
- -Users null
+ -Users null `
+ -Groups null
 ```
 
 - Convert the resource to JSON

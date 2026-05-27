@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -38,7 +38,7 @@ function Initialize-GroAdminSetMemberRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "permissions" = ${Permissions}
+            'permissions' = ${Permissions}
         }
 
 
@@ -76,7 +76,7 @@ function ConvertFrom-GroAdminJsonToSetMemberRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminSetMemberRequest
-        $AllProperties = ("permissions")
+        $AllProperties = ('permissions')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -87,14 +87,14 @@ function ConvertFrom-GroAdminJsonToSetMemberRequest {
             throw "Error! Empty JSON cannot be serialized due to the required property 'permissions' missing."
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "permissions"))) {
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'permissions'))) {
             throw "Error! JSON cannot be serialized due to the required property 'permissions' missing."
         } else {
-            $Permissions = $JsonParameters.PSobject.Properties["permissions"].value
+            $Permissions = $JsonParameters.PSobject.Properties['permissions'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "permissions" = ${Permissions}
+            'permissions' = ${Permissions}
         }
 
         return $PSO

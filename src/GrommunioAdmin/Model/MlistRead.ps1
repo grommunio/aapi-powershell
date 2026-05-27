@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -18,15 +18,19 @@ Unique ID of the object
 .PARAMETER Listname
 Name or e-mail address of the list
 .PARAMETER ListType
-No description available.
+Type of mailing list (0=Normal, 2=Domain)
 .PARAMETER ListPrivilege
-No description available.
+Sender privilege of list (0=All, 1=Internal, 2=Domain, 3=Specific, 4=Outgoing)
 .PARAMETER Associations
 Recipients, only available if listType=0
 .PARAMETER Specifieds
 Senders, only available if listPrivilege=3
-.PARAMETER Class
-No description available.
+.PARAMETER DisplayName
+Display name property of the associated user object
+.PARAMETER Hidden
+attributehidde_gromox property of the associated user object
+.PARAMETER User
+ID of the associated user
 .OUTPUTS
 
 MlistRead<PSCustomObject>
@@ -42,10 +46,12 @@ function Initialize-GroAdminMlistRead {
         [String]
         ${Listname},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [ValidateSet("0", "1", "2", "3")]
+        [System.Nullable[Int32]]
         ${ListType},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [ValidateSet("0", "1", "2", "3", "4")]
+        [System.Nullable[Int32]]
         ${ListPrivilege},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
         [String[]]
@@ -54,8 +60,14 @@ function Initialize-GroAdminMlistRead {
         [String[]]
         ${Specifieds},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
-        ${Class}
+        [String]
+        ${DisplayName},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${Hidden},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${User}
     )
 
     Process {
@@ -64,13 +76,15 @@ function Initialize-GroAdminMlistRead {
 
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "listname" = ${Listname}
-            "listType" = ${ListType}
-            "listPrivilege" = ${ListPrivilege}
-            "associations" = ${Associations}
-            "specifieds" = ${Specifieds}
-            "class" = ${Class}
+            'ID' = ${ID}
+            'listname' = ${Listname}
+            'listType' = ${ListType}
+            'listPrivilege' = ${ListPrivilege}
+            'associations' = ${Associations}
+            'specifieds' = ${Specifieds}
+            'displayName' = ${DisplayName}
+            'hidden' = ${Hidden}
+            'user' = ${User}
         }
 
 
@@ -108,63 +122,77 @@ function ConvertFrom-GroAdminJsonToMlistRead {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminMlistRead
-        $AllProperties = ("ID", "listname", "listType", "listPrivilege", "associations", "specifieds", "class")
+        $AllProperties = ('ID', 'listname', 'listType', 'listPrivilege', 'associations', 'specifieds', 'displayName', 'hidden', 'user')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "ID"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'ID'))) { #optional property not found
             $ID = $null
         } else {
-            $ID = $JsonParameters.PSobject.Properties["ID"].value
+            $ID = $JsonParameters.PSobject.Properties['ID'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "listname"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'listname'))) { #optional property not found
             $Listname = $null
         } else {
-            $Listname = $JsonParameters.PSobject.Properties["listname"].value
+            $Listname = $JsonParameters.PSobject.Properties['listname'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "listType"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'listType'))) { #optional property not found
             $ListType = $null
         } else {
-            $ListType = $JsonParameters.PSobject.Properties["listType"].value
+            $ListType = $JsonParameters.PSobject.Properties['listType'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "listPrivilege"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'listPrivilege'))) { #optional property not found
             $ListPrivilege = $null
         } else {
-            $ListPrivilege = $JsonParameters.PSobject.Properties["listPrivilege"].value
+            $ListPrivilege = $JsonParameters.PSobject.Properties['listPrivilege'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "associations"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'associations'))) { #optional property not found
             $Associations = $null
         } else {
-            $Associations = $JsonParameters.PSobject.Properties["associations"].value
+            $Associations = $JsonParameters.PSobject.Properties['associations'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "specifieds"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'specifieds'))) { #optional property not found
             $Specifieds = $null
         } else {
-            $Specifieds = $JsonParameters.PSobject.Properties["specifieds"].value
+            $Specifieds = $JsonParameters.PSobject.Properties['specifieds'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "class"))) { #optional property not found
-            $Class = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'displayName'))) { #optional property not found
+            $DisplayName = $null
         } else {
-            $Class = $JsonParameters.PSobject.Properties["class"].value
+            $DisplayName = $JsonParameters.PSobject.Properties['displayName'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'hidden'))) { #optional property not found
+            $Hidden = $null
+        } else {
+            $Hidden = $JsonParameters.PSobject.Properties['hidden'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'user'))) { #optional property not found
+            $User = $null
+        } else {
+            $User = $JsonParameters.PSobject.Properties['user'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "listname" = ${Listname}
-            "listType" = ${ListType}
-            "listPrivilege" = ${ListPrivilege}
-            "associations" = ${Associations}
-            "specifieds" = ${Specifieds}
-            "class" = ${Class}
+            'ID' = ${ID}
+            'listname' = ${Listname}
+            'listType' = ${ListType}
+            'listPrivilege' = ${ListPrivilege}
+            'associations' = ${Associations}
+            'specifieds' = ${Specifieds}
+            'displayName' = ${DisplayName}
+            'hidden' = ${Hidden}
+            'user' = ${User}
         }
 
         return $PSO

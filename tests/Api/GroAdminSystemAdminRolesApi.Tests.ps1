@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminRolesApi' {
@@ -39,7 +39,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminRolesApi' {
 
     Context 'Invoke-GroAdminPatchRole' {
         It 'Test Invoke-GroAdminPatchRole' {
-            #$TestResult = Invoke-GroAdminPatchRole -ID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -PostRoleRequest "TEST_VALUE"
+            #$TestResult = Invoke-GroAdminPatchRole -ID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -AdminRoleWrite "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -55,7 +55,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminRolesApi' {
 
     Context 'Submit-GroAdminRole' {
         It 'Test Submit-GroAdminRole' {
-            #$TestResult = Submit-GroAdminRole -XCsrfToken "TEST_VALUE" -PostRoleRequest "TEST_VALUE"
+            #$TestResult = Submit-GroAdminRole -XCsrfToken "TEST_VALUE" -AdminRoleWrite "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

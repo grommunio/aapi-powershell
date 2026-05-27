@@ -1,10 +1,18 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminServiceApi' {
+    Context 'Get-GroAdminUserDeviceLastConnect' {
+        It 'Test Get-GroAdminUserDeviceLastConnect' {
+            #$TestResult = Get-GroAdminUserDeviceLastConnect -Username "TEST_VALUE" -Devices "TEST_VALUE"
+            #$TestResult | Should -BeOfType TODO
+            #$TestResult.property | Should -Be 0
+        }
+    }
+
     Context 'Get-GroAdminUserDeviceWipeStatus' {
         It 'Test Get-GroAdminUserDeviceWipeStatus' {
             #$TestResult = Get-GroAdminUserDeviceWipeStatus -Username "TEST_VALUE" -Devices "TEST_VALUE"

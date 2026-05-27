@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -14,7 +14,7 @@ No summary available.
 No description available.
 
 .PARAMETER Usernames
-
+No description available.
 .OUTPUTS
 
 PutStoreAccessUserRequest<PSCustomObject>
@@ -34,7 +34,7 @@ function Initialize-GroAdminPutStoreAccessUserRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "usernames" = ${Usernames}
+            'usernames' = ${Usernames}
         }
 
 
@@ -72,21 +72,21 @@ function ConvertFrom-GroAdminJsonToPutStoreAccessUserRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminPutStoreAccessUserRequest
-        $AllProperties = ("usernames")
+        $AllProperties = ('usernames')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "usernames"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'usernames'))) { #optional property not found
             $Usernames = $null
         } else {
-            $Usernames = $JsonParameters.PSobject.Properties["usernames"].value
+            $Usernames = $JsonParameters.PSobject.Properties['usernames'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "usernames" = ${Usernames}
+            'usernames' = ${Usernames}
         }
 
         return $PSO

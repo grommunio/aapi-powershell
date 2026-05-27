@@ -75,7 +75,7 @@ $APIEndpoint = -join($grommunioHost,"/api/v1")
 Set-GroAdminConfiguration -BaseUrl $APIEndpoint
 
 # Login to grommunio Admin API
-$LoginResult = (Submit-GroAdminLogin -ContentType "application/x-www-form-urlencoded" -User $grommunioUsername -Pass $grommunioPassword)
+$LoginResult = (Submit-GroAdminLogin -User $grommunioUsername -Pass $grommunioPassword)
 $LoginCookie = -join("grommunioAuthJwt=",$LoginResult.grommunioAuthJwt)
 $LoginCSRF = $LoginResult.csrf
 
@@ -84,9 +84,9 @@ Set-GroAdminConfiguration -DefaultHeaders @{"Cookie"="$LoginCookie";"X-CSRF-TOKE
 
 PS> Get-GroAdminAbout
 
-API   backend schema
----   ------- ------
-1.9.2 1.9.8      109
+API    backend schema
+---    ------- ------
+1.19.0 2.4         149
 
 PS> $domains = $(Get-GroAdminDomains).data
 PS> echo $domains
@@ -110,7 +110,7 @@ domainStatus  : 0
 
 To uninstall the module, simply run:
 ```powershell
-Remove-Module -FullyQualifiedName @{ModuleName = "GrommunioAdmin"; ModuleVersion = "1.9.2"}
+Remove-Module -FullyQualifiedName @{ModuleName = "GrommunioAdmin"; ModuleVersion = "1.19.0"}
 ```
 
 ### Tests
@@ -132,6 +132,7 @@ All URIs are relative to */api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+GroAdminDefaultApi | [Invoke-GroAdminCheckForUpdates](docs/GroAdminDefaultApi.md#Invoke-GroAdminCheckForUpdates) | POST /system/updates/{command} | checkForUpdates
 GroAdminDefaultsApi | [Get-GroAdminCreateParams](docs/GroAdminDefaultsApi.md#Get-GroAdminCreateParams) | GET /defaults/createParams | getCreateParams
 GroAdminDefaultsApi | [Get-GroAdminDomainDefaultParams](docs/GroAdminDefaultsApi.md#Get-GroAdminDomainDefaultParams) | GET /defaults/createParams/{domainID} | getDomainDefaultParams
 GroAdminDefaultsApi | [Get-GroAdminStoreLangs](docs/GroAdminDefaultsApi.md#Get-GroAdminStoreLangs) | GET /defaults/storeLangs | getStoreLangs
@@ -139,13 +140,6 @@ GroAdminDefaultsApi | [Invoke-GroAdminPatchCreateParams](docs/GroAdminDefaultsAp
 GroAdminDefaultsApi | [Invoke-GroAdminPatchDomainDefaultParams](docs/GroAdminDefaultsApi.md#Invoke-GroAdminPatchDomainDefaultParams) | PATCH /defaults/createParams/{domainID} | patchDomainDefaultParams
 GroAdminDefaultsApi | [Send-GroAdminCreateParams](docs/GroAdminDefaultsApi.md#Send-GroAdminCreateParams) | PUT /defaults/createParams | putCreateParams
 GroAdminDefaultsApi | [Send-GroAdminDomainDefaultParams](docs/GroAdminDefaultsApi.md#Send-GroAdminDomainDefaultParams) | PUT /defaults/createParams/{domainID} | putDomainDefaultParams
-GroAdminDomainAdminClassesApi | [Invoke-GroAdminDeleteClass](docs/GroAdminDomainAdminClassesApi.md#Invoke-GroAdminDeleteClass) | DELETE /domains/{domainID}/classes/{ID} | deleteClass
-GroAdminDomainAdminClassesApi | [Get-GroAdminClass](docs/GroAdminDomainAdminClassesApi.md#Get-GroAdminClass) | GET /domains/{domainID}/classes/{ID} | getClass
-GroAdminDomainAdminClassesApi | [Get-GroAdminClasses](docs/GroAdminDomainAdminClassesApi.md#Get-GroAdminClasses) | GET /domains/{domainID}/classes | getClasses
-GroAdminDomainAdminClassesApi | [Get-GroAdminClassesTree](docs/GroAdminDomainAdminClassesApi.md#Get-GroAdminClassesTree) | GET /domains/{domainID}/classes/tree | getClassesTree
-GroAdminDomainAdminClassesApi | [Invoke-GroAdminPatchClass](docs/GroAdminDomainAdminClassesApi.md#Invoke-GroAdminPatchClass) | PATCH /domains/{domainID}/classes/{ID} | patchClass
-GroAdminDomainAdminClassesApi | [Submit-GroAdminClass](docs/GroAdminDomainAdminClassesApi.md#Submit-GroAdminClass) | POST /domains/{domainID}/classes | postClass
-GroAdminDomainAdminClassesApi | [Test-GroAdminFilter](docs/GroAdminDomainAdminClassesApi.md#Test-GroAdminFilter) | POST /domains/{domainID}/classes/testFilter | testFilter
 GroAdminDomainAdminFoldersApi | [Invoke-GroAdminDeleteFolder](docs/GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminDeleteFolder) | DELETE /domains/{domainID}/folders/{folderID} | deleteFolder
 GroAdminDomainAdminFoldersApi | [Invoke-GroAdminDeleteMember](docs/GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminDeleteMember) | DELETE /domains/{domainID}/folders/{folderID}/owners/{memberID} | deleteMember
 GroAdminDomainAdminFoldersApi | [Get-GroAdminFolder](docs/GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolder) | GET /domains/{domainID}/folders/{folderID} | getFolder
@@ -188,6 +182,10 @@ GroAdminDomainAdminUsersApi | [Remove-GroAdminDeviceResync](docs/GroAdminDomainA
 GroAdminDomainAdminUsersApi | [Remove-GroAdminDeviceStates](docs/GroAdminDomainAdminUsersApi.md#Remove-GroAdminDeviceStates) | DELETE /domains/{domainID}/users/{userID}/sync | removeDeviceStates
 GroAdminDomainAdminUsersApi | [Set-GroAdminOofSize](docs/GroAdminDomainAdminUsersApi.md#Set-GroAdminOofSize) | PUT /domains/{domainID}/users/{userID}/oof | setOofSize
 GroAdminDomainAdminUsersApi | [Set-GroAdminPassword](docs/GroAdminDomainAdminUsersApi.md#Set-GroAdminPassword) | PUT /domains/{domainID}/users/{userID}/password | setPassword
+GroAdminExmdbApi | [Submit-GroAdminUserFolderPermissionsGrant](docs/GroAdminExmdbApi.md#Submit-GroAdminUserFolderPermissionsGrant) | POST /system/exmdb/{username}/folders/{fid}/permissions | postUserFolderPermissionsGrant
+GroAdminExmdbApi | [Submit-GroAdminUserFolderPermissionsGrant0](docs/GroAdminExmdbApi.md#Submit-GroAdminUserFolderPermissionsGrant0) | DELETE /system/exmdb/{username}/folders/{fid}/permissions | postUserFolderPermissionsGrant
+GroAdminExmdbApi | [Use-GroAdminrFolder](docs/GroAdminExmdbApi.md#Use-GroAdminrFolder) | GET /system/exmdb/{username}/folders/{fid} | userFolder
+GroAdminExmdbApi | [Use-GroAdminrFolders](docs/GroAdminExmdbApi.md#Use-GroAdminrFolders) | GET /system/exmdb/{username}/folders | userFolders
 GroAdminLDAPApi | [Invoke-GroAdminCheckUsers](docs/GroAdminLDAPApi.md#Invoke-GroAdminCheckUsers) | GET /domains/ldap/check | checkUsers
 GroAdminLDAPApi | [Invoke-GroAdminDeleteLDAPConf](docs/GroAdminLDAPApi.md#Invoke-GroAdminDeleteLDAPConf) | DELETE /system/mconf/ldap | deleteLDAPConf
 GroAdminLDAPApi | [Invoke-GroAdminDeleteOrgLDAPConf](docs/GroAdminLDAPApi.md#Invoke-GroAdminDeleteOrgLDAPConf) | DELETE /system/orgs/{ID}/ldap | deleteOrgLDAPConf
@@ -207,15 +205,19 @@ GroAdminMiscApi | [Invoke-GroAdminCheckFormat](docs/GroAdminMiscApi.md#Invoke-Gr
 GroAdminMiscApi | [Invoke-GroAdminDeleteMailq](docs/GroAdminMiscApi.md#Invoke-GroAdminDeleteMailq) | POST /system/mailq/delete | deleteMailq
 GroAdminMiscApi | [Clear-GroAdminMailq](docs/GroAdminMiscApi.md#Clear-GroAdminMailq) | POST /system/mailq/flush | flushMailq
 GroAdminMiscApi | [Get-GroAdminAbout](docs/GroAdminMiscApi.md#Get-GroAdminAbout) | GET /about | getAbout
+GroAdminMiscApi | [Get-GroAdminDomainDnsCheck](docs/GroAdminMiscApi.md#Get-GroAdminDomainDnsCheck) | GET /domains/{domainID}/dnsCheck | getDomainDnsCheck
 GroAdminMiscApi | [Get-GroAdminMailq](docs/GroAdminMiscApi.md#Get-GroAdminMailq) | GET /system/mailq | getMailq
 GroAdminMiscApi | [Get-GroAdminProfile](docs/GroAdminMiscApi.md#Get-GroAdminProfile) | GET /profile | getProfile
 GroAdminMiscApi | [Get-GroAdminStatus](docs/GroAdminMiscApi.md#Get-GroAdminStatus) | GET /status | getStatus
 GroAdminMiscApi | [Get-GroAdminUserDomains](docs/GroAdminMiscApi.md#Get-GroAdminUserDomains) | GET /domains | getUserDomains
+GroAdminMiscApi | [Get-GroAdminUsernames](docs/GroAdminMiscApi.md#Get-GroAdminUsernames) | GET /users | getUsernames
 GroAdminMiscApi | [Submit-GroAdminLogin](docs/GroAdminMiscApi.md#Submit-GroAdminLogin) | POST /login | postLogin
 GroAdminMiscApi | [Submit-GroAdminRequeue](docs/GroAdminMiscApi.md#Submit-GroAdminRequeue) | POST /system/mailq/requeue | postRequeue
 GroAdminMiscApi | [Send-GroAdminPasswd](docs/GroAdminMiscApi.md#Send-GroAdminPasswd) | PUT /passwd | putPasswd
 GroAdminMiscApi | [Invoke-GroAdminRemoteCLI](docs/GroAdminMiscApi.md#Invoke-GroAdminRemoteCLI) | POST /system/cli | remoteCLI
+GroAdminMiscApi | [Reset-GroAdminPasswd](docs/GroAdminMiscApi.md#Reset-GroAdminPasswd) | PUT /passwd/{username} | resetPasswd
 GroAdminMiscApi | [Sync-GroAdminTop](docs/GroAdminMiscApi.md#Sync-GroAdminTop) | GET /system/sync/top | syncTop
+GroAdminServiceApi | [Get-GroAdminUserDeviceLastConnect](docs/GroAdminServiceApi.md#Get-GroAdminUserDeviceLastConnect) | GET /service/lastconnect/{username} | getUserDeviceLastConnect
 GroAdminServiceApi | [Get-GroAdminUserDeviceWipeStatus](docs/GroAdminServiceApi.md#Get-GroAdminUserDeviceWipeStatus) | GET /service/wipe/{username} | getUserDeviceWipeStatus
 GroAdminServiceApi | [Get-GroAdminUserInformation](docs/GroAdminServiceApi.md#Get-GroAdminUserInformation) | GET /service/userinfo/{username} | getUserInformation
 GroAdminServiceApi | [Get-GroAdminUserSyncPolicy](docs/GroAdminServiceApi.md#Get-GroAdminUserSyncPolicy) | GET /service/syncPolicy/{username} | getUserSyncPolicy
@@ -242,9 +244,12 @@ GroAdminSystemAdminDomainsApi | [Invoke-GroAdminPatchDomain](docs/GroAdminSystem
 GroAdminSystemAdminDomainsApi | [Submit-GroAdminDomain](docs/GroAdminSystemAdminDomainsApi.md#Submit-GroAdminDomain) | POST /system/domains | postDomain
 GroAdminSystemAdminLicenseApi | [Invoke-GroAdminDownloadCert](docs/GroAdminSystemAdminLicenseApi.md#Invoke-GroAdminDownloadCert) | GET /system/license/certificate.pem | downloadCert
 GroAdminSystemAdminLicenseApi | [Get-GroAdminLicense](docs/GroAdminSystemAdminLicenseApi.md#Get-GroAdminLicense) | GET /system/license | getLicense
+GroAdminSystemAdminLicenseApi | [Get-GroAdminLicenseCredentials](docs/GroAdminSystemAdminLicenseApi.md#Get-GroAdminLicenseCredentials) | GET /system/license/creds | getLicenseCredentials
 GroAdminSystemAdminLicenseApi | [Send-GroAdminLicense](docs/GroAdminSystemAdminLicenseApi.md#Send-GroAdminLicense) | PUT /system/license | putLicense
+GroAdminSystemAdminLicenseApi | [Set-GroAdminLicenseCredentials](docs/GroAdminSystemAdminLicenseApi.md#Set-GroAdminLicenseCredentials) | PUT /system/license/creds | setLicenseCredentials
 GroAdminSystemAdminLogsApi | [Get-GroAdminLog](docs/GroAdminSystemAdminLogsApi.md#Get-GroAdminLog) | GET /system/logs/{file} | getLog
 GroAdminSystemAdminLogsApi | [Get-GroAdminLogs](docs/GroAdminSystemAdminLogsApi.md#Get-GroAdminLogs) | GET /system/logs | getLogs
+GroAdminSystemAdminLogsApi | [Get-GroAdminUpdateLog](docs/GroAdminSystemAdminLogsApi.md#Get-GroAdminUpdateLog) | GET /system/updateLog/{pid} | getUpdateLog
 GroAdminSystemAdminMConfApi | [Invoke-GroAdminDeleteAuthmgr](docs/GroAdminSystemAdminMConfApi.md#Invoke-GroAdminDeleteAuthmgr) | DELETE /system/mconf/authmgr | deleteAuthmgr
 GroAdminSystemAdminMConfApi | [Invoke-GroAdminDeleteLDAPConf](docs/GroAdminSystemAdminMConfApi.md#Invoke-GroAdminDeleteLDAPConf) | DELETE /system/mconf/ldap | deleteLDAPConf
 GroAdminSystemAdminMConfApi | [Get-GroAdminAuthmgr](docs/GroAdminSystemAdminMConfApi.md#Get-GroAdminAuthmgr) | GET /system/mconf/authmgr | getAuthmgr
@@ -271,248 +276,159 @@ GroAdminSystemAdminRolesApi | [Invoke-GroAdminPatchUserRoles](docs/GroAdminSyste
 GroAdminSystemAdminRolesApi | [Submit-GroAdminRole](docs/GroAdminSystemAdminRolesApi.md#Submit-GroAdminRole) | POST /system/roles | postRole
 GroAdminSystemAdminServersApi | [Invoke-GroAdminDeleteServer](docs/GroAdminSystemAdminServersApi.md#Invoke-GroAdminDeleteServer) | DELETE /system/servers/{ID} | deleteServer
 GroAdminSystemAdminServersApi | [Get-GroAdminServer](docs/GroAdminSystemAdminServersApi.md#Get-GroAdminServer) | GET /system/servers/{ID} | getServer
+GroAdminSystemAdminServersApi | [Get-GroAdminServerDnsCheck](docs/GroAdminSystemAdminServersApi.md#Get-GroAdminServerDnsCheck) | GET /system/servers/dnsCheck | getServerDnsCheck
 GroAdminSystemAdminServersApi | [Get-GroAdminServers](docs/GroAdminSystemAdminServersApi.md#Get-GroAdminServers) | GET /system/servers | getServers
 GroAdminSystemAdminServersApi | [Invoke-GroAdminPatchServer](docs/GroAdminSystemAdminServersApi.md#Invoke-GroAdminPatchServer) | PATCH /system/servers/{ID} | patchServer
 GroAdminSystemAdminServersApi | [Submit-GroAdminServers](docs/GroAdminSystemAdminServersApi.md#Submit-GroAdminServers) | POST /system/servers | postServers
+GroAdminTasQApi | [Stop-GroAdminTask](docs/GroAdminTasQApi.md#Stop-GroAdminTask) | POST /tasq/tasks/{ID}/cancel | cancelTask
+GroAdminTasQApi | [Invoke-GroAdminDeleteTask](docs/GroAdminTasQApi.md#Invoke-GroAdminDeleteTask) | DELETE /tasq/tasks/{ID} | deleteTask
 GroAdminTasQApi | [Get-GroAdminTask](docs/GroAdminTasQApi.md#Get-GroAdminTask) | GET /tasq/tasks/{ID} | getTask
 GroAdminTasQApi | [Get-GroAdminTasks](docs/GroAdminTasQApi.md#Get-GroAdminTasks) | GET /tasq/tasks | getTasks
 GroAdminTasQApi | [Invoke-GroAdminNotify](docs/GroAdminTasQApi.md#Invoke-GroAdminNotify) | POST /tasq/notify | notify
 GroAdminTasQApi | [Start-GroAdminTaskq](docs/GroAdminTasQApi.md#Start-GroAdminTaskq) | POST /tasq/start | startTaskq
 GroAdminTasQApi | [Stop-GroAdminTaskq](docs/GroAdminTasQApi.md#Stop-GroAdminTaskq) | POST /tasq/stop | stopTaskq
 GroAdminTasQApi | [Invoke-GroAdminTaskQStatus](docs/GroAdminTasQApi.md#Invoke-GroAdminTaskQStatus) | GET /tasq/status | taskQStatus
+GroAdminUsersApi | [Get-GroAdminUsernames](docs/GroAdminUsersApi.md#Get-GroAdminUsernames) | GET /users | getUsernames
+GroAdminUsersApi | [Reset-GroAdminPasswd](docs/GroAdminUsersApi.md#Reset-GroAdminPasswd) | PUT /passwd/{username} | resetPasswd
 
 
 ### Documentation for Models
 
- - [GrommunioAdmin/Model.AboutResponse](docs/AboutResponse.md)
- - [GrommunioAdmin/Model.Action](docs/Action.md)
  - [GrommunioAdmin/Model.AdminPermission](docs/AdminPermission.md)
  - [GrommunioAdmin/Model.AdminRole](docs/AdminRole.md)
  - [GrommunioAdmin/Model.AdminRoleWrite](docs/AdminRoleWrite.md)
- - [GrommunioAdmin/Model.Allowbluetooth](docs/Allowbluetooth.md)
- - [GrommunioAdmin/Model.Allowbrowser](docs/Allowbrowser.md)
- - [GrommunioAdmin/Model.Allowcam](docs/Allowcam.md)
- - [GrommunioAdmin/Model.Allowconsumeremail](docs/Allowconsumeremail.md)
- - [GrommunioAdmin/Model.Allowdesktopsync](docs/Allowdesktopsync.md)
- - [GrommunioAdmin/Model.Allowhtmlemail](docs/Allowhtmlemail.md)
- - [GrommunioAdmin/Model.Allowinternetsharing](docs/Allowinternetsharing.md)
- - [GrommunioAdmin/Model.Allowirda](docs/Allowirda.md)
- - [GrommunioAdmin/Model.Allowpopimapemail](docs/Allowpopimapemail.md)
- - [GrommunioAdmin/Model.Allowremotedesk](docs/Allowremotedesk.md)
- - [GrommunioAdmin/Model.Allowsimpledevpw](docs/Allowsimpledevpw.md)
- - [GrommunioAdmin/Model.Allowsmimeencalgneg](docs/Allowsmimeencalgneg.md)
- - [GrommunioAdmin/Model.Allowsmimesoftcerts](docs/Allowsmimesoftcerts.md)
- - [GrommunioAdmin/Model.Allowstoragecard](docs/Allowstoragecard.md)
- - [GrommunioAdmin/Model.Allowtextmessaging](docs/Allowtextmessaging.md)
- - [GrommunioAdmin/Model.Allowunsignedapps](docs/Allowunsignedapps.md)
- - [GrommunioAdmin/Model.Allowunsigninstallpacks](docs/Allowunsigninstallpacks.md)
- - [GrommunioAdmin/Model.Allowwifi](docs/Allowwifi.md)
- - [GrommunioAdmin/Model.Alphanumpwreq](docs/Alphanumpwreq.md)
- - [GrommunioAdmin/Model.Attenabled](docs/Attenabled.md)
- - [GrommunioAdmin/Model.AuthBackendSelection](docs/AuthBackendSelection.md)
- - [GrommunioAdmin/Model.Child](docs/Child.md)
- - [GrommunioAdmin/Model.ChkFormatResponse](docs/ChkFormatResponse.md)
- - [GrommunioAdmin/Model.Class](docs/Class.md)
- - [GrommunioAdmin/Model.ClassFilter](docs/ClassFilter.md)
- - [GrommunioAdmin/Model.ClassRead](docs/ClassRead.md)
- - [GrommunioAdmin/Model.ClassTreeElement](docs/ClassTreeElement.md)
- - [GrommunioAdmin/Model.ClassWrite](docs/ClassWrite.md)
- - [GrommunioAdmin/Model.Code](docs/Code.md)
- - [GrommunioAdmin/Model.Connection](docs/Connection.md)
- - [GrommunioAdmin/Model.Container](docs/Container.md)
- - [GrommunioAdmin/Model.CpuPercent](docs/CpuPercent.md)
+ - [GrommunioAdmin/Model.AltnamesInner](docs/AltnamesInner.md)
+ - [GrommunioAdmin/Model.CheckForUpdates200Response](docs/CheckForUpdates200Response.md)
+ - [GrommunioAdmin/Model.CheckFormat200Response](docs/CheckFormat200Response.md)
+ - [GrommunioAdmin/Model.CheckUsers200Response](docs/CheckUsers200Response.md)
+ - [GrommunioAdmin/Model.CheckUsers200ResponseOrphanedInner](docs/CheckUsers200ResponseOrphanedInner.md)
+ - [GrommunioAdmin/Model.ClassFiltersInnerInner](docs/ClassFiltersInnerInner.md)
  - [GrommunioAdmin/Model.CreateDefaults](docs/CreateDefaults.md)
- - [GrommunioAdmin/Model.Data1](docs/Data1.md)
- - [GrommunioAdmin/Model.Data2](docs/Data2.md)
- - [GrommunioAdmin/Model.Data3](docs/Data3.md)
- - [GrommunioAdmin/Model.Data3Asversion](docs/Data3Asversion.md)
- - [GrommunioAdmin/Model.Data4](docs/Data4.md)
- - [GrommunioAdmin/Model.Data5](docs/Data5.md)
- - [GrommunioAdmin/Model.Data6](docs/Data6.md)
- - [GrommunioAdmin/Model.Data7](docs/Data7.md)
- - [GrommunioAdmin/Model.DatabaseError1](docs/DatabaseError1.md)
- - [GrommunioAdmin/Model.DefaultsCreateParamsResponse](docs/DefaultsCreateParamsResponse.md)
- - [GrommunioAdmin/Model.DefaultsStoreLangsResponse](docs/DefaultsStoreLangsResponse.md)
- - [GrommunioAdmin/Model.Deleted](docs/Deleted.md)
- - [GrommunioAdmin/Model.Devencenabled](docs/Devencenabled.md)
- - [GrommunioAdmin/Model.Devpwenabled](docs/Devpwenabled.md)
- - [GrommunioAdmin/Model.Disk](docs/Disk.md)
+ - [GrommunioAdmin/Model.DeleteFolder202Response](docs/DeleteFolder202Response.md)
+ - [GrommunioAdmin/Model.DeleteOrphaned200Response](docs/DeleteOrphaned200Response.md)
  - [GrommunioAdmin/Model.Domain](docs/Domain.md)
- - [GrommunioAdmin/Model.Domain1](docs/Domain1.md)
  - [GrommunioAdmin/Model.DomainCommon](docs/DomainCommon.md)
- - [GrommunioAdmin/Model.DomainCommonSyncPolicy](docs/DomainCommonSyncPolicy.md)
- - [GrommunioAdmin/Model.DomainCommonSyncPolicyAllOf](docs/DomainCommonSyncPolicyAllOf.md)
- - [GrommunioAdmin/Model.DomainHomeserver](docs/DomainHomeserver.md)
- - [GrommunioAdmin/Model.DomainHomeserverAllOf](docs/DomainHomeserverAllOf.md)
+ - [GrommunioAdmin/Model.DomainDnsCheck](docs/DomainDnsCheck.md)
+ - [GrommunioAdmin/Model.DomainDnsCheckAutodiscoverSRV](docs/DomainDnsCheckAutodiscoverSRV.md)
+ - [GrommunioAdmin/Model.DomainDnsCheckMxRecords](docs/DomainDnsCheckMxRecords.md)
  - [GrommunioAdmin/Model.DomainWrite](docs/DomainWrite.md)
- - [GrommunioAdmin/Model.DomainsClassesResponse](docs/DomainsClassesResponse.md)
- - [GrommunioAdmin/Model.DomainsClassesTestFilterResponse](docs/DomainsClassesTestFilterResponse.md)
- - [GrommunioAdmin/Model.DomainsClassesTreeResponse](docs/DomainsClassesTreeResponse.md)
- - [GrommunioAdmin/Model.DomainsFoldersOwnersMemberIDRequest](docs/DomainsFoldersOwnersMemberIDRequest.md)
- - [GrommunioAdmin/Model.DomainsFoldersOwnersRequest](docs/DomainsFoldersOwnersRequest.md)
- - [GrommunioAdmin/Model.DomainsFoldersOwnersResponse](docs/DomainsFoldersOwnersResponse.md)
- - [GrommunioAdmin/Model.DomainsFoldersRequest](docs/DomainsFoldersRequest.md)
- - [GrommunioAdmin/Model.DomainsFoldersRequest1](docs/DomainsFoldersRequest1.md)
- - [GrommunioAdmin/Model.DomainsFoldersResponse](docs/DomainsFoldersResponse.md)
- - [GrommunioAdmin/Model.DomainsFoldersResponse1](docs/DomainsFoldersResponse1.md)
- - [GrommunioAdmin/Model.DomainsLdapCheckResponse](docs/DomainsLdapCheckResponse.md)
- - [GrommunioAdmin/Model.DomainsLdapCheckResponse1](docs/DomainsLdapCheckResponse1.md)
- - [GrommunioAdmin/Model.DomainsLdapDownsyncResponse](docs/DomainsLdapDownsyncResponse.md)
- - [GrommunioAdmin/Model.DomainsLdapDumpResponse](docs/DomainsLdapDumpResponse.md)
- - [GrommunioAdmin/Model.DomainsLdapImportUserResponse](docs/DomainsLdapImportUserResponse.md)
- - [GrommunioAdmin/Model.DomainsLdapImportUserResponse1](docs/DomainsLdapImportUserResponse1.md)
- - [GrommunioAdmin/Model.DomainsLdapSearchResponse](docs/DomainsLdapSearchResponse.md)
- - [GrommunioAdmin/Model.DomainsMlistsResponse](docs/DomainsMlistsResponse.md)
- - [GrommunioAdmin/Model.DomainsResponse](docs/DomainsResponse.md)
- - [GrommunioAdmin/Model.DomainsSyncPolicyResponse](docs/DomainsSyncPolicyResponse.md)
- - [GrommunioAdmin/Model.DomainsUsersDelegatesResponse](docs/DomainsUsersDelegatesResponse.md)
- - [GrommunioAdmin/Model.DomainsUsersPasswordRequest](docs/DomainsUsersPasswordRequest.md)
- - [GrommunioAdmin/Model.DomainsUsersResponse](docs/DomainsUsersResponse.md)
- - [GrommunioAdmin/Model.DomainsUsersRolesRequest](docs/DomainsUsersRolesRequest.md)
- - [GrommunioAdmin/Model.DomainsUsersRolesResponse](docs/DomainsUsersRolesResponse.md)
- - [GrommunioAdmin/Model.DomainsUsersSendasResponse](docs/DomainsUsersSendasResponse.md)
- - [GrommunioAdmin/Model.DomainsUsersStoreAccessRequest](docs/DomainsUsersStoreAccessRequest.md)
- - [GrommunioAdmin/Model.DomainsUsersStoreAccessRequest1](docs/DomainsUsersStoreAccessRequest1.md)
- - [GrommunioAdmin/Model.DomainsUsersStoreAccessResponse](docs/DomainsUsersStoreAccessResponse.md)
- - [GrommunioAdmin/Model.DomainsUsersStorePropsResponse](docs/DomainsUsersStorePropsResponse.md)
- - [GrommunioAdmin/Model.DomainsUsersStorePropsResponse1](docs/DomainsUsersStorePropsResponse1.md)
- - [GrommunioAdmin/Model.DomainsUsersSyncDeviceIDWipeRequest](docs/DomainsUsersSyncDeviceIDWipeRequest.md)
- - [GrommunioAdmin/Model.DomainsUsersSyncResponse](docs/DomainsUsersSyncResponse.md)
- - [GrommunioAdmin/Model.ExternalAudience](docs/ExternalAudience.md)
+ - [GrommunioAdmin/Model.DumpLDAP200Response](docs/DumpLDAP200Response.md)
  - [GrommunioAdmin/Model.FetchmailEntry](docs/FetchmailEntry.md)
- - [GrommunioAdmin/Model.FolderMemberList](docs/FolderMemberList.md)
+ - [GrommunioAdmin/Model.FolderMemberListInner](docs/FolderMemberListInner.md)
  - [GrommunioAdmin/Model.Forward](docs/Forward.md)
- - [GrommunioAdmin/Model.ForwardType](docs/ForwardType.md)
- - [GrommunioAdmin/Model.Fs](docs/Fs.md)
+ - [GrommunioAdmin/Model.GetAbout200Response](docs/GetAbout200Response.md)
+ - [GrommunioAdmin/Model.GetAllUsers200Response](docs/GetAllUsers200Response.md)
+ - [GrommunioAdmin/Model.GetAuthmgr200Response](docs/GetAuthmgr200Response.md)
+ - [GrommunioAdmin/Model.GetCommandList200Response](docs/GetCommandList200Response.md)
+ - [GrommunioAdmin/Model.GetConfigFile200Response](docs/GetConfigFile200Response.md)
+ - [GrommunioAdmin/Model.GetCreateParams200Response](docs/GetCreateParams200Response.md)
+ - [GrommunioAdmin/Model.GetDashboard200Response](docs/GetDashboard200Response.md)
+ - [GrommunioAdmin/Model.GetDashboard200ResponseCpuPercent](docs/GetDashboard200ResponseCpuPercent.md)
+ - [GrommunioAdmin/Model.GetDashboard200ResponseDisksInner](docs/GetDashboard200ResponseDisksInner.md)
+ - [GrommunioAdmin/Model.GetDashboard200ResponseMemory](docs/GetDashboard200ResponseMemory.md)
+ - [GrommunioAdmin/Model.GetDashboard200ResponseSwap](docs/GetDashboard200ResponseSwap.md)
+ - [GrommunioAdmin/Model.GetDomains200Response](docs/GetDomains200Response.md)
+ - [GrommunioAdmin/Model.GetFolders200Response](docs/GetFolders200Response.md)
+ - [GrommunioAdmin/Model.GetLDAPConf200Response](docs/GetLDAPConf200Response.md)
+ - [GrommunioAdmin/Model.GetLicenseCredentials200Response](docs/GetLicenseCredentials200Response.md)
+ - [GrommunioAdmin/Model.GetLog200Response](docs/GetLog200Response.md)
+ - [GrommunioAdmin/Model.GetLog200ResponseDataInner](docs/GetLog200ResponseDataInner.md)
+ - [GrommunioAdmin/Model.GetMailq200Response](docs/GetMailq200Response.md)
+ - [GrommunioAdmin/Model.GetMlists200Response](docs/GetMlists200Response.md)
+ - [GrommunioAdmin/Model.GetOrgLDAPConf200Response](docs/GetOrgLDAPConf200Response.md)
+ - [GrommunioAdmin/Model.GetOrgs200Response](docs/GetOrgs200Response.md)
+ - [GrommunioAdmin/Model.GetPermissions200Response](docs/GetPermissions200Response.md)
+ - [GrommunioAdmin/Model.GetProfile200Response](docs/GetProfile200Response.md)
+ - [GrommunioAdmin/Model.GetProfile200ResponseUser](docs/GetProfile200ResponseUser.md)
+ - [GrommunioAdmin/Model.GetRoles200Response](docs/GetRoles200Response.md)
+ - [GrommunioAdmin/Model.GetServerDnsCheck200Response](docs/GetServerDnsCheck200Response.md)
+ - [GrommunioAdmin/Model.GetServers200Response](docs/GetServers200Response.md)
+ - [GrommunioAdmin/Model.GetServicesList200Response](docs/GetServicesList200Response.md)
+ - [GrommunioAdmin/Model.GetServicesListDBConf200Response](docs/GetServicesListDBConf200Response.md)
+ - [GrommunioAdmin/Model.GetStatus200Response](docs/GetStatus200Response.md)
+ - [GrommunioAdmin/Model.GetStoreAccessUsers200Response](docs/GetStoreAccessUsers200Response.md)
+ - [GrommunioAdmin/Model.GetStoreLangs200Response](docs/GetStoreLangs200Response.md)
+ - [GrommunioAdmin/Model.GetStoreLangs200ResponseDataInner](docs/GetStoreLangs200ResponseDataInner.md)
+ - [GrommunioAdmin/Model.GetStoreProps200Response](docs/GetStoreProps200Response.md)
+ - [GrommunioAdmin/Model.GetSyncedDevices200Response](docs/GetSyncedDevices200Response.md)
+ - [GrommunioAdmin/Model.GetSyncedDevices200ResponseDataInner](docs/GetSyncedDevices200ResponseDataInner.md)
+ - [GrommunioAdmin/Model.GetSyncedDevices200ResponseDataInnerAsversion](docs/GetSyncedDevices200ResponseDataInnerAsversion.md)
+ - [GrommunioAdmin/Model.GetTasks200Response](docs/GetTasks200Response.md)
+ - [GrommunioAdmin/Model.GetUpdateLog200Response](docs/GetUpdateLog200Response.md)
+ - [GrommunioAdmin/Model.GetUserDeviceWipeStatus200Response](docs/GetUserDeviceWipeStatus200Response.md)
+ - [GrommunioAdmin/Model.GetUserDeviceWipeStatus200ResponseDataValue](docs/GetUserDeviceWipeStatus200ResponseDataValue.md)
+ - [GrommunioAdmin/Model.GetUserInformation200Response](docs/GetUserInformation200Response.md)
+ - [GrommunioAdmin/Model.GetUserSyncPolicy200Response](docs/GetUserSyncPolicy200Response.md)
+ - [GrommunioAdmin/Model.GetUsernames200Response](docs/GetUsernames200Response.md)
+ - [GrommunioAdmin/Model.GetUsernames200ResponseDataInner](docs/GetUsernames200ResponseDataInner.md)
  - [GrommunioAdmin/Model.Homeserver](docs/Homeserver.md)
  - [GrommunioAdmin/Model.HomeserverRef](docs/HomeserverRef.md)
  - [GrommunioAdmin/Model.ImportLdapUser200Response](docs/ImportLdapUser200Response.md)
- - [GrommunioAdmin/Model.InvalidRequest1](docs/InvalidRequest1.md)
+ - [GrommunioAdmin/Model.ImportLdapUser200ResponseAnyOf](docs/ImportLdapUser200ResponseAnyOf.md)
+ - [GrommunioAdmin/Model.IntExtDns](docs/IntExtDns.md)
  - [GrommunioAdmin/Model.LdapConfig](docs/LdapConfig.md)
  - [GrommunioAdmin/Model.LdapConfigConnection](docs/LdapConfigConnection.md)
+ - [GrommunioAdmin/Model.LdapConfigGroups](docs/LdapConfigGroups.md)
  - [GrommunioAdmin/Model.LdapConfigUsers](docs/LdapConfigUsers.md)
  - [GrommunioAdmin/Model.License](docs/License.md)
- - [GrommunioAdmin/Model.ListPrivilege](docs/ListPrivilege.md)
- - [GrommunioAdmin/Model.ListType](docs/ListType.md)
- - [GrommunioAdmin/Model.ListType1](docs/ListType1.md)
- - [GrommunioAdmin/Model.LoginResponse](docs/LoginResponse.md)
- - [GrommunioAdmin/Model.Maxattsize](docs/Maxattsize.md)
- - [GrommunioAdmin/Model.Maxcalagefilter](docs/Maxcalagefilter.md)
- - [GrommunioAdmin/Model.Maxemailagefilter](docs/Maxemailagefilter.md)
- - [GrommunioAdmin/Model.Memory](docs/Memory.md)
  - [GrommunioAdmin/Model.MlistRead](docs/MlistRead.md)
- - [GrommunioAdmin/Model.MlistReadClass](docs/MlistReadClass.md)
- - [GrommunioAdmin/Model.MlistReadClassAllOf](docs/MlistReadClassAllOf.md)
  - [GrommunioAdmin/Model.MlistWrite](docs/MlistWrite.md)
- - [GrommunioAdmin/Model.Mode](docs/Mode.md)
- - [GrommunioAdmin/Model.ModelData](docs/ModelData.md)
- - [GrommunioAdmin/Model.NotFound1](docs/NotFound1.md)
- - [GrommunioAdmin/Model.Op](docs/Op.md)
  - [GrommunioAdmin/Model.Org](docs/Org.md)
+ - [GrommunioAdmin/Model.OrgDomainsInner](docs/OrgDomainsInner.md)
  - [GrommunioAdmin/Model.OrgWrite](docs/OrgWrite.md)
- - [GrommunioAdmin/Model.Orphaned](docs/Orphaned.md)
- - [GrommunioAdmin/Model.ParentClass](docs/ParentClass.md)
- - [GrommunioAdmin/Model.PasswdRequest](docs/PasswdRequest.md)
  - [GrommunioAdmin/Model.PatchConfigFileRequest](docs/PatchConfigFileRequest.md)
  - [GrommunioAdmin/Model.PatchFolderRequest](docs/PatchFolderRequest.md)
  - [GrommunioAdmin/Model.PatchServiceFilesRequest](docs/PatchServiceFilesRequest.md)
+ - [GrommunioAdmin/Model.PatchStoreProps200Response](docs/PatchStoreProps200Response.md)
  - [GrommunioAdmin/Model.PatchStorePropsRequestValue](docs/PatchStorePropsRequestValue.md)
- - [GrommunioAdmin/Model.PatchUserRequest](docs/PatchUserRequest.md)
+ - [GrommunioAdmin/Model.PatchUserRoles200Response](docs/PatchUserRoles200Response.md)
+ - [GrommunioAdmin/Model.PatchUserRoles200ResponseDataInner](docs/PatchUserRoles200ResponseDataInner.md)
  - [GrommunioAdmin/Model.PatchUserRolesRequest](docs/PatchUserRolesRequest.md)
- - [GrommunioAdmin/Model.PostClassRequest](docs/PostClassRequest.md)
  - [GrommunioAdmin/Model.PostDeviceWipeRequest](docs/PostDeviceWipeRequest.md)
- - [GrommunioAdmin/Model.PostDomainRequest](docs/PostDomainRequest.md)
  - [GrommunioAdmin/Model.PostFoldersRequest](docs/PostFoldersRequest.md)
- - [GrommunioAdmin/Model.PostMlistsRequest](docs/PostMlistsRequest.md)
- - [GrommunioAdmin/Model.PostOrgsRequest](docs/PostOrgsRequest.md)
+ - [GrommunioAdmin/Model.PostLogin200Response](docs/PostLogin200Response.md)
+ - [GrommunioAdmin/Model.PostLogin400Response](docs/PostLogin400Response.md)
+ - [GrommunioAdmin/Model.PostLogin500Response](docs/PostLogin500Response.md)
+ - [GrommunioAdmin/Model.PostLogin503Response](docs/PostLogin503Response.md)
  - [GrommunioAdmin/Model.PostOwnerRequest](docs/PostOwnerRequest.md)
- - [GrommunioAdmin/Model.PostRoleRequest](docs/PostRoleRequest.md)
- - [GrommunioAdmin/Model.PostServersRequest](docs/PostServersRequest.md)
  - [GrommunioAdmin/Model.PostStoreAccessUserRequest](docs/PostStoreAccessUserRequest.md)
- - [GrommunioAdmin/Model.PostUserRequest](docs/PostUserRequest.md)
- - [GrommunioAdmin/Model.ProfileResponse](docs/ProfileResponse.md)
- - [GrommunioAdmin/Model.ProfileResponseUser](docs/ProfileResponseUser.md)
- - [GrommunioAdmin/Model.Protocol](docs/Protocol.md)
+ - [GrommunioAdmin/Model.PostUserFolderPermissionsGrantRequest](docs/PostUserFolderPermissionsGrantRequest.md)
  - [GrommunioAdmin/Model.PublicFolder](docs/PublicFolder.md)
  - [GrommunioAdmin/Model.PublicFolderRef](docs/PublicFolderRef.md)
- - [GrommunioAdmin/Model.PutConfigFileRequest](docs/PutConfigFileRequest.md)
- - [GrommunioAdmin/Model.PutCreateParamsRequest](docs/PutCreateParamsRequest.md)
  - [GrommunioAdmin/Model.PutPasswdRequest](docs/PutPasswdRequest.md)
  - [GrommunioAdmin/Model.PutStoreAccessUserRequest](docs/PutStoreAccessUserRequest.md)
- - [GrommunioAdmin/Model.Pwrecoveryenabled](docs/Pwrecoveryenabled.md)
- - [GrommunioAdmin/Model.Queued](docs/Queued.md)
+ - [GrommunioAdmin/Model.RemoteCLI200Response](docs/RemoteCLI200Response.md)
+ - [GrommunioAdmin/Model.RemoteCLI200ResponseFsValue](docs/RemoteCLI200ResponseFsValue.md)
  - [GrommunioAdmin/Model.RemoteCLIRequest](docs/RemoteCLIRequest.md)
- - [GrommunioAdmin/Model.Reqdevenc](docs/Reqdevenc.md)
- - [GrommunioAdmin/Model.Reqencsmimealgorithm](docs/Reqencsmimealgorithm.md)
- - [GrommunioAdmin/Model.Reqencsmimemessages](docs/Reqencsmimemessages.md)
- - [GrommunioAdmin/Model.Reqmansyncroam](docs/Reqmansyncroam.md)
- - [GrommunioAdmin/Model.Reqsignedsmimealgorithm](docs/Reqsignedsmimealgorithm.md)
- - [GrommunioAdmin/Model.Reqsignedsmimemessages](docs/Reqsignedsmimemessages.md)
- - [GrommunioAdmin/Model.Role](docs/Role.md)
- - [GrommunioAdmin/Model.ServerError1](docs/ServerError1.md)
+ - [GrommunioAdmin/Model.ResetPasswd404Response](docs/ResetPasswd404Response.md)
+ - [GrommunioAdmin/Model.ResetPasswdRequest](docs/ResetPasswdRequest.md)
+ - [GrommunioAdmin/Model.SearchLDAP200Response](docs/SearchLDAP200Response.md)
+ - [GrommunioAdmin/Model.SearchLDAP200ResponseDataInner](docs/SearchLDAP200ResponseDataInner.md)
  - [GrommunioAdmin/Model.Service](docs/Service.md)
- - [GrommunioAdmin/Model.ServiceSyncPolicyResponse](docs/ServiceSyncPolicyResponse.md)
- - [GrommunioAdmin/Model.ServiceUnavailable1](docs/ServiceUnavailable1.md)
- - [GrommunioAdmin/Model.ServiceUserinfoResponse](docs/ServiceUserinfoResponse.md)
- - [GrommunioAdmin/Model.ServiceWipeRequest](docs/ServiceWipeRequest.md)
- - [GrommunioAdmin/Model.ServiceWipeResponse](docs/ServiceWipeResponse.md)
  - [GrommunioAdmin/Model.SetAuthmgrRequest](docs/SetAuthmgrRequest.md)
+ - [GrommunioAdmin/Model.SetLicenseCredentialsRequest](docs/SetLicenseCredentialsRequest.md)
  - [GrommunioAdmin/Model.SetMemberRequest](docs/SetMemberRequest.md)
- - [GrommunioAdmin/Model.SetOofSizeRequest](docs/SetOofSizeRequest.md)
- - [GrommunioAdmin/Model.SetOrgLDAPConfRequest](docs/SetOrgLDAPConfRequest.md)
  - [GrommunioAdmin/Model.SetPasswordRequest](docs/SetPasswordRequest.md)
  - [GrommunioAdmin/Model.SetUserDeviceWipeStatusRequest](docs/SetUserDeviceWipeStatusRequest.md)
- - [GrommunioAdmin/Model.SrcAuth](docs/SrcAuth.md)
- - [GrommunioAdmin/Model.State](docs/State.md)
- - [GrommunioAdmin/Model.State1](docs/State1.md)
- - [GrommunioAdmin/Model.Status](docs/Status.md)
- - [GrommunioAdmin/Model.StatusResponse](docs/StatusResponse.md)
- - [GrommunioAdmin/Model.Swap](docs/Swap.md)
  - [GrommunioAdmin/Model.SyncPolicy](docs/SyncPolicy.md)
  - [GrommunioAdmin/Model.SyncPolicyMaxattsize](docs/SyncPolicyMaxattsize.md)
- - [GrommunioAdmin/Model.SyncStatus](docs/SyncStatus.md)
- - [GrommunioAdmin/Model.SystemCliRequest](docs/SystemCliRequest.md)
- - [GrommunioAdmin/Model.SystemCliResponse](docs/SystemCliResponse.md)
- - [GrommunioAdmin/Model.SystemDashboardResponse](docs/SystemDashboardResponse.md)
- - [GrommunioAdmin/Model.SystemDashboardResponseCpuPercent](docs/SystemDashboardResponseCpuPercent.md)
- - [GrommunioAdmin/Model.SystemDashboardResponseMemory](docs/SystemDashboardResponseMemory.md)
- - [GrommunioAdmin/Model.SystemDashboardResponseSwap](docs/SystemDashboardResponseSwap.md)
- - [GrommunioAdmin/Model.SystemDashboardServicesResponse](docs/SystemDashboardServicesResponse.md)
- - [GrommunioAdmin/Model.SystemDbconfCommandsResponse](docs/SystemDbconfCommandsResponse.md)
- - [GrommunioAdmin/Model.SystemDbconfRequest](docs/SystemDbconfRequest.md)
- - [GrommunioAdmin/Model.SystemDbconfRequest1](docs/SystemDbconfRequest1.md)
- - [GrommunioAdmin/Model.SystemDbconfRequest2](docs/SystemDbconfRequest2.md)
- - [GrommunioAdmin/Model.SystemDbconfResponse](docs/SystemDbconfResponse.md)
- - [GrommunioAdmin/Model.SystemDbconfResponse2](docs/SystemDbconfResponse2.md)
- - [GrommunioAdmin/Model.SystemDomainsResponse](docs/SystemDomainsResponse.md)
- - [GrommunioAdmin/Model.SystemLogsResponse](docs/SystemLogsResponse.md)
- - [GrommunioAdmin/Model.SystemLogsResponse1](docs/SystemLogsResponse1.md)
- - [GrommunioAdmin/Model.SystemMailqResponse](docs/SystemMailqResponse.md)
- - [GrommunioAdmin/Model.SystemMconfAuthmgrRequest](docs/SystemMconfAuthmgrRequest.md)
- - [GrommunioAdmin/Model.SystemMconfAuthmgrResponse](docs/SystemMconfAuthmgrResponse.md)
- - [GrommunioAdmin/Model.SystemMconfLdapResponse](docs/SystemMconfLdapResponse.md)
- - [GrommunioAdmin/Model.SystemOrgsLdapDownsyncResponse](docs/SystemOrgsLdapDownsyncResponse.md)
- - [GrommunioAdmin/Model.SystemOrgsLdapResponse](docs/SystemOrgsLdapResponse.md)
- - [GrommunioAdmin/Model.SystemOrgsResponse](docs/SystemOrgsResponse.md)
- - [GrommunioAdmin/Model.SystemRolesPermissionsResponse](docs/SystemRolesPermissionsResponse.md)
- - [GrommunioAdmin/Model.SystemRolesResponse](docs/SystemRolesResponse.md)
- - [GrommunioAdmin/Model.SystemServersResponse](docs/SystemServersResponse.md)
- - [GrommunioAdmin/Model.SystemSyncTopResponse](docs/SystemSyncTopResponse.md)
- - [GrommunioAdmin/Model.SystemUsersResponse](docs/SystemUsersResponse.md)
- - [GrommunioAdmin/Model.SystemVhostStatusResponse](docs/SystemVhostStatusResponse.md)
- - [GrommunioAdmin/Model.TasqStatusResponse](docs/TasqStatusResponse.md)
+ - [GrommunioAdmin/Model.SyncStatusInner](docs/SyncStatusInner.md)
+ - [GrommunioAdmin/Model.SyncTop200Response](docs/SyncTop200Response.md)
+ - [GrommunioAdmin/Model.SyncTop200ResponseDataInner](docs/SyncTop200ResponseDataInner.md)
+ - [GrommunioAdmin/Model.SyncTop200ResponseDataInnerAsversion](docs/SyncTop200ResponseDataInnerAsversion.md)
+ - [GrommunioAdmin/Model.TaskQStatus200Response](docs/TaskQStatus200Response.md)
  - [GrommunioAdmin/Model.TasqTask](docs/TasqTask.md)
- - [GrommunioAdmin/Model.TasqTasksResponse](docs/TasqTasksResponse.md)
+ - [GrommunioAdmin/Model.UpdateAllUsers200Response](docs/UpdateAllUsers200Response.md)
  - [GrommunioAdmin/Model.User](docs/User.md)
- - [GrommunioAdmin/Model.User1](docs/User1.md)
- - [GrommunioAdmin/Model.User2](docs/User2.md)
- - [GrommunioAdmin/Model.UserForward](docs/UserForward.md)
- - [GrommunioAdmin/Model.UserForwardAllOf](docs/UserForwardAllOf.md)
+ - [GrommunioAdmin/Model.UserFolder200Response](docs/UserFolder200Response.md)
+ - [GrommunioAdmin/Model.UserFolder200ResponseMembersInner](docs/UserFolder200ResponseMembersInner.md)
+ - [GrommunioAdmin/Model.UserFolderRef](docs/UserFolderRef.md)
  - [GrommunioAdmin/Model.UserInit](docs/UserInit.md)
  - [GrommunioAdmin/Model.UserOofState](docs/UserOofState.md)
+ - [GrommunioAdmin/Model.UserRolesInner](docs/UserRolesInner.md)
  - [GrommunioAdmin/Model.UserStatus](docs/UserStatus.md)
  - [GrommunioAdmin/Model.UserUpdate](docs/UserUpdate.md)
- - [GrommunioAdmin/Model.Users](docs/Users.md)
+
 
 ## Status
 

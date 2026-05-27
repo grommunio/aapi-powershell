@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminOrganizationsApi' {
@@ -47,7 +47,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminOrganizationsAp
 
     Context 'Invoke-GroAdminPatchOrg' {
         It 'Test Invoke-GroAdminPatchOrg' {
-            #$TestResult = Invoke-GroAdminPatchOrg -ID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -PostOrgsRequest "TEST_VALUE"
+            #$TestResult = Invoke-GroAdminPatchOrg -ID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -OrgWrite "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -55,7 +55,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminOrganizationsAp
 
     Context 'Submit-GroAdminOrgs' {
         It 'Test Submit-GroAdminOrgs' {
-            #$TestResult = Submit-GroAdminOrgs -XCsrfToken "TEST_VALUE" -PostOrgsRequest "TEST_VALUE"
+            #$TestResult = Submit-GroAdminOrgs -XCsrfToken "TEST_VALUE" -OrgWrite "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -63,7 +63,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminOrganizationsAp
 
     Context 'Set-GroAdminOrgLDAPConf' {
         It 'Test Set-GroAdminOrgLDAPConf' {
-            #$TestResult = Set-GroAdminOrgLDAPConf -ID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -SetOrgLDAPConfRequest "TEST_VALUE"
+            #$TestResult = Set-GroAdminOrgLDAPConf -ID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -LdapConfig "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

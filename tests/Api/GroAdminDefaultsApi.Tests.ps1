@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDefaultsApi' {
@@ -31,7 +31,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDefaultsApi' {
 
     Context 'Invoke-GroAdminPatchCreateParams' {
         It 'Test Invoke-GroAdminPatchCreateParams' {
-            #$TestResult = Invoke-GroAdminPatchCreateParams -XCsrfToken "TEST_VALUE" -PutCreateParamsRequest "TEST_VALUE"
+            #$TestResult = Invoke-GroAdminPatchCreateParams -XCsrfToken "TEST_VALUE" -CreateDefaults "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -39,7 +39,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDefaultsApi' {
 
     Context 'Invoke-GroAdminPatchDomainDefaultParams' {
         It 'Test Invoke-GroAdminPatchDomainDefaultParams' {
-            #$TestResult = Invoke-GroAdminPatchDomainDefaultParams -DomainID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -PutCreateParamsRequest "TEST_VALUE"
+            #$TestResult = Invoke-GroAdminPatchDomainDefaultParams -DomainID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -CreateDefaults "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -47,7 +47,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDefaultsApi' {
 
     Context 'Send-GroAdminCreateParams' {
         It 'Test Send-GroAdminCreateParams' {
-            #$TestResult = Send-GroAdminCreateParams -XCsrfToken "TEST_VALUE" -PutCreateParamsRequest "TEST_VALUE"
+            #$TestResult = Send-GroAdminCreateParams -XCsrfToken "TEST_VALUE" -CreateDefaults "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -55,7 +55,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDefaultsApi' {
 
     Context 'Send-GroAdminDomainDefaultParams' {
         It 'Test Send-GroAdminDomainDefaultParams' {
-            #$TestResult = Send-GroAdminDomainDefaultParams -DomainID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -PutCreateParamsRequest "TEST_VALUE"
+            #$TestResult = Send-GroAdminDomainDefaultParams -DomainID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -CreateDefaults "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

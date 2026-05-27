@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -14,9 +14,9 @@ No summary available.
 No description available.
 
 .PARAMETER State
-No description available.
+Out-of-office state (0=Disabled, 1=Enabled, 2=Scheduled)
 .PARAMETER ExternalAudience
-No description available.
+External audience setting (0=None, 1=Known, 2=All)
 .PARAMETER StartTime
 Date string with time
 .PARAMETER EndTime
@@ -38,10 +38,12 @@ function Initialize-GroAdminUserOofState {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [ValidateSet("0", "1", "2")]
+        [System.Nullable[Int32]]
         ${State},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [ValidateSet("0", "1", "2")]
+        [System.Nullable[Int32]]
         ${ExternalAudience},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
         [ValidatePattern("^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$")]
@@ -71,14 +73,14 @@ function Initialize-GroAdminUserOofState {
 
 
         $PSO = [PSCustomObject]@{
-            "state" = ${State}
-            "externalAudience" = ${ExternalAudience}
-            "startTime" = ${StartTime}
-            "endTime" = ${EndTime}
-            "internalSubject" = ${InternalSubject}
-            "internalReply" = ${InternalReply}
-            "externalSubject" = ${ExternalSubject}
-            "externalReply" = ${ExternalReply}
+            'state' = ${State}
+            'externalAudience' = ${ExternalAudience}
+            'startTime' = ${StartTime}
+            'endTime' = ${EndTime}
+            'internalSubject' = ${InternalSubject}
+            'internalReply' = ${InternalReply}
+            'externalSubject' = ${ExternalSubject}
+            'externalReply' = ${ExternalReply}
         }
 
 
@@ -116,70 +118,70 @@ function ConvertFrom-GroAdminJsonToUserOofState {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminUserOofState
-        $AllProperties = ("state", "externalAudience", "startTime", "endTime", "internalSubject", "internalReply", "externalSubject", "externalReply")
+        $AllProperties = ('state', 'externalAudience', 'startTime', 'endTime', 'internalSubject', 'internalReply', 'externalSubject', 'externalReply')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "state"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'state'))) { #optional property not found
             $State = $null
         } else {
-            $State = $JsonParameters.PSobject.Properties["state"].value
+            $State = $JsonParameters.PSobject.Properties['state'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "externalAudience"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'externalAudience'))) { #optional property not found
             $ExternalAudience = $null
         } else {
-            $ExternalAudience = $JsonParameters.PSobject.Properties["externalAudience"].value
+            $ExternalAudience = $JsonParameters.PSobject.Properties['externalAudience'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "startTime"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'startTime'))) { #optional property not found
             $StartTime = $null
         } else {
-            $StartTime = $JsonParameters.PSobject.Properties["startTime"].value
+            $StartTime = $JsonParameters.PSobject.Properties['startTime'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "endTime"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'endTime'))) { #optional property not found
             $EndTime = $null
         } else {
-            $EndTime = $JsonParameters.PSobject.Properties["endTime"].value
+            $EndTime = $JsonParameters.PSobject.Properties['endTime'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "internalSubject"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'internalSubject'))) { #optional property not found
             $InternalSubject = $null
         } else {
-            $InternalSubject = $JsonParameters.PSobject.Properties["internalSubject"].value
+            $InternalSubject = $JsonParameters.PSobject.Properties['internalSubject'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "internalReply"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'internalReply'))) { #optional property not found
             $InternalReply = $null
         } else {
-            $InternalReply = $JsonParameters.PSobject.Properties["internalReply"].value
+            $InternalReply = $JsonParameters.PSobject.Properties['internalReply'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "externalSubject"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'externalSubject'))) { #optional property not found
             $ExternalSubject = $null
         } else {
-            $ExternalSubject = $JsonParameters.PSobject.Properties["externalSubject"].value
+            $ExternalSubject = $JsonParameters.PSobject.Properties['externalSubject'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "externalReply"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'externalReply'))) { #optional property not found
             $ExternalReply = $null
         } else {
-            $ExternalReply = $JsonParameters.PSobject.Properties["externalReply"].value
+            $ExternalReply = $JsonParameters.PSobject.Properties['externalReply'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "state" = ${State}
-            "externalAudience" = ${ExternalAudience}
-            "startTime" = ${StartTime}
-            "endTime" = ${EndTime}
-            "internalSubject" = ${InternalSubject}
-            "internalReply" = ${InternalReply}
-            "externalSubject" = ${ExternalSubject}
-            "externalReply" = ${ExternalReply}
+            'state' = ${State}
+            'externalAudience' = ${ExternalAudience}
+            'startTime' = ${StartTime}
+            'endTime' = ${EndTime}
+            'internalSubject' = ${InternalSubject}
+            'internalReply' = ${InternalReply}
+            'externalSubject' = ${ExternalSubject}
+            'externalReply' = ${ExternalReply}
         }
 
         return $PSO

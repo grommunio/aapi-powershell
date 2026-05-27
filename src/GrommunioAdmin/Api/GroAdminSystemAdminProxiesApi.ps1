@@ -1,13 +1,13 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
 .SYNOPSIS
 
-getAntispam
+Make call to grommunio-antispam
 
 .DESCRIPTION
 
@@ -54,6 +54,16 @@ function Get-GroAdminAntispam {
         }
         $LocalVarUri = $LocalVarUri.replace('{path}', [System.Web.HTTPUtility]::UrlEncode($Path))
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -77,7 +87,7 @@ function Get-GroAdminAntispam {
 <#
 .SYNOPSIS
 
-getVhostStatus
+Make call nginx vhost status endpoint
 
 .DESCRIPTION
 
@@ -127,6 +137,16 @@ function Get-GroAdminVhostStatus {
         }
         $LocalVarUri = $LocalVarUri.replace('{host}', [System.Web.HTTPUtility]::UrlEncode($Host))
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -150,7 +170,7 @@ function Get-GroAdminVhostStatus {
 <#
 .SYNOPSIS
 
-getVhosts
+Get list of vhosts
 
 .DESCRIPTION
 
@@ -162,7 +182,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-SystemVhostStatusResponse
+GetServicesListDBConf200Response
 #>
 function Get-GroAdminVhosts {
     [CmdletBinding()]
@@ -190,6 +210,16 @@ function Get-GroAdminVhosts {
 
         $LocalVarUri = '/system/vhostStatus'
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -199,7 +229,7 @@ function Get-GroAdminVhosts {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "SystemVhostStatusResponse" `
+                                -ReturnType "GetServicesListDBConf200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {

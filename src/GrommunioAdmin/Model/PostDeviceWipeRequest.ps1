@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -15,6 +15,8 @@ No description available.
 
 .PARAMETER Password
 Password of the user requesting the wipe
+.PARAMETER Status
+New device wipe status
 .OUTPUTS
 
 PostDeviceWipeRequest<PSCustomObject>
@@ -25,7 +27,11 @@ function Initialize-GroAdminPostDeviceWipeRequest {
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Password}
+        ${Password},
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
+        [ValidateSet("2", "16")]
+        [System.Nullable[Int32]]
+        ${Status}
     )
 
     Process {
@@ -34,7 +40,8 @@ function Initialize-GroAdminPostDeviceWipeRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "password" = ${Password}
+            'password' = ${Password}
+            'status' = ${Status}
         }
 
 
@@ -72,21 +79,28 @@ function ConvertFrom-GroAdminJsonToPostDeviceWipeRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminPostDeviceWipeRequest
-        $AllProperties = ("password")
+        $AllProperties = ('password', 'status')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "password"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'password'))) { #optional property not found
             $Password = $null
         } else {
-            $Password = $JsonParameters.PSobject.Properties["password"].value
+            $Password = $JsonParameters.PSobject.Properties['password'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'status'))) { #optional property not found
+            $Status = $null
+        } else {
+            $Status = $JsonParameters.PSobject.Properties['status'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "password" = ${Password}
+            'password' = ${Password}
+            'status' = ${Status}
         }
 
         return $PSO

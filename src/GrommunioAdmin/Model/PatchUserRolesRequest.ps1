@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -34,7 +34,7 @@ function Initialize-GroAdminPatchUserRolesRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "roles" = ${Roles}
+            'roles' = ${Roles}
         }
 
 
@@ -72,21 +72,21 @@ function ConvertFrom-GroAdminJsonToPatchUserRolesRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminPatchUserRolesRequest
-        $AllProperties = ("roles")
+        $AllProperties = ('roles')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "roles"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'roles'))) { #optional property not found
             $Roles = $null
         } else {
-            $Roles = $JsonParameters.PSobject.Properties["roles"].value
+            $Roles = $JsonParameters.PSobject.Properties['roles'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "roles" = ${Roles}
+            'roles' = ${Roles}
         }
 
         return $PSO

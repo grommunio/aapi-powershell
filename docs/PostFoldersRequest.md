@@ -4,9 +4,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Displayname** | **String** | Name of the folder | 
-**Container** | [**Container**](Container.md) |  | 
+**Container** | **String** | Container class | 
 **Comment** | **String** |  | 
 **ParentID** | **String** | ID of the parent folder | [optional] [default to "0"]
+**SyncToMobile** | **Boolean** |  | [optional] 
 
 ## Examples
 
@@ -15,7 +16,8 @@ Name | Type | Description | Notes
 $PostFoldersRequest = Initialize-GrommunioAdminPostFoldersRequest  -Displayname null `
  -Container null `
  -Comment null `
- -ParentID null
+ -ParentID null `
+ -SyncToMobile null
 ```
 
 - Convert the resource to JSON

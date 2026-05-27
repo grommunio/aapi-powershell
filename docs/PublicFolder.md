@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Comment** | **String** |  | [optional] 
 **Creationtime** | **String** | Date string with time | [optional] 
 **Container** | **String** |  | [optional] 
+**SyncToMobile** | **Boolean** |  | [optional] 
 
 ## Examples
 
@@ -17,7 +18,8 @@ $PublicFolder = Initialize-GrommunioAdminPublicFolder  -Folderid null `
  -Displayname null `
  -Comment null `
  -Creationtime null `
- -Container null
+ -Container null `
+ -SyncToMobile null
 ```
 
 - Convert the resource to JSON

@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -24,7 +24,8 @@ function Initialize-GroAdminSetAuthmgrRequest {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [ValidateSet("always_mysql", "always_ldap", "externid")]
+        [String]
         ${AuthBackendSelection}
     )
 
@@ -34,7 +35,7 @@ function Initialize-GroAdminSetAuthmgrRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "authBackendSelection" = ${AuthBackendSelection}
+            'authBackendSelection' = ${AuthBackendSelection}
         }
 
 
@@ -72,21 +73,21 @@ function ConvertFrom-GroAdminJsonToSetAuthmgrRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminSetAuthmgrRequest
-        $AllProperties = ("authBackendSelection")
+        $AllProperties = ('authBackendSelection')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "authBackendSelection"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'authBackendSelection'))) { #optional property not found
             $AuthBackendSelection = $null
         } else {
-            $AuthBackendSelection = $JsonParameters.PSobject.Properties["authBackendSelection"].value
+            $AuthBackendSelection = $JsonParameters.PSobject.Properties['authBackendSelection'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "authBackendSelection" = ${AuthBackendSelection}
+            'authBackendSelection' = ${AuthBackendSelection}
         }
 
         return $PSO

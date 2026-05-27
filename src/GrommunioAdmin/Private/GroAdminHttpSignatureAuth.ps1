@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -117,7 +117,7 @@ function Get-GroAdminHttpSignedHeader {
             -HashAlgorithmName $httpSigningConfiguration.HashAlgorithm `
             -KeyPassPhrase $httpSigningConfiguration.KeyPassPhrase
     }
-    #Depricated
+    #Deprecated
     <#$cryptographicScheme = Get-GroAdminCryptographicScheme -SigningAlgorithm $httpSigningConfiguration.SigningAlgorithm `
                                                  -HashAlgorithm $httpSigningConfiguration.HashAlgorithm
     #>

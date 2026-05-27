@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -21,6 +21,8 @@ Initial password
 No description available.
 .PARAMETER Properties
 User properties as name/value pairs
+.PARAMETER Altnames
+List of alternative login names
 .PARAMETER Aliases
 List of aliases for this user
 .PARAMETER Status
@@ -41,6 +43,12 @@ Meet privilege
 Files privilege
 .PARAMETER PrivArchive
 Archive privilege
+.PARAMETER PrivWeb
+Web privilege
+.PARAMETER PrivEas
+EAS privilege
+.PARAMETER PrivDav
+DAV privilege
 .PARAMETER Fetchmail
 List of fetchmail entries for this user
 .PARAMETER SyncPolicy
@@ -73,57 +81,70 @@ function Initialize-GroAdminUserInit {
         [System.Nullable[Int32]]
         ${DomainID},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [System.Collections.Hashtable]
         ${Properties},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
+        [PSCustomObject[]]
+        ${Altnames},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
         [String[]]
         ${Aliases},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
+        [ValidateSet("0", "1", "2", "3", "4", "5")]
         [PSCustomObject]
         ${Status},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${Pop3Imap},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Smtp},
+        ${Pop3Imap},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${ChangePassword},
+        ${Smtp},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${PublicAddress},
+        ${ChangePassword},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${PrivChat},
+        ${PublicAddress},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${PrivVideo},
+        ${PrivChat},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${PrivFiles},
+        ${PrivVideo},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${PrivArchive},
+        ${PrivFiles},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject[]]
-        ${Fetchmail},
+        [System.Nullable[Boolean]]
+        ${PrivArchive},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
-        ${SyncPolicy},
+        [System.Nullable[Boolean]]
+        ${PrivWeb},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Chat},
+        ${PrivEas},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${ChatAdmin},
+        ${PrivDav},
         [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Lang},
+        [PSCustomObject[]]
+        ${Fetchmail},
         [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
-        ${Forward},
+        ${SyncPolicy},
         [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${Chat},
+        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${ChatAdmin},
+        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Lang},
+        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
+        [PSCustomObject]
+        ${Forward},
+        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
         ${Homeserver}
     )
@@ -138,27 +159,31 @@ function Initialize-GroAdminUserInit {
 
 
         $PSO = [PSCustomObject]@{
-            "username" = ${Username}
-            "password" = ${Password}
-            "domainID" = ${DomainID}
-            "properties" = ${Properties}
-            "aliases" = ${Aliases}
-            "status" = ${Status}
-            "pop3_imap" = ${Pop3Imap}
-            "smtp" = ${Smtp}
-            "changePassword" = ${ChangePassword}
-            "publicAddress" = ${PublicAddress}
-            "privChat" = ${PrivChat}
-            "privVideo" = ${PrivVideo}
-            "privFiles" = ${PrivFiles}
-            "privArchive" = ${PrivArchive}
-            "fetchmail" = ${Fetchmail}
-            "syncPolicy" = ${SyncPolicy}
-            "chat" = ${Chat}
-            "chatAdmin" = ${ChatAdmin}
-            "lang" = ${Lang}
-            "forward" = ${Forward}
-            "homeserver" = ${Homeserver}
+            'username' = ${Username}
+            'password' = ${Password}
+            'domainID' = ${DomainID}
+            'properties' = ${Properties}
+            'altnames' = ${Altnames}
+            'aliases' = ${Aliases}
+            'status' = ${Status}
+            'pop3_imap' = ${Pop3Imap}
+            'smtp' = ${Smtp}
+            'changePassword' = ${ChangePassword}
+            'publicAddress' = ${PublicAddress}
+            'privChat' = ${PrivChat}
+            'privVideo' = ${PrivVideo}
+            'privFiles' = ${PrivFiles}
+            'privArchive' = ${PrivArchive}
+            'privWeb' = ${PrivWeb}
+            'privEas' = ${PrivEas}
+            'privDav' = ${PrivDav}
+            'fetchmail' = ${Fetchmail}
+            'syncPolicy' = ${SyncPolicy}
+            'chat' = ${Chat}
+            'chatAdmin' = ${ChatAdmin}
+            'lang' = ${Lang}
+            'forward' = ${Forward}
+            'homeserver' = ${Homeserver}
         }
 
 
@@ -196,161 +221,189 @@ function ConvertFrom-GroAdminJsonToUserInit {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminUserInit
-        $AllProperties = ("username", "password", "domainID", "properties", "aliases", "status", "pop3_imap", "smtp", "changePassword", "publicAddress", "privChat", "privVideo", "privFiles", "privArchive", "fetchmail", "syncPolicy", "chat", "chatAdmin", "lang", "forward", "homeserver")
+        $AllProperties = ('username', 'password', 'domainID', 'properties', 'altnames', 'aliases', 'status', 'pop3_imap', 'smtp', 'changePassword', 'publicAddress', 'privChat', 'privVideo', 'privFiles', 'privArchive', 'privWeb', 'privEas', 'privDav', 'fetchmail', 'syncPolicy', 'chat', 'chatAdmin', 'lang', 'forward', 'homeserver')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "username"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'username'))) { #optional property not found
             $Username = $null
         } else {
-            $Username = $JsonParameters.PSobject.Properties["username"].value
+            $Username = $JsonParameters.PSobject.Properties['username'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "password"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'password'))) { #optional property not found
             $Password = $null
         } else {
-            $Password = $JsonParameters.PSobject.Properties["password"].value
+            $Password = $JsonParameters.PSobject.Properties['password'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "domainID"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'domainID'))) { #optional property not found
             $DomainID = $null
         } else {
-            $DomainID = $JsonParameters.PSobject.Properties["domainID"].value
+            $DomainID = $JsonParameters.PSobject.Properties['domainID'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "properties"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'properties'))) { #optional property not found
             $Properties = $null
         } else {
-            $Properties = $JsonParameters.PSobject.Properties["properties"].value
+            $Properties = $JsonParameters.PSobject.Properties['properties'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "aliases"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'altnames'))) { #optional property not found
+            $Altnames = $null
+        } else {
+            $Altnames = $JsonParameters.PSobject.Properties['altnames'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'aliases'))) { #optional property not found
             $Aliases = $null
         } else {
-            $Aliases = $JsonParameters.PSobject.Properties["aliases"].value
+            $Aliases = $JsonParameters.PSobject.Properties['aliases'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "status"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'status'))) { #optional property not found
             $Status = $null
         } else {
-            $Status = $JsonParameters.PSobject.Properties["status"].value
+            $Status = $JsonParameters.PSobject.Properties['status'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "pop3_imap"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'pop3_imap'))) { #optional property not found
             $Pop3Imap = $null
         } else {
-            $Pop3Imap = $JsonParameters.PSobject.Properties["pop3_imap"].value
+            $Pop3Imap = $JsonParameters.PSobject.Properties['pop3_imap'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "smtp"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'smtp'))) { #optional property not found
             $Smtp = $null
         } else {
-            $Smtp = $JsonParameters.PSobject.Properties["smtp"].value
+            $Smtp = $JsonParameters.PSobject.Properties['smtp'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "changePassword"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'changePassword'))) { #optional property not found
             $ChangePassword = $null
         } else {
-            $ChangePassword = $JsonParameters.PSobject.Properties["changePassword"].value
+            $ChangePassword = $JsonParameters.PSobject.Properties['changePassword'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "publicAddress"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'publicAddress'))) { #optional property not found
             $PublicAddress = $null
         } else {
-            $PublicAddress = $JsonParameters.PSobject.Properties["publicAddress"].value
+            $PublicAddress = $JsonParameters.PSobject.Properties['publicAddress'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "privChat"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'privChat'))) { #optional property not found
             $PrivChat = $null
         } else {
-            $PrivChat = $JsonParameters.PSobject.Properties["privChat"].value
+            $PrivChat = $JsonParameters.PSobject.Properties['privChat'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "privVideo"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'privVideo'))) { #optional property not found
             $PrivVideo = $null
         } else {
-            $PrivVideo = $JsonParameters.PSobject.Properties["privVideo"].value
+            $PrivVideo = $JsonParameters.PSobject.Properties['privVideo'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "privFiles"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'privFiles'))) { #optional property not found
             $PrivFiles = $null
         } else {
-            $PrivFiles = $JsonParameters.PSobject.Properties["privFiles"].value
+            $PrivFiles = $JsonParameters.PSobject.Properties['privFiles'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "privArchive"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'privArchive'))) { #optional property not found
             $PrivArchive = $null
         } else {
-            $PrivArchive = $JsonParameters.PSobject.Properties["privArchive"].value
+            $PrivArchive = $JsonParameters.PSobject.Properties['privArchive'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "fetchmail"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'privWeb'))) { #optional property not found
+            $PrivWeb = $null
+        } else {
+            $PrivWeb = $JsonParameters.PSobject.Properties['privWeb'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'privEas'))) { #optional property not found
+            $PrivEas = $null
+        } else {
+            $PrivEas = $JsonParameters.PSobject.Properties['privEas'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'privDav'))) { #optional property not found
+            $PrivDav = $null
+        } else {
+            $PrivDav = $JsonParameters.PSobject.Properties['privDav'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'fetchmail'))) { #optional property not found
             $Fetchmail = $null
         } else {
-            $Fetchmail = $JsonParameters.PSobject.Properties["fetchmail"].value
+            $Fetchmail = $JsonParameters.PSobject.Properties['fetchmail'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "syncPolicy"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'syncPolicy'))) { #optional property not found
             $SyncPolicy = $null
         } else {
-            $SyncPolicy = $JsonParameters.PSobject.Properties["syncPolicy"].value
+            $SyncPolicy = $JsonParameters.PSobject.Properties['syncPolicy'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "chat"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'chat'))) { #optional property not found
             $Chat = $null
         } else {
-            $Chat = $JsonParameters.PSobject.Properties["chat"].value
+            $Chat = $JsonParameters.PSobject.Properties['chat'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "chatAdmin"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'chatAdmin'))) { #optional property not found
             $ChatAdmin = $null
         } else {
-            $ChatAdmin = $JsonParameters.PSobject.Properties["chatAdmin"].value
+            $ChatAdmin = $JsonParameters.PSobject.Properties['chatAdmin'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "lang"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'lang'))) { #optional property not found
             $Lang = $null
         } else {
-            $Lang = $JsonParameters.PSobject.Properties["lang"].value
+            $Lang = $JsonParameters.PSobject.Properties['lang'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "forward"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'forward'))) { #optional property not found
             $Forward = $null
         } else {
-            $Forward = $JsonParameters.PSobject.Properties["forward"].value
+            $Forward = $JsonParameters.PSobject.Properties['forward'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "homeserver"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'homeserver'))) { #optional property not found
             $Homeserver = $null
         } else {
-            $Homeserver = $JsonParameters.PSobject.Properties["homeserver"].value
+            $Homeserver = $JsonParameters.PSobject.Properties['homeserver'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "username" = ${Username}
-            "password" = ${Password}
-            "domainID" = ${DomainID}
-            "properties" = ${Properties}
-            "aliases" = ${Aliases}
-            "status" = ${Status}
-            "pop3_imap" = ${Pop3Imap}
-            "smtp" = ${Smtp}
-            "changePassword" = ${ChangePassword}
-            "publicAddress" = ${PublicAddress}
-            "privChat" = ${PrivChat}
-            "privVideo" = ${PrivVideo}
-            "privFiles" = ${PrivFiles}
-            "privArchive" = ${PrivArchive}
-            "fetchmail" = ${Fetchmail}
-            "syncPolicy" = ${SyncPolicy}
-            "chat" = ${Chat}
-            "chatAdmin" = ${ChatAdmin}
-            "lang" = ${Lang}
-            "forward" = ${Forward}
-            "homeserver" = ${Homeserver}
+            'username' = ${Username}
+            'password' = ${Password}
+            'domainID' = ${DomainID}
+            'properties' = ${Properties}
+            'altnames' = ${Altnames}
+            'aliases' = ${Aliases}
+            'status' = ${Status}
+            'pop3_imap' = ${Pop3Imap}
+            'smtp' = ${Smtp}
+            'changePassword' = ${ChangePassword}
+            'publicAddress' = ${PublicAddress}
+            'privChat' = ${PrivChat}
+            'privVideo' = ${PrivVideo}
+            'privFiles' = ${PrivFiles}
+            'privArchive' = ${PrivArchive}
+            'privWeb' = ${PrivWeb}
+            'privEas' = ${PrivEas}
+            'privDav' = ${PrivDav}
+            'fetchmail' = ${Fetchmail}
+            'syncPolicy' = ${SyncPolicy}
+            'chat' = ${Chat}
+            'chatAdmin' = ${ChatAdmin}
+            'lang' = ${Lang}
+            'forward' = ${Forward}
+            'homeserver' = ${Homeserver}
         }
 
         return $PSO

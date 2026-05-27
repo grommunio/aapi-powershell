@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -178,8 +178,8 @@ function Set-GroAdminConfiguration {
         }
 
         If ($null -ne $Proxy) {
-            If ($Proxy.GetType().FullName -ne "System.Net.SystemWebProxy" -and $Proxy.GetType().FullName -ne "System.Net.WebRequest+WebProxyWrapperOpaque") {
-                throw "Incorrect Proxy type '$($Proxy.GetType().FullName)'. Must be System.Net.SystemWebProxy or System.Net.WebRequest+WebProxyWrapperOpaque."
+            If ('System.Net.IWebProxy' -notin $Proxy.GetType().ImplementedInterfaces.FullName) {
+                throw "Incorrect Proxy type '$($Proxy.GetType().FullName)'. Must implement System.Net.IWebProxy interface."
             }
             $Script:Configuration['Proxy'] = $Proxy
         } else {
@@ -387,6 +387,7 @@ An 'Authorization' header is calculated by creating a hash of select headers,
 and optionally the body of the HTTP request, then signing the hash value using
 a key. The 'Authorization' header is added to outbound HTTP requests.
 
+Ref: https://openapi-generator.tech
 
 .PARAMETER KeyId
 KeyId for HTTP signing

@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -26,10 +26,10 @@ function Initialize-GroAdminCreateDefaults {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [System.Collections.Hashtable]
         ${User},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [System.Collections.Hashtable]
         ${Domain}
     )
 
@@ -39,8 +39,8 @@ function Initialize-GroAdminCreateDefaults {
 
 
         $PSO = [PSCustomObject]@{
-            "user" = ${User}
-            "domain" = ${Domain}
+            'user' = ${User}
+            'domain' = ${Domain}
         }
 
 
@@ -78,28 +78,28 @@ function ConvertFrom-GroAdminJsonToCreateDefaults {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminCreateDefaults
-        $AllProperties = ("user", "domain")
+        $AllProperties = ('user', 'domain')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "user"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'user'))) { #optional property not found
             $User = $null
         } else {
-            $User = $JsonParameters.PSobject.Properties["user"].value
+            $User = $JsonParameters.PSobject.Properties['user'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "domain"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'domain'))) { #optional property not found
             $Domain = $null
         } else {
-            $Domain = $JsonParameters.PSobject.Properties["domain"].value
+            $Domain = $JsonParameters.PSobject.Properties['domain'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "user" = ${User}
-            "domain" = ${Domain}
+            'user' = ${User}
+            'domain' = ${Domain}
         }
 
         return $PSO

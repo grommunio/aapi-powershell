@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -16,11 +16,13 @@ No description available.
 .PARAMETER Displayname
 Name of the folder
 .PARAMETER Container
-No description available.
+Container class
 .PARAMETER Comment
 No description available.
 .PARAMETER ParentID
 ID of the parent folder
+.PARAMETER SyncToMobile
+No description available.
 .OUTPUTS
 
 PostFoldersRequest<PSCustomObject>
@@ -33,14 +35,18 @@ function Initialize-GroAdminPostFoldersRequest {
         [String]
         ${Displayname},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [ValidateSet("IPF.Note", "IPF.Contact", "IPF.Appointment", "IPF.Stickynote", "IPF.Task")]
+        [String]
         ${Container},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Comment},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ParentID} = "0"
+        ${ParentID} = "0",
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${SyncToMobile}
     )
 
     Process {
@@ -61,10 +67,11 @@ function Initialize-GroAdminPostFoldersRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "displayname" = ${Displayname}
-            "container" = ${Container}
-            "comment" = ${Comment}
-            "parentID" = ${ParentID}
+            'displayname' = ${Displayname}
+            'container' = ${Container}
+            'comment' = ${Comment}
+            'parentID' = ${ParentID}
+            'syncToMobile' = ${SyncToMobile}
         }
 
 
@@ -102,7 +109,7 @@ function ConvertFrom-GroAdminJsonToPostFoldersRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminPostFoldersRequest
-        $AllProperties = ("displayname", "container", "comment", "parentID")
+        $AllProperties = ('displayname', 'container', 'comment', 'parentID', 'syncToMobile')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -113,35 +120,42 @@ function ConvertFrom-GroAdminJsonToPostFoldersRequest {
             throw "Error! Empty JSON cannot be serialized due to the required property 'displayname' missing."
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "displayname"))) {
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'displayname'))) {
             throw "Error! JSON cannot be serialized due to the required property 'displayname' missing."
         } else {
-            $Displayname = $JsonParameters.PSobject.Properties["displayname"].value
+            $Displayname = $JsonParameters.PSobject.Properties['displayname'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "container"))) {
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'container'))) {
             throw "Error! JSON cannot be serialized due to the required property 'container' missing."
         } else {
-            $Container = $JsonParameters.PSobject.Properties["container"].value
+            $Container = $JsonParameters.PSobject.Properties['container'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "comment"))) {
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'comment'))) {
             throw "Error! JSON cannot be serialized due to the required property 'comment' missing."
         } else {
-            $Comment = $JsonParameters.PSobject.Properties["comment"].value
+            $Comment = $JsonParameters.PSobject.Properties['comment'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "parentID"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'parentID'))) { #optional property not found
             $ParentID = $null
         } else {
-            $ParentID = $JsonParameters.PSobject.Properties["parentID"].value
+            $ParentID = $JsonParameters.PSobject.Properties['parentID'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'syncToMobile'))) { #optional property not found
+            $SyncToMobile = $null
+        } else {
+            $SyncToMobile = $JsonParameters.PSobject.Properties['syncToMobile'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "displayname" = ${Displayname}
-            "container" = ${Container}
-            "comment" = ${Comment}
-            "parentID" = ${ParentID}
+            'displayname' = ${Displayname}
+            'container' = ${Container}
+            'comment' = ${Comment}
+            'parentID' = ${ParentID}
+            'syncToMobile' = ${SyncToMobile}
         }
 
         return $PSO

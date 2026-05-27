@@ -1,13 +1,13 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
 .SYNOPSIS
 
-checkFormat
+Check format of input
 
 .DESCRIPTION
 
@@ -25,7 +25,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-ChkFormatResponse
+CheckFormat200Response
 #>
 function Invoke-GroAdminCheckFormat {
     [CmdletBinding()]
@@ -76,7 +76,7 @@ function Invoke-GroAdminCheckFormat {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "ChkFormatResponse" `
+                                -ReturnType "CheckFormat200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -90,7 +90,7 @@ function Invoke-GroAdminCheckFormat {
 <#
 .SYNOPSIS
 
-deleteMailq
+Delete entries from postfix mail queue
 
 .DESCRIPTION
 
@@ -150,6 +150,16 @@ function Invoke-GroAdminDeleteMailq {
             $LocalVarQueryParameters['queue'] = $Queue
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'POST' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -173,7 +183,7 @@ function Invoke-GroAdminDeleteMailq {
 <#
 .SYNOPSIS
 
-flushMailq
+Flush postfix mail queue
 
 .DESCRIPTION
 
@@ -234,6 +244,16 @@ function Clear-GroAdminMailq {
         }
         $LocalVarQueryParameters['queue'] = $Queue
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'POST' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -257,7 +277,7 @@ function Clear-GroAdminMailq {
 <#
 .SYNOPSIS
 
-getAbout
+Get general information about the backend
 
 .DESCRIPTION
 
@@ -269,7 +289,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-AboutResponse
+GetAbout200Response
 #>
 function Get-GroAdminAbout {
     [CmdletBinding()]
@@ -306,7 +326,7 @@ function Get-GroAdminAbout {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "AboutResponse" `
+                                -ReturnType "GetAbout200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -320,7 +340,90 @@ function Get-GroAdminAbout {
 <#
 .SYNOPSIS
 
-getMailq
+Get detailed dns check for domain
+
+.DESCRIPTION
+
+No description available.
+
+.PARAMETER DomainID
+ID of the domain
+
+.PARAMETER WithHttpInfo
+
+A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
+
+.OUTPUTS
+
+DomainDnsCheck
+#>
+function Get-GroAdminDomainDnsCheck {
+    [CmdletBinding()]
+    Param (
+        [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Int32]
+        ${DomainID},
+        [Switch]
+        $WithHttpInfo
+    )
+
+    Process {
+        'Calling method: Get-GroAdminDomainDnsCheck' | Write-Debug
+        $PSBoundParameters | Out-DebugParameter | Write-Debug
+
+        $LocalVarAccepts = @()
+        $LocalVarContentTypes = @()
+        $LocalVarQueryParameters = @{}
+        $LocalVarHeaderParameters = @{}
+        $LocalVarFormParameters = @{}
+        $LocalVarPathParameters = @{}
+        $LocalVarCookieParameters = @{}
+        $LocalVarBodyParameter = $null
+
+        $Configuration = Get-GroAdminConfiguration
+        # HTTP header 'Accept' (if needed)
+        $LocalVarAccepts = @('application/json')
+
+        $LocalVarUri = '/domains/{domainID}/dnsCheck'
+        if (!$DomainID) {
+            throw "Error! The required parameter `DomainID` missing when calling getDomainDnsCheck."
+        }
+        $LocalVarUri = $LocalVarUri.replace('{domainID}', [System.Web.HTTPUtility]::UrlEncode($DomainID))
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
+        $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
+                                -Uri $LocalVarUri `
+                                -Accepts $LocalVarAccepts `
+                                -ContentTypes $LocalVarContentTypes `
+                                -Body $LocalVarBodyParameter `
+                                -HeaderParameters $LocalVarHeaderParameters `
+                                -QueryParameters $LocalVarQueryParameters `
+                                -FormParameters $LocalVarFormParameters `
+                                -CookieParameters $LocalVarCookieParameters `
+                                -ReturnType "DomainDnsCheck" `
+                                -IsBodyNullable $false
+
+        if ($WithHttpInfo.IsPresent) {
+            return $LocalVarResult
+        } else {
+            return $LocalVarResult["Response"]
+        }
+    }
+}
+
+<#
+.SYNOPSIS
+
+Retrieve mailq output
 
 .DESCRIPTION
 
@@ -332,7 +435,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-SystemMailqResponse
+GetMailq200Response
 #>
 function Get-GroAdminMailq {
     [CmdletBinding()]
@@ -360,6 +463,16 @@ function Get-GroAdminMailq {
 
         $LocalVarUri = '/system/mailq'
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -369,7 +482,7 @@ function Get-GroAdminMailq {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "SystemMailqResponse" `
+                                -ReturnType "GetMailq200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -383,7 +496,7 @@ function Get-GroAdminMailq {
 <#
 .SYNOPSIS
 
-getProfile
+Get information about currently logged in user
 
 .DESCRIPTION
 
@@ -395,7 +508,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-ProfileResponse
+GetProfile200Response
 #>
 function Get-GroAdminProfile {
     [CmdletBinding()]
@@ -423,6 +536,16 @@ function Get-GroAdminProfile {
 
         $LocalVarUri = '/profile'
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -432,7 +555,7 @@ function Get-GroAdminProfile {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "ProfileResponse" `
+                                -ReturnType "GetProfile200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -446,7 +569,7 @@ function Get-GroAdminProfile {
 <#
 .SYNOPSIS
 
-getStatus
+Check API connectivity and status
 
 .DESCRIPTION
 
@@ -458,7 +581,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-StatusResponse
+GetStatus200Response
 #>
 function Get-GroAdminStatus {
     [CmdletBinding()]
@@ -495,7 +618,7 @@ function Get-GroAdminStatus {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "StatusResponse" `
+                                -ReturnType "GetStatus200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -509,7 +632,7 @@ function Get-GroAdminStatus {
 <#
 .SYNOPSIS
 
-getUserDomains
+Get list of domains the user has access to
 
 .DESCRIPTION
 
@@ -521,7 +644,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-DomainsResponse
+GetDomains200Response
 #>
 function Get-GroAdminUserDomains {
     [CmdletBinding()]
@@ -549,6 +672,16 @@ function Get-GroAdminUserDomains {
 
         $LocalVarUri = '/domains'
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -558,7 +691,7 @@ function Get-GroAdminUserDomains {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "DomainsResponse" `
+                                -ReturnType "GetDomains200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -572,14 +705,84 @@ function Get-GroAdminUserDomains {
 <#
 .SYNOPSIS
 
-postLogin
+Get list of usernames
 
 .DESCRIPTION
 
 No description available.
 
-.PARAMETER ContentType
+.PARAMETER WithHttpInfo
 
+A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
+
+.OUTPUTS
+
+GetUsernames200Response
+#>
+function Get-GroAdminUsernames {
+    [CmdletBinding()]
+    Param (
+        [Switch]
+        $WithHttpInfo
+    )
+
+    Process {
+        'Calling method: Get-GroAdminUsernames' | Write-Debug
+        $PSBoundParameters | Out-DebugParameter | Write-Debug
+
+        $LocalVarAccepts = @()
+        $LocalVarContentTypes = @()
+        $LocalVarQueryParameters = @{}
+        $LocalVarHeaderParameters = @{}
+        $LocalVarFormParameters = @{}
+        $LocalVarPathParameters = @{}
+        $LocalVarCookieParameters = @{}
+        $LocalVarBodyParameter = $null
+
+        $Configuration = Get-GroAdminConfiguration
+        # HTTP header 'Accept' (if needed)
+        $LocalVarAccepts = @('application/json')
+
+        $LocalVarUri = '/users'
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
+        $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
+                                -Uri $LocalVarUri `
+                                -Accepts $LocalVarAccepts `
+                                -ContentTypes $LocalVarContentTypes `
+                                -Body $LocalVarBodyParameter `
+                                -HeaderParameters $LocalVarHeaderParameters `
+                                -QueryParameters $LocalVarQueryParameters `
+                                -FormParameters $LocalVarFormParameters `
+                                -CookieParameters $LocalVarCookieParameters `
+                                -ReturnType "GetUsernames200Response" `
+                                -IsBodyNullable $false
+
+        if ($WithHttpInfo.IsPresent) {
+            return $LocalVarResult
+        } else {
+            return $LocalVarResult["Response"]
+        }
+    }
+}
+
+<#
+.SYNOPSIS
+
+Login user
+
+.DESCRIPTION
+
+No description available.
 
 .PARAMETER User
 Username
@@ -593,19 +796,15 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-LoginResponse
+PostLogin200Response
 #>
 function Submit-GroAdminLogin {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [ValidateSet("application/x-www-form-urlencoded")]
-        [String]
-        ${ContentType},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${User},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Pass},
         [Switch]
@@ -634,11 +833,6 @@ function Submit-GroAdminLogin {
 
         $LocalVarUri = '/login'
 
-        if (!$ContentType) {
-            throw "Error! The required parameter `ContentType` missing when calling postLogin."
-        }
-        $LocalVarHeaderParameters['Content-Type'] = $ContentType
-
         if ($User) {
             $LocalVarFormParameters['user'] = $User
         }
@@ -656,7 +850,7 @@ function Submit-GroAdminLogin {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "LoginResponse" `
+                                -ReturnType "PostLogin200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -670,7 +864,7 @@ function Submit-GroAdminLogin {
 <#
 .SYNOPSIS
 
-postRequeue
+Requeue entries from postfix mail queue
 
 .DESCRIPTION
 
@@ -730,6 +924,16 @@ function Submit-GroAdminRequeue {
             $LocalVarQueryParameters['queue'] = $Queue
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'POST' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -753,7 +957,7 @@ function Submit-GroAdminRequeue {
 <#
 .SYNOPSIS
 
-putPasswd
+Change current users password
 
 .DESCRIPTION
 
@@ -763,7 +967,7 @@ No description available.
 CSRF Token
 
 .PARAMETER PutPasswdRequest
-
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -837,14 +1041,14 @@ function Send-GroAdminPasswd {
 <#
 .SYNOPSIS
 
-remoteCLI
+Remote CLI invocation
 
 .DESCRIPTION
 
 No description available.
 
 .PARAMETER RemoteCLIRequest
-
+No description available.
 
 .PARAMETER XCsrfToken
 CSRF Token
@@ -855,7 +1059,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-SystemCliResponse
+RemoteCLI200Response
 #>
 function Invoke-GroAdminRemoteCLI {
     [CmdletBinding()]
@@ -902,6 +1106,16 @@ function Invoke-GroAdminRemoteCLI {
 
         $LocalVarBodyParameter = $RemoteCLIRequest | ConvertTo-Json -Depth 100
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'POST' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -911,7 +1125,7 @@ function Invoke-GroAdminRemoteCLI {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "SystemCliResponse" `
+                                -ReturnType "RemoteCLI200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -925,7 +1139,111 @@ function Invoke-GroAdminRemoteCLI {
 <#
 .SYNOPSIS
 
-syncTop
+Change user password
+
+.DESCRIPTION
+
+No description available.
+
+.PARAMETER Username
+E-mail address of the user
+
+.PARAMETER XCsrfToken
+CSRF Token
+
+.PARAMETER ResetPasswdRequest
+No description available.
+
+.PARAMETER WithHttpInfo
+
+A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
+
+.OUTPUTS
+
+None
+#>
+function Reset-GroAdminPasswd {
+    [CmdletBinding()]
+    Param (
+        [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Username},
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${XCsrfToken},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [PSCustomObject]
+        ${ResetPasswdRequest},
+        [Switch]
+        $WithHttpInfo
+    )
+
+    Process {
+        'Calling method: Reset-GroAdminPasswd' | Write-Debug
+        $PSBoundParameters | Out-DebugParameter | Write-Debug
+
+        $LocalVarAccepts = @()
+        $LocalVarContentTypes = @()
+        $LocalVarQueryParameters = @{}
+        $LocalVarHeaderParameters = @{}
+        $LocalVarFormParameters = @{}
+        $LocalVarPathParameters = @{}
+        $LocalVarCookieParameters = @{}
+        $LocalVarBodyParameter = $null
+
+        $Configuration = Get-GroAdminConfiguration
+        # HTTP header 'Accept' (if needed)
+        $LocalVarAccepts = @('application/json')
+
+        # HTTP header 'Content-Type'
+        $LocalVarContentTypes = @('application/json')
+
+        $LocalVarUri = '/passwd/{username}'
+        if (!$Username) {
+            throw "Error! The required parameter `Username` missing when calling resetPasswd."
+        }
+        $LocalVarUri = $LocalVarUri.replace('{username}', [System.Web.HTTPUtility]::UrlEncode($Username))
+
+        if ($XCsrfToken) {
+            $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
+        }
+
+        $LocalVarBodyParameter = $ResetPasswdRequest | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
+        $LocalVarResult = Invoke-GroAdminApiClient -Method 'PUT' `
+                                -Uri $LocalVarUri `
+                                -Accepts $LocalVarAccepts `
+                                -ContentTypes $LocalVarContentTypes `
+                                -Body $LocalVarBodyParameter `
+                                -HeaderParameters $LocalVarHeaderParameters `
+                                -QueryParameters $LocalVarQueryParameters `
+                                -FormParameters $LocalVarFormParameters `
+                                -CookieParameters $LocalVarCookieParameters `
+                                -ReturnType "" `
+                                -IsBodyNullable $false
+
+        if ($WithHttpInfo.IsPresent) {
+            return $LocalVarResult
+        } else {
+            return $LocalVarResult["Response"]
+        }
+    }
+}
+
+<#
+.SYNOPSIS
+
+Get grommunio-sync usage information
 
 .DESCRIPTION
 
@@ -943,7 +1261,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-SystemSyncTopResponse
+SyncTop200Response
 #>
 function Sync-GroAdminTop {
     [CmdletBinding()]
@@ -985,6 +1303,16 @@ function Sync-GroAdminTop {
             $LocalVarQueryParameters['filterEnded'] = $FilterEnded
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -994,7 +1322,7 @@ function Sync-GroAdminTop {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "SystemSyncTopResponse" `
+                                -ReturnType "SyncTop200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {

@@ -3,8 +3,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**State** | [**State1**](State1.md) |  | [optional] 
-**ExternalAudience** | [**ExternalAudience**](ExternalAudience.md) |  | [optional] 
+**State** | **Int32** | Out-of-office state (0&#x3D;Disabled, 1&#x3D;Enabled, 2&#x3D;Scheduled) | [optional] 
+**ExternalAudience** | **Int32** | External audience setting (0&#x3D;None, 1&#x3D;Known, 2&#x3D;All) | [optional] 
 **StartTime** | **String** | Date string with time | [optional] 
 **EndTime** | **String** | Date string with time | [optional] 
 **InternalSubject** | **String** | Subject for internal out-of-office reply | [optional] [default to "Out of Office"]

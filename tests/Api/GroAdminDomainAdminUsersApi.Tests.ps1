@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDomainAdminUsersApi' {
@@ -95,7 +95,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDomainAdminUsersApi' {
 
     Context 'Get-GroAdminUsers' {
         It 'Test Get-GroAdminUsers' {
-            #$TestResult = Get-GroAdminUsers -DomainID "TEST_VALUE" -Level "TEST_VALUE" -Limit "TEST_VALUE" -Offset "TEST_VALUE" -Match "TEST_VALUE" -MatchFields "TEST_VALUE" -Sort "TEST_VALUE" -ID "TEST_VALUE" -Username "TEST_VALUE" -Properties "TEST_VALUE"
+            #$TestResult = Get-GroAdminUsers -DomainID "TEST_VALUE" -Level "TEST_VALUE" -Limit "TEST_VALUE" -Offset "TEST_VALUE" -Match "TEST_VALUE" -MatchFields "TEST_VALUE" -MatchProps "TEST_VALUE" -FilterProp "TEST_VALUE" -Sort "TEST_VALUE" -ID "TEST_VALUE" -Username "TEST_VALUE" -Mlist "TEST_VALUE" -Properties "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -119,7 +119,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDomainAdminUsersApi' {
 
     Context 'Invoke-GroAdminPatchUser' {
         It 'Test Invoke-GroAdminPatchUser' {
-            #$TestResult = Invoke-GroAdminPatchUser -UserID "TEST_VALUE" -DomainID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -PatchUserRequest "TEST_VALUE"
+            #$TestResult = Invoke-GroAdminPatchUser -UserID "TEST_VALUE" -DomainID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -UserUpdate "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -143,7 +143,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDomainAdminUsersApi' {
 
     Context 'Submit-GroAdminUser' {
         It 'Test Submit-GroAdminUser' {
-            #$TestResult = Submit-GroAdminUser -DomainID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -PostUserRequest "TEST_VALUE"
+            #$TestResult = Submit-GroAdminUser -DomainID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -UserInit "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -207,7 +207,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDomainAdminUsersApi' {
 
     Context 'Set-GroAdminOofSize' {
         It 'Test Set-GroAdminOofSize' {
-            #$TestResult = Set-GroAdminOofSize -DomainID "TEST_VALUE" -UserID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -SetOofSizeRequest "TEST_VALUE"
+            #$TestResult = Set-GroAdminOofSize -DomainID "TEST_VALUE" -UserID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -UserOofState "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 **ID** | **Int32** | Unique ID of the object | [optional] [readonly] 
 **Name** | **String** |  | [optional] 
 **Description** | **String** |  | [optional] 
-**Domains** | [**Domain1[]**](Domain1.md) | List of domains belonging to the organization | [optional] 
+**DomainCount** | **Int32** | Number of domains in this organization | [optional] 
+**Domains** | [**OrgDomainsInner[]**](OrgDomainsInner.md) | List of domains belonging to the organization | [optional] 
 
 ## Examples
 
@@ -15,6 +16,7 @@ Name | Type | Description | Notes
 $Org = Initialize-GrommunioAdminOrg  -ID null `
  -Name null `
  -Description null `
+ -DomainCount null `
  -Domains null
 ```
 

@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -11,7 +11,7 @@ No summary available.
 
 .DESCRIPTION
 
-No description available.
+Configuration for user search
 
 .PARAMETER Username
 Name of the attribute that corresponds to the username (e-mail address)
@@ -74,15 +74,15 @@ function Initialize-GroAdminLdapConfigUsers {
 
 
         $PSO = [PSCustomObject]@{
-            "username" = ${Username}
-            "displayName" = ${DisplayName}
-            "filters" = ${Filters}
-            "filter" = ${VarFilter}
-            "templates" = ${Templates}
-            "attributes" = ${Attributes}
-            "defaultQuota" = ${DefaultQuota}
-            "searchAttributes" = ${SearchAttributes}
-            "aliases" = ${Aliases}
+            'username' = ${Username}
+            'displayName' = ${DisplayName}
+            'filters' = ${Filters}
+            'filter' = ${VarFilter}
+            'templates' = ${Templates}
+            'attributes' = ${Attributes}
+            'defaultQuota' = ${DefaultQuota}
+            'searchAttributes' = ${SearchAttributes}
+            'aliases' = ${Aliases}
         }
 
 
@@ -120,77 +120,77 @@ function ConvertFrom-GroAdminJsonToLdapConfigUsers {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminLdapConfigUsers
-        $AllProperties = ("username", "displayName", "filters", "filter", "templates", "attributes", "defaultQuota", "searchAttributes", "aliases")
+        $AllProperties = ('username', 'displayName', 'filters', 'filter', 'templates', 'attributes', 'defaultQuota', 'searchAttributes', 'aliases')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "username"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'username'))) { #optional property not found
             $Username = $null
         } else {
-            $Username = $JsonParameters.PSobject.Properties["username"].value
+            $Username = $JsonParameters.PSobject.Properties['username'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "displayName"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'displayName'))) { #optional property not found
             $DisplayName = $null
         } else {
-            $DisplayName = $JsonParameters.PSobject.Properties["displayName"].value
+            $DisplayName = $JsonParameters.PSobject.Properties['displayName'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "filters"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'filters'))) { #optional property not found
             $Filters = $null
         } else {
-            $Filters = $JsonParameters.PSobject.Properties["filters"].value
+            $Filters = $JsonParameters.PSobject.Properties['filters'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "filter"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'filter'))) { #optional property not found
             $VarFilter = $null
         } else {
-            $VarFilter = $JsonParameters.PSobject.Properties["filter"].value
+            $VarFilter = $JsonParameters.PSobject.Properties['filter'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "templates"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'templates'))) { #optional property not found
             $Templates = $null
         } else {
-            $Templates = $JsonParameters.PSobject.Properties["templates"].value
+            $Templates = $JsonParameters.PSobject.Properties['templates'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "attributes"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'attributes'))) { #optional property not found
             $Attributes = $null
         } else {
-            $Attributes = $JsonParameters.PSobject.Properties["attributes"].value
+            $Attributes = $JsonParameters.PSobject.Properties['attributes'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "defaultQuota"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'defaultQuota'))) { #optional property not found
             $DefaultQuota = $null
         } else {
-            $DefaultQuota = $JsonParameters.PSobject.Properties["defaultQuota"].value
+            $DefaultQuota = $JsonParameters.PSobject.Properties['defaultQuota'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "searchAttributes"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'searchAttributes'))) { #optional property not found
             $SearchAttributes = $null
         } else {
-            $SearchAttributes = $JsonParameters.PSobject.Properties["searchAttributes"].value
+            $SearchAttributes = $JsonParameters.PSobject.Properties['searchAttributes'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "aliases"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'aliases'))) { #optional property not found
             $Aliases = $null
         } else {
-            $Aliases = $JsonParameters.PSobject.Properties["aliases"].value
+            $Aliases = $JsonParameters.PSobject.Properties['aliases'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "username" = ${Username}
-            "displayName" = ${DisplayName}
-            "filters" = ${Filters}
-            "filter" = ${VarFilter}
-            "templates" = ${Templates}
-            "attributes" = ${Attributes}
-            "defaultQuota" = ${DefaultQuota}
-            "searchAttributes" = ${SearchAttributes}
-            "aliases" = ${Aliases}
+            'username' = ${Username}
+            'displayName' = ${DisplayName}
+            'filters' = ${Filters}
+            'filter' = ${VarFilter}
+            'templates' = ${Templates}
+            'attributes' = ${Attributes}
+            'defaultQuota' = ${DefaultQuota}
+            'searchAttributes' = ${SearchAttributes}
+            'aliases' = ${Aliases}
         }
 
         return $PSO

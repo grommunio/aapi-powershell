@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -16,7 +16,7 @@ No description available.
 .PARAMETER Command
 CLI command to execute
 .PARAMETER Mode
-No description available.
+CLI mode (execute or complete)
 .PARAMETER Color
 Enable terminal colors
 .PARAMETER Fs
@@ -33,8 +33,9 @@ function Initialize-GroAdminRemoteCLIRequest {
         [String]
         ${Command},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
-        ${Mode},
+        [ValidateSet("exec", "complete")]
+        [String]
+        ${Mode} = "exec",
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${Color} = $false,
@@ -53,10 +54,10 @@ function Initialize-GroAdminRemoteCLIRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "command" = ${Command}
-            "mode" = ${Mode}
-            "color" = ${Color}
-            "fs" = ${Fs}
+            'command' = ${Command}
+            'mode' = ${Mode}
+            'color' = ${Color}
+            'fs' = ${Fs}
         }
 
 
@@ -94,7 +95,7 @@ function ConvertFrom-GroAdminJsonToRemoteCLIRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminRemoteCLIRequest
-        $AllProperties = ("command", "mode", "color", "fs")
+        $AllProperties = ('command', 'mode', 'color', 'fs')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -105,35 +106,35 @@ function ConvertFrom-GroAdminJsonToRemoteCLIRequest {
             throw "Error! Empty JSON cannot be serialized due to the required property 'command' missing."
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "command"))) {
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'command'))) {
             throw "Error! JSON cannot be serialized due to the required property 'command' missing."
         } else {
-            $Command = $JsonParameters.PSobject.Properties["command"].value
+            $Command = $JsonParameters.PSobject.Properties['command'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "mode"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'mode'))) { #optional property not found
             $Mode = $null
         } else {
-            $Mode = $JsonParameters.PSobject.Properties["mode"].value
+            $Mode = $JsonParameters.PSobject.Properties['mode'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "color"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'color'))) { #optional property not found
             $Color = $null
         } else {
-            $Color = $JsonParameters.PSobject.Properties["color"].value
+            $Color = $JsonParameters.PSobject.Properties['color'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "fs"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'fs'))) { #optional property not found
             $Fs = $null
         } else {
-            $Fs = $JsonParameters.PSobject.Properties["fs"].value
+            $Fs = $JsonParameters.PSobject.Properties['fs'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "command" = ${Command}
-            "mode" = ${Mode}
-            "color" = ${Color}
-            "fs" = ${Fs}
+            'command' = ${Command}
+            'mode' = ${Mode}
+            'color' = ${Color}
+            'fs' = ${Fs}
         }
 
         return $PSO

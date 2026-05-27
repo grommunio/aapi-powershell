@@ -1,13 +1,13 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
 .SYNOPSIS
 
-getUserDeviceWipeStatus
+Get device last connect time for user
 
 .DESCRIPTION
 
@@ -25,7 +25,100 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-ServiceWipeResponse
+GetUserDeviceWipeStatus200Response
+#>
+function Get-GroAdminUserDeviceLastConnect {
+    [CmdletBinding()]
+    Param (
+        [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Username},
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String[]]
+        ${Devices},
+        [Switch]
+        $WithHttpInfo
+    )
+
+    Process {
+        'Calling method: Get-GroAdminUserDeviceLastConnect' | Write-Debug
+        $PSBoundParameters | Out-DebugParameter | Write-Debug
+
+        $LocalVarAccepts = @()
+        $LocalVarContentTypes = @()
+        $LocalVarQueryParameters = @{}
+        $LocalVarHeaderParameters = @{}
+        $LocalVarFormParameters = @{}
+        $LocalVarPathParameters = @{}
+        $LocalVarCookieParameters = @{}
+        $LocalVarBodyParameter = $null
+
+        $Configuration = Get-GroAdminConfiguration
+        # HTTP header 'Accept' (if needed)
+        $LocalVarAccepts = @('application/json')
+
+        $LocalVarUri = '/service/lastconnect/{username}'
+        if (!$Username) {
+            throw "Error! The required parameter `Username` missing when calling getUserDeviceLastConnect."
+        }
+        $LocalVarUri = $LocalVarUri.replace('{username}', [System.Web.HTTPUtility]::UrlEncode($Username))
+
+        if ($Devices) {
+            $LocalVarQueryParameters['devices'] = $Devices
+        }
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
+        $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
+                                -Uri $LocalVarUri `
+                                -Accepts $LocalVarAccepts `
+                                -ContentTypes $LocalVarContentTypes `
+                                -Body $LocalVarBodyParameter `
+                                -HeaderParameters $LocalVarHeaderParameters `
+                                -QueryParameters $LocalVarQueryParameters `
+                                -FormParameters $LocalVarFormParameters `
+                                -CookieParameters $LocalVarCookieParameters `
+                                -ReturnType "GetUserDeviceWipeStatus200Response" `
+                                -IsBodyNullable $false
+
+        if ($WithHttpInfo.IsPresent) {
+            return $LocalVarResult
+        } else {
+            return $LocalVarResult["Response"]
+        }
+    }
+}
+
+<#
+.SYNOPSIS
+
+Get device wipe status for user
+
+.DESCRIPTION
+
+No description available.
+
+.PARAMETER Username
+E-mail address of the user
+
+.PARAMETER Devices
+Restrict request to these device IDs
+
+.PARAMETER WithHttpInfo
+
+A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
+
+.OUTPUTS
+
+GetUserDeviceWipeStatus200Response
 #>
 function Get-GroAdminUserDeviceWipeStatus {
     [CmdletBinding()]
@@ -67,6 +160,16 @@ function Get-GroAdminUserDeviceWipeStatus {
             $LocalVarQueryParameters['devices'] = $Devices
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -76,7 +179,7 @@ function Get-GroAdminUserDeviceWipeStatus {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "ServiceWipeResponse" `
+                                -ReturnType "GetUserDeviceWipeStatus200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -90,7 +193,7 @@ function Get-GroAdminUserDeviceWipeStatus {
 <#
 .SYNOPSIS
 
-getUserInformation
+Get basic user information
 
 .DESCRIPTION
 
@@ -105,7 +208,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-ServiceUserinfoResponse
+GetUserInformation200Response
 #>
 function Get-GroAdminUserInformation {
     [CmdletBinding()]
@@ -140,6 +243,16 @@ function Get-GroAdminUserInformation {
         }
         $LocalVarUri = $LocalVarUri.replace('{username}', [System.Web.HTTPUtility]::UrlEncode($Username))
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -149,7 +262,7 @@ function Get-GroAdminUserInformation {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "ServiceUserinfoResponse" `
+                                -ReturnType "GetUserInformation200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -163,7 +276,7 @@ function Get-GroAdminUserInformation {
 <#
 .SYNOPSIS
 
-getUserSyncPolicy
+Get sync policy for specific user
 
 .DESCRIPTION
 
@@ -178,7 +291,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-ServiceSyncPolicyResponse
+GetUserSyncPolicy200Response
 #>
 function Get-GroAdminUserSyncPolicy {
     [CmdletBinding()]
@@ -213,6 +326,16 @@ function Get-GroAdminUserSyncPolicy {
         }
         $LocalVarUri = $LocalVarUri.replace('{username}', [System.Web.HTTPUtility]::UrlEncode($Username))
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -222,7 +345,7 @@ function Get-GroAdminUserSyncPolicy {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "ServiceSyncPolicyResponse" `
+                                -ReturnType "GetUserSyncPolicy200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -236,7 +359,7 @@ function Get-GroAdminUserSyncPolicy {
 <#
 .SYNOPSIS
 
-putPasswd
+Change current users password
 
 .DESCRIPTION
 
@@ -246,7 +369,7 @@ No description available.
 CSRF Token
 
 .PARAMETER PutPasswdRequest
-
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -320,7 +443,7 @@ function Send-GroAdminPasswd {
 <#
 .SYNOPSIS
 
-setUserDeviceWipeStatus
+Set device wipe status for user
 
 .DESCRIPTION
 
@@ -330,7 +453,7 @@ No description available.
 E-mail address of the user
 
 .PARAMETER SetUserDeviceWipeStatusRequest
-
+No description available.
 
 .PARAMETER XCsrfToken
 CSRF Token
@@ -404,6 +527,16 @@ function Set-GroAdminUserDeviceWipeStatus {
         }
 
         $LocalVarBodyParameter = $SetUserDeviceWipeStatusRequest | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'POST' `
                                 -Uri $LocalVarUri `

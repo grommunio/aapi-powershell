@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -54,11 +54,11 @@ function Initialize-GroAdminHomeserver {
 
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "hostname" = ${Hostname}
-            "extname" = ${Extname}
-            "users" = ${Users}
-            "domains" = ${Domains}
+            'ID' = ${ID}
+            'hostname' = ${Hostname}
+            'extname' = ${Extname}
+            'users' = ${Users}
+            'domains' = ${Domains}
         }
 
 
@@ -96,49 +96,49 @@ function ConvertFrom-GroAdminJsonToHomeserver {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminHomeserver
-        $AllProperties = ("ID", "hostname", "extname", "users", "domains")
+        $AllProperties = ('ID', 'hostname', 'extname', 'users', 'domains')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "ID"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'ID'))) { #optional property not found
             $ID = $null
         } else {
-            $ID = $JsonParameters.PSobject.Properties["ID"].value
+            $ID = $JsonParameters.PSobject.Properties['ID'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "hostname"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'hostname'))) { #optional property not found
             $Hostname = $null
         } else {
-            $Hostname = $JsonParameters.PSobject.Properties["hostname"].value
+            $Hostname = $JsonParameters.PSobject.Properties['hostname'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "extname"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'extname'))) { #optional property not found
             $Extname = $null
         } else {
-            $Extname = $JsonParameters.PSobject.Properties["extname"].value
+            $Extname = $JsonParameters.PSobject.Properties['extname'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "users"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'users'))) { #optional property not found
             $Users = $null
         } else {
-            $Users = $JsonParameters.PSobject.Properties["users"].value
+            $Users = $JsonParameters.PSobject.Properties['users'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "domains"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'domains'))) { #optional property not found
             $Domains = $null
         } else {
-            $Domains = $JsonParameters.PSobject.Properties["domains"].value
+            $Domains = $JsonParameters.PSobject.Properties['domains'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "hostname" = ${Hostname}
-            "extname" = ${Extname}
-            "users" = ${Users}
-            "domains" = ${Domains}
+            'ID' = ${ID}
+            'hostname' = ${Hostname}
+            'extname' = ${Extname}
+            'users' = ${Users}
+            'domains' = ${Domains}
         }
 
         return $PSO

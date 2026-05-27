@@ -1,32 +1,37 @@
-# GrommunioAdmin.GrommunioAdmin/Api.GroAdminDefaultsApi
+# GrommunioAdmin.GrommunioAdmin\Api.GroAdminDefaultsApi
 
 All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Get-GroAdminCreateParams**](GroAdminDefaultsApi.md#Get-GroAdminCreateParams) | **GET** /defaults/createParams | getCreateParams
-[**Get-GroAdminDomainDefaultParams**](GroAdminDefaultsApi.md#Get-GroAdminDomainDefaultParams) | **GET** /defaults/createParams/{domainID} | getDomainDefaultParams
-[**Get-GroAdminStoreLangs**](GroAdminDefaultsApi.md#Get-GroAdminStoreLangs) | **GET** /defaults/storeLangs | getStoreLangs
-[**Invoke-GroAdminPatchCreateParams**](GroAdminDefaultsApi.md#Invoke-GroAdminPatchCreateParams) | **PATCH** /defaults/createParams | patchCreateParams
-[**Invoke-GroAdminPatchDomainDefaultParams**](GroAdminDefaultsApi.md#Invoke-GroAdminPatchDomainDefaultParams) | **PATCH** /defaults/createParams/{domainID} | patchDomainDefaultParams
-[**Send-GroAdminCreateParams**](GroAdminDefaultsApi.md#Send-GroAdminCreateParams) | **PUT** /defaults/createParams | putCreateParams
-[**Send-GroAdminDomainDefaultParams**](GroAdminDefaultsApi.md#Send-GroAdminDomainDefaultParams) | **PUT** /defaults/createParams/{domainID} | putDomainDefaultParams
+[**Get-GroAdminCreateParams**](GroAdminDefaultsApi.md#Get-GroAdminCreateParams) | **GET** /defaults/createParams | Get default create parameters
+[**Get-GroAdminDomainDefaultParams**](GroAdminDefaultsApi.md#Get-GroAdminDomainDefaultParams) | **GET** /defaults/createParams/{domainID} | Get default create parameter overrides for domain
+[**Get-GroAdminStoreLangs**](GroAdminDefaultsApi.md#Get-GroAdminStoreLangs) | **GET** /defaults/storeLangs | Get list of available user store languages
+[**Invoke-GroAdminPatchCreateParams**](GroAdminDefaultsApi.md#Invoke-GroAdminPatchCreateParams) | **PATCH** /defaults/createParams | Update create default parameters
+[**Invoke-GroAdminPatchDomainDefaultParams**](GroAdminDefaultsApi.md#Invoke-GroAdminPatchDomainDefaultParams) | **PATCH** /defaults/createParams/{domainID} | Update create default parameter overrides for domain
+[**Send-GroAdminCreateParams**](GroAdminDefaultsApi.md#Send-GroAdminCreateParams) | **PUT** /defaults/createParams | Replace create default parameters
+[**Send-GroAdminDomainDefaultParams**](GroAdminDefaultsApi.md#Send-GroAdminDomainDefaultParams) | **PUT** /defaults/createParams/{domainID} | Replace create default parameter overrides for domain
 
 
-<a name="Get-GroAdminCreateParams"></a>
+<a id="Get-GroAdminCreateParams"></a>
 # **Get-GroAdminCreateParams**
-> DefaultsCreateParamsResponse Get-GroAdminCreateParams<br>
+> GetCreateParams200Response Get-GroAdminCreateParams<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Domain] <System.Nullable[Int32]><br>
-
-getCreateParams
 
 Get default create parameters
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Domain = 56 # Int32 | Get the effective defaults for specific domain (optional)
 
-# getCreateParams
+# Get default create parameters
 try {
     $Result = Get-GroAdminCreateParams -Domain $Domain
 } catch {
@@ -43,11 +48,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DefaultsCreateParamsResponse**](DefaultsCreateParamsResponse.md) (PSCustomObject)
+[**GetCreateParams200Response**](GetCreateParams200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -56,20 +61,25 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminDomainDefaultParams"></a>
+<a id="Get-GroAdminDomainDefaultParams"></a>
 # **Get-GroAdminDomainDefaultParams**
-> DefaultsCreateParamsResponse Get-GroAdminDomainDefaultParams<br>
+> GetCreateParams200Response Get-GroAdminDomainDefaultParams<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
-
-getDomainDefaultParams
 
 Get default create parameter overrides for domain
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 
-# getDomainDefaultParams
+# Get default create parameter overrides for domain
 try {
     $Result = Get-GroAdminDomainDefaultParams -DomainID $DomainID
 } catch {
@@ -86,11 +96,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DefaultsCreateParamsResponse**](DefaultsCreateParamsResponse.md) (PSCustomObject)
+[**GetCreateParams200Response**](GetCreateParams200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -99,18 +109,16 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminStoreLangs"></a>
+<a id="Get-GroAdminStoreLangs"></a>
 # **Get-GroAdminStoreLangs**
-> DefaultsStoreLangsResponse Get-GroAdminStoreLangs<br>
-
-getStoreLangs
+> GetStoreLangs200Response Get-GroAdminStoreLangs<br>
 
 Get list of available user store languages
 
 ### Example
 ```powershell
 
-# getStoreLangs
+# Get list of available user store languages
 try {
     $Result = Get-GroAdminStoreLangs
 } catch {
@@ -124,7 +132,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**DefaultsStoreLangsResponse**](DefaultsStoreLangsResponse.md) (PSCustomObject)
+[**GetStoreLangs200Response**](GetStoreLangs200Response.md) (PSCustomObject)
 
 ### Authorization
 
@@ -137,24 +145,29 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminPatchCreateParams"></a>
+<a id="Invoke-GroAdminPatchCreateParams"></a>
 # **Invoke-GroAdminPatchCreateParams**
 > void Invoke-GroAdminPatchCreateParams<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PutCreateParamsRequest] <PSCustomObject><br>
-
-patchCreateParams
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreateDefaults] <PSCustomObject><br>
 
 Update create default parameters
 
 ### Example
 ```powershell
-$XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
-$PutCreateParamsRequest = Initialize-PutCreateParamsRequest -User  -Domain # PutCreateParamsRequest |  (optional)
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
 
-# patchCreateParams
+$XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
+$CreateDefaults = Initialize-CreateDefaults -User @{ key_example =  } -Domain @{ key_example =  } # CreateDefaults |  (optional)
+
+# Update create default parameters
 try {
-    $Result = Invoke-GroAdminPatchCreateParams -XCsrfToken $XCsrfToken -PutCreateParamsRequest $PutCreateParamsRequest
+    $Result = Invoke-GroAdminPatchCreateParams -XCsrfToken $XCsrfToken -CreateDefaults $CreateDefaults
 } catch {
     Write-Host ("Exception occurred when calling Invoke-GroAdminPatchCreateParams: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -166,7 +179,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **XCsrfToken** | **String**| CSRF Token | [optional] 
- **PutCreateParamsRequest** | [**PutCreateParamsRequest**](PutCreateParamsRequest.md)|  | [optional] 
+ **CreateDefaults** | [**CreateDefaults**](CreateDefaults.md)|  | [optional] 
 
 ### Return type
 
@@ -174,7 +187,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -183,26 +196,31 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminPatchDomainDefaultParams"></a>
+<a id="Invoke-GroAdminPatchDomainDefaultParams"></a>
 # **Invoke-GroAdminPatchDomainDefaultParams**
 > void Invoke-GroAdminPatchDomainDefaultParams<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PutCreateParamsRequest] <PSCustomObject><br>
-
-patchDomainDefaultParams
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreateDefaults] <PSCustomObject><br>
 
 Update create default parameter overrides for domain
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
-$PutCreateParamsRequest = Initialize-PutCreateParamsRequest -User  -Domain # PutCreateParamsRequest |  (optional)
+$CreateDefaults = Initialize-CreateDefaults -User @{ key_example =  } -Domain @{ key_example =  } # CreateDefaults |  (optional)
 
-# patchDomainDefaultParams
+# Update create default parameter overrides for domain
 try {
-    $Result = Invoke-GroAdminPatchDomainDefaultParams -DomainID $DomainID -XCsrfToken $XCsrfToken -PutCreateParamsRequest $PutCreateParamsRequest
+    $Result = Invoke-GroAdminPatchDomainDefaultParams -DomainID $DomainID -XCsrfToken $XCsrfToken -CreateDefaults $CreateDefaults
 } catch {
     Write-Host ("Exception occurred when calling Invoke-GroAdminPatchDomainDefaultParams: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -215,7 +233,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **DomainID** | **Int32**| ID of the domain | 
  **XCsrfToken** | **String**| CSRF Token | [optional] 
- **PutCreateParamsRequest** | [**PutCreateParamsRequest**](PutCreateParamsRequest.md)|  | [optional] 
+ **CreateDefaults** | [**CreateDefaults**](CreateDefaults.md)|  | [optional] 
 
 ### Return type
 
@@ -223,7 +241,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -232,24 +250,29 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Send-GroAdminCreateParams"></a>
+<a id="Send-GroAdminCreateParams"></a>
 # **Send-GroAdminCreateParams**
 > void Send-GroAdminCreateParams<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PutCreateParamsRequest] <PSCustomObject><br>
-
-putCreateParams
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreateDefaults] <PSCustomObject><br>
 
 Replace create default parameters
 
 ### Example
 ```powershell
-$XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
-$PutCreateParamsRequest = Initialize-PutCreateParamsRequest -User  -Domain # PutCreateParamsRequest |  (optional)
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
 
-# putCreateParams
+$XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
+$CreateDefaults = Initialize-CreateDefaults -User @{ key_example =  } -Domain @{ key_example =  } # CreateDefaults |  (optional)
+
+# Replace create default parameters
 try {
-    $Result = Send-GroAdminCreateParams -XCsrfToken $XCsrfToken -PutCreateParamsRequest $PutCreateParamsRequest
+    $Result = Send-GroAdminCreateParams -XCsrfToken $XCsrfToken -CreateDefaults $CreateDefaults
 } catch {
     Write-Host ("Exception occurred when calling Send-GroAdminCreateParams: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -261,7 +284,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **XCsrfToken** | **String**| CSRF Token | [optional] 
- **PutCreateParamsRequest** | [**PutCreateParamsRequest**](PutCreateParamsRequest.md)|  | [optional] 
+ **CreateDefaults** | [**CreateDefaults**](CreateDefaults.md)|  | [optional] 
 
 ### Return type
 
@@ -269,7 +292,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -278,26 +301,31 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Send-GroAdminDomainDefaultParams"></a>
+<a id="Send-GroAdminDomainDefaultParams"></a>
 # **Send-GroAdminDomainDefaultParams**
 > void Send-GroAdminDomainDefaultParams<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PutCreateParamsRequest] <PSCustomObject><br>
-
-putDomainDefaultParams
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreateDefaults] <PSCustomObject><br>
 
 Replace create default parameter overrides for domain
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
-$PutCreateParamsRequest = Initialize-PutCreateParamsRequest -User  -Domain # PutCreateParamsRequest |  (optional)
+$CreateDefaults = Initialize-CreateDefaults -User @{ key_example =  } -Domain @{ key_example =  } # CreateDefaults |  (optional)
 
-# putDomainDefaultParams
+# Replace create default parameter overrides for domain
 try {
-    $Result = Send-GroAdminDomainDefaultParams -DomainID $DomainID -XCsrfToken $XCsrfToken -PutCreateParamsRequest $PutCreateParamsRequest
+    $Result = Send-GroAdminDomainDefaultParams -DomainID $DomainID -XCsrfToken $XCsrfToken -CreateDefaults $CreateDefaults
 } catch {
     Write-Host ("Exception occurred when calling Send-GroAdminDomainDefaultParams: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -310,7 +338,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **DomainID** | **Int32**| ID of the domain | 
  **XCsrfToken** | **String**| CSRF Token | [optional] 
- **PutCreateParamsRequest** | [**PutCreateParamsRequest**](PutCreateParamsRequest.md)|  | [optional] 
+ **CreateDefaults** | [**CreateDefaults**](CreateDefaults.md)|  | [optional] 
 
 ### Return type
 
@@ -318,7 +346,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 

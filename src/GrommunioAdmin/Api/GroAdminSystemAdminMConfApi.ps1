@@ -1,13 +1,13 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
 .SYNOPSIS
 
-deleteAuthmgr
+Reset authmgr configuration to default
 
 .DESCRIPTION
 
@@ -47,6 +47,16 @@ function Invoke-GroAdminDeleteAuthmgr {
 
         $LocalVarUri = '/system/mconf/authmgr'
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'DELETE' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -70,7 +80,7 @@ function Invoke-GroAdminDeleteAuthmgr {
 <#
 .SYNOPSIS
 
-deleteLDAPConf
+Remove LDAP configuration and disable service
 
 .DESCRIPTION
 
@@ -120,6 +130,16 @@ function Invoke-GroAdminDeleteLDAPConf {
             $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'DELETE' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -143,7 +163,7 @@ function Invoke-GroAdminDeleteLDAPConf {
 <#
 .SYNOPSIS
 
-getAuthmgr
+Get the current authmgr configuration
 
 .DESCRIPTION
 
@@ -155,7 +175,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-SystemMconfAuthmgrResponse
+GetAuthmgr200Response
 #>
 function Get-GroAdminAuthmgr {
     [CmdletBinding()]
@@ -183,6 +203,16 @@ function Get-GroAdminAuthmgr {
 
         $LocalVarUri = '/system/mconf/authmgr'
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -192,7 +222,7 @@ function Get-GroAdminAuthmgr {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "SystemMconfAuthmgrResponse" `
+                                -ReturnType "GetAuthmgr200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -206,7 +236,7 @@ function Get-GroAdminAuthmgr {
 <#
 .SYNOPSIS
 
-getLDAPConf
+Get the current LDAP configuration
 
 .DESCRIPTION
 
@@ -218,7 +248,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-SystemMconfLdapResponse
+GetLDAPConf200Response
 #>
 function Get-GroAdminLDAPConf {
     [CmdletBinding()]
@@ -246,6 +276,16 @@ function Get-GroAdminLDAPConf {
 
         $LocalVarUri = '/system/mconf/ldap'
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -255,7 +295,7 @@ function Get-GroAdminLDAPConf {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "SystemMconfLdapResponse" `
+                                -ReturnType "GetLDAPConf200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -269,7 +309,7 @@ function Get-GroAdminLDAPConf {
 <#
 .SYNOPSIS
 
-setAuthmgr
+Set new authmgr configuration
 
 .DESCRIPTION
 
@@ -279,7 +319,7 @@ No description available.
 CSRF Token
 
 .PARAMETER SetAuthmgrRequest
-
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -330,6 +370,16 @@ function Set-GroAdminAuthmgr {
 
         $LocalVarBodyParameter = $SetAuthmgrRequest | ConvertTo-Json -Depth 100
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'PUT' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -353,7 +403,7 @@ function Set-GroAdminAuthmgr {
 <#
 .SYNOPSIS
 
-setLDAPConf
+Set new LDAP configuration
 
 .DESCRIPTION
 
@@ -365,8 +415,8 @@ CSRF Token
 .PARAMETER Force
 Update configuration even if validation failed
 
-.PARAMETER SetOrgLDAPConfRequest
-
+.PARAMETER LdapConfig
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -387,7 +437,7 @@ function Set-GroAdminLDAPConf {
         ${Force},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [PSCustomObject]
-        ${SetOrgLDAPConfRequest},
+        ${LdapConfig},
         [Switch]
         $WithHttpInfo
     )
@@ -422,7 +472,17 @@ function Set-GroAdminLDAPConf {
             $LocalVarQueryParameters['force'] = $Force
         }
 
-        $LocalVarBodyParameter = $SetOrgLDAPConfRequest | ConvertTo-Json -Depth 100
+        $LocalVarBodyParameter = $LdapConfig | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'PUT' `
                                 -Uri $LocalVarUri `

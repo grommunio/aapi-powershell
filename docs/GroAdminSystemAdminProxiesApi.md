@@ -1,28 +1,35 @@
-# GrommunioAdmin.GrommunioAdmin/Api.GroAdminSystemAdminProxiesApi
+# GrommunioAdmin.GrommunioAdmin\Api.GroAdminSystemAdminProxiesApi
 
 All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Get-GroAdminAntispam**](GroAdminSystemAdminProxiesApi.md#Get-GroAdminAntispam) | **GET** /system/antispam/{path} | getAntispam
-[**Get-GroAdminVhostStatus**](GroAdminSystemAdminProxiesApi.md#Get-GroAdminVhostStatus) | **GET** /system/vhostStatus/{host} | getVhostStatus
-[**Get-GroAdminVhosts**](GroAdminSystemAdminProxiesApi.md#Get-GroAdminVhosts) | **GET** /system/vhostStatus | getVhosts
+[**Get-GroAdminAntispam**](GroAdminSystemAdminProxiesApi.md#Get-GroAdminAntispam) | **GET** /system/antispam/{path} | Make call to grommunio-antispam
+[**Get-GroAdminVhostStatus**](GroAdminSystemAdminProxiesApi.md#Get-GroAdminVhostStatus) | **GET** /system/vhostStatus/{host} | Make call nginx vhost status endpoint
+[**Get-GroAdminVhosts**](GroAdminSystemAdminProxiesApi.md#Get-GroAdminVhosts) | **GET** /system/vhostStatus | Get list of vhosts
 
 
-<a name="Get-GroAdminAntispam"></a>
+<a id="Get-GroAdminAntispam"></a>
 # **Get-GroAdminAntispam**
 > void Get-GroAdminAntispam<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Path] <String><br>
 
-getAntispam
+Make call to grommunio-antispam
 
 Proxies any request including query parameters to the grommunio-antispam backend
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Path = "MyPath" # String | grommunio-antispam endpoint to query
 
-# getAntispam
+# Make call to grommunio-antispam
 try {
     $Result = Get-GroAdminAntispam -Path $Path
 } catch {
@@ -43,7 +50,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -52,20 +59,25 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminVhostStatus"></a>
+<a id="Get-GroAdminVhostStatus"></a>
 # **Get-GroAdminVhostStatus**
 > void Get-GroAdminVhostStatus<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Host] <String><br>
-
-getVhostStatus
 
 Make call nginx vhost status endpoint
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Host = "MyHost" # String | Host to query
 
-# getVhostStatus
+# Make call nginx vhost status endpoint
 try {
     $Result = Get-GroAdminVhostStatus -Host $Host
 } catch {
@@ -86,7 +98,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -95,18 +107,23 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminVhosts"></a>
+<a id="Get-GroAdminVhosts"></a>
 # **Get-GroAdminVhosts**
-> SystemVhostStatusResponse Get-GroAdminVhosts<br>
-
-getVhosts
+> GetServicesListDBConf200Response Get-GroAdminVhosts<br>
 
 Get list of vhosts
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
 
-# getVhosts
+
+# Get list of vhosts
 try {
     $Result = Get-GroAdminVhosts
 } catch {
@@ -120,11 +137,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SystemVhostStatusResponse**](SystemVhostStatusResponse.md) (PSCustomObject)
+[**GetServicesListDBConf200Response**](GetServicesListDBConf200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 

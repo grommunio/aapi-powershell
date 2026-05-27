@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 #region Import functions
@@ -22,7 +22,9 @@ $Script:Configuration = [System.Collections.HashTable]@{}
 
 $Script:CmdletBindingParameters = @('Verbose','Debug','ErrorAction','WarningAction','InformationAction','ErrorVariable','WarningVariable','InformationVariable','OutVariable','OutBuffer','PipelineVariable')
 
-'Api', 'Model', 'Client', 'Private' | Get-ChildItem -Path {
+'Api', 'Model', 'Client', 'Private' | Where-Object {
+    Join-Path $PSScriptRoot $_ | Test-Path
+} | Get-ChildItem -Path {
     Join-Path $PSScriptRoot $_
 } -Filter '*.ps1' | ForEach-Object {
     Write-Debug "Importing file: $($_.BaseName)"

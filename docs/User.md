@@ -6,8 +6,9 @@ Name | Type | Description | Notes
 **ID** | **Int32** | Unique ID of the object | [optional] [readonly] 
 **Username** | **String** |  | [optional] 
 **DomainID** | **Int32** |  | [optional] [readonly] 
-**Roles** | [**Role[]**](Role.md) | List of role associated with the user | [optional] 
-**Properties** | [**SystemCollectionsHashtable**](.md) | User properties as name/value pairs | [optional] 
+**Roles** | [**UserRolesInner[]**](UserRolesInner.md) | List of role associated with the user | [optional] 
+**Properties** | [**System.Collections.Hashtable**](AnyType.md) | User properties as name/value pairs | [optional] 
+**Altnames** | [**AltnamesInner[]**](AltnamesInner.md) | List of alternative login names | [optional] 
 **Aliases** | **String[]** | List of aliases for this user | [optional] 
 **Status** | [**UserStatus**](UserStatus.md) |  | [optional] 
 **Pop3Imap** | **Boolean** | POP3/IMAP privilege | [optional] 
@@ -18,14 +19,19 @@ Name | Type | Description | Notes
 **PrivVideo** | **Boolean** | Meet privilege | [optional] 
 **PrivFiles** | **Boolean** | Files privilege | [optional] 
 **PrivArchive** | **Boolean** | Archive privilege | [optional] 
+**PrivWeb** | **Boolean** | Web privilege | [optional] 
+**PrivEas** | **Boolean** | EAS privilege | [optional] 
+**PrivDav** | **Boolean** | DAV privilege | [optional] 
 **LdapID** | **String** | Base64 encoded LDAP object ID | [optional] 
 **Fetchmail** | [**FetchmailEntry[]**](FetchmailEntry.md) | List of fetchmail entries for this user | [optional] 
-**SyncPolicy** | [**DomainCommonSyncPolicy**](DomainCommonSyncPolicy.md) |  | [optional] 
+**SyncPolicy** | [**SyncPolicy**](SyncPolicy.md) |  | [optional] 
 **Chat** | **Boolean** | Whether chat is enabled for this user | [optional] 
 **ChatAdmin** | **Boolean** | Whether this user has grommunio-chat admin permissions | [optional] 
 **Lang** | **String** | User language | [optional] 
-**Forward** | [**UserForward**](UserForward.md) |  | [optional] 
-**Homeserver** | [**DomainHomeserver**](DomainHomeserver.md) |  | [optional] 
+**Forward** | [**Forward**](Forward.md) |  | [optional] 
+**Homeserver** | [**HomeserverRef**](HomeserverRef.md) |  | [optional] 
+**Mlist** | **Int32** | ID of the associated MList | [optional] 
+**OrgID** | **Int32** | ID of the organization the user belongs to | [optional] 
 
 ## Examples
 
@@ -36,6 +42,7 @@ $User = Initialize-GrommunioAdminUser  -ID null `
  -DomainID null `
  -Roles null `
  -Properties null `
+ -Altnames null `
  -Aliases null `
  -Status null `
  -Pop3Imap null `
@@ -46,6 +53,9 @@ $User = Initialize-GrommunioAdminUser  -ID null `
  -PrivVideo null `
  -PrivFiles null `
  -PrivArchive null `
+ -PrivWeb null `
+ -PrivEas null `
+ -PrivDav null `
  -LdapID null `
  -Fetchmail null `
  -SyncPolicy null `
@@ -53,7 +63,9 @@ $User = Initialize-GrommunioAdminUser  -ID null `
  -ChatAdmin null `
  -Lang null `
  -Forward null `
- -Homeserver null
+ -Homeserver null `
+ -Mlist null `
+ -OrgID null
 ```
 
 - Convert the resource to JSON

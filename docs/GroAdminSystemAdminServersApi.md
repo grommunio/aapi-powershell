@@ -1,32 +1,38 @@
-# GrommunioAdmin.GrommunioAdmin/Api.GroAdminSystemAdminServersApi
+# GrommunioAdmin.GrommunioAdmin\Api.GroAdminSystemAdminServersApi
 
 All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Invoke-GroAdminDeleteServer**](GroAdminSystemAdminServersApi.md#Invoke-GroAdminDeleteServer) | **DELETE** /system/servers/{ID} | deleteServer
-[**Get-GroAdminServer**](GroAdminSystemAdminServersApi.md#Get-GroAdminServer) | **GET** /system/servers/{ID} | getServer
-[**Get-GroAdminServers**](GroAdminSystemAdminServersApi.md#Get-GroAdminServers) | **GET** /system/servers | getServers
-[**Invoke-GroAdminPatchServer**](GroAdminSystemAdminServersApi.md#Invoke-GroAdminPatchServer) | **PATCH** /system/servers/{ID} | patchServer
-[**Submit-GroAdminServers**](GroAdminSystemAdminServersApi.md#Submit-GroAdminServers) | **POST** /system/servers | postServers
+[**Invoke-GroAdminDeleteServer**](GroAdminSystemAdminServersApi.md#Invoke-GroAdminDeleteServer) | **DELETE** /system/servers/{ID} | Delete server
+[**Get-GroAdminServer**](GroAdminSystemAdminServersApi.md#Get-GroAdminServer) | **GET** /system/servers/{ID} | Get detailed information about a server
+[**Get-GroAdminServerDnsCheck**](GroAdminSystemAdminServersApi.md#Get-GroAdminServerDnsCheck) | **GET** /system/servers/dnsCheck | Get a dns check result for all servers
+[**Get-GroAdminServers**](GroAdminSystemAdminServersApi.md#Get-GroAdminServers) | **GET** /system/servers | Get a list of servers
+[**Invoke-GroAdminPatchServer**](GroAdminSystemAdminServersApi.md#Invoke-GroAdminPatchServer) | **PATCH** /system/servers/{ID} | Update server
+[**Submit-GroAdminServers**](GroAdminSystemAdminServersApi.md#Submit-GroAdminServers) | **POST** /system/servers | Register a new server
 
 
-<a name="Invoke-GroAdminDeleteServer"></a>
+<a id="Invoke-GroAdminDeleteServer"></a>
 # **Invoke-GroAdminDeleteServer**
 > void Invoke-GroAdminDeleteServer<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 
-deleteServer
-
 Delete server
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $ID = 56 # Int32 | ID of the object
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 
-# deleteServer
+# Delete server
 try {
     $Result = Invoke-GroAdminDeleteServer -ID $ID -XCsrfToken $XCsrfToken
 } catch {
@@ -48,7 +54,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -57,22 +63,27 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminServer"></a>
+<a id="Get-GroAdminServer"></a>
 # **Get-GroAdminServer**
 > Homeserver Get-GroAdminServer<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Level] <System.Nullable[Int32]><br>
 
-getServer
-
 Get detailed information about a server
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $ID = 56 # Int32 | ID of the object
 $Level = 56 # Int32 | Set detail level of return value. Usually ranges from 0 to 2. (optional)
 
-# getServer
+# Get detailed information about a server
 try {
     $Result = Get-GroAdminServer -ID $ID -Level $Level
 } catch {
@@ -94,7 +105,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -103,9 +114,52 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminServers"></a>
+<a id="Get-GroAdminServerDnsCheck"></a>
+# **Get-GroAdminServerDnsCheck**
+> GetServerDnsCheck200Response Get-GroAdminServerDnsCheck<br>
+
+Get a dns check result for all servers
+
+### Example
+```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
+
+# Get a dns check result for all servers
+try {
+    $Result = Get-GroAdminServerDnsCheck
+} catch {
+    Write-Host ("Exception occurred when calling Get-GroAdminServerDnsCheck: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**GetServerDnsCheck200Response**](GetServerDnsCheck200Response.md) (PSCustomObject)
+
+### Authorization
+
+[JWTCookie](../README.md#JWTCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="Get-GroAdminServers"></a>
 # **Get-GroAdminServers**
-> SystemServersResponse Get-GroAdminServers<br>
+> GetServers200Response Get-GroAdminServers<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Level] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Limit] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Offset] <System.Nullable[Int32]><br>
@@ -116,12 +170,17 @@ No authorization required
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Description] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Users] <System.Nullable[Int32][]><br>
 
-getServers
-
 Get a list of servers
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Level = 56 # Int32 | Set detail level of return value. Usually ranges from 0 to 2. (optional)
 $Limit = 56 # Int32 | Maximum number of results to return (optional) (default to 50)
 $Offset = 56 # Int32 | Index of the first element to return (optional) (default to 0)
@@ -132,7 +191,7 @@ $Hostname = "MyHostname" # String | Filter by hostname (optional)
 $Description = "MyDescription" # String | Filter by extname (optional)
 $Users = 0 # Int32[] | Filter by users (optional)
 
-# getServers
+# Get a list of servers
 try {
     $Result = Get-GroAdminServers -Level $Level -Limit $Limit -Offset $Offset -Match $Match -MatchFields $MatchFields -Sort $Sort -Hostname $Hostname -Description $Description -Users $Users
 } catch {
@@ -157,11 +216,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SystemServersResponse**](SystemServersResponse.md) (PSCustomObject)
+[**GetServers200Response**](GetServers200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -170,26 +229,31 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminPatchServer"></a>
+<a id="Invoke-GroAdminPatchServer"></a>
 # **Invoke-GroAdminPatchServer**
 > Homeserver Invoke-GroAdminPatchServer<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PostServersRequest] <PSCustomObject><br>
-
-patchServer
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Homeserver] <PSCustomObject><br>
 
 Update server
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $ID = 56 # Int32 | ID of the object
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
-$PostServersRequest = Initialize-PostServersRequest -ID 0 -Hostname "MyHostname" -Extname "MyExtname" -Users 0 -Domains 0 # PostServersRequest |  (optional)
+$Homeserver = Initialize-Homeserver -ID 0 -Hostname "MyHostname" -Extname "MyExtname" -Users 0 -Domains 0 # Homeserver |  (optional)
 
-# patchServer
+# Update server
 try {
-    $Result = Invoke-GroAdminPatchServer -ID $ID -XCsrfToken $XCsrfToken -PostServersRequest $PostServersRequest
+    $Result = Invoke-GroAdminPatchServer -ID $ID -XCsrfToken $XCsrfToken -Homeserver $Homeserver
 } catch {
     Write-Host ("Exception occurred when calling Invoke-GroAdminPatchServer: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -202,7 +266,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ID** | **Int32**| ID of the object | 
  **XCsrfToken** | **String**| CSRF Token | [optional] 
- **PostServersRequest** | [**PostServersRequest**](PostServersRequest.md)|  | [optional] 
+ **Homeserver** | [**Homeserver**](Homeserver.md)|  | [optional] 
 
 ### Return type
 
@@ -210,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -219,24 +283,29 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-GroAdminServers"></a>
+<a id="Submit-GroAdminServers"></a>
 # **Submit-GroAdminServers**
 > Homeserver Submit-GroAdminServers<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PostServersRequest] <PSCustomObject><br>
-
-postServers
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Homeserver] <PSCustomObject><br>
 
 Register a new server
 
 ### Example
 ```powershell
-$XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
-$PostServersRequest = Initialize-PostServersRequest -ID 0 -Hostname "MyHostname" -Extname "MyExtname" -Users 0 -Domains 0 # PostServersRequest |  (optional)
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
 
-# postServers
+$XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
+$Homeserver = Initialize-Homeserver -ID 0 -Hostname "MyHostname" -Extname "MyExtname" -Users 0 -Domains 0 # Homeserver |  (optional)
+
+# Register a new server
 try {
-    $Result = Submit-GroAdminServers -XCsrfToken $XCsrfToken -PostServersRequest $PostServersRequest
+    $Result = Submit-GroAdminServers -XCsrfToken $XCsrfToken -Homeserver $Homeserver
 } catch {
     Write-Host ("Exception occurred when calling Submit-GroAdminServers: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -248,7 +317,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **XCsrfToken** | **String**| CSRF Token | [optional] 
- **PostServersRequest** | [**PostServersRequest**](PostServersRequest.md)|  | [optional] 
+ **Homeserver** | [**Homeserver**](Homeserver.md)|  | [optional] 
 
 ### Return type
 
@@ -256,7 +325,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 

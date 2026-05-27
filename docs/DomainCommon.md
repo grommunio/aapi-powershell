@@ -9,15 +9,16 @@ Name | Type | Description | Notes
 **Displayname** | **String** | Decoded unicode domain name | [optional] [readonly] 
 **Homedir** | **String** |  | [optional] [readonly] 
 **MaxUser** | **Int32** |  | [optional] 
-**Title** | **String** |  | [optional] 
-**Address** | **String** |  | [optional] 
-**AdminName** | **String** |  | [optional] 
-**Tel** | **String** |  | [optional] 
+**Title** | **String** |  | [optional] [default to ""]
+**Address** | **String** |  | [optional] [default to ""]
+**AdminName** | **String** |  | [optional] [default to ""]
+**Tel** | **String** |  | [optional] [default to ""]
 **EndDay** | **String** | Date string | [optional] 
 **DomainStatus** | **Int32** | Domain status (0&#x3D;Normal, 1&#x3D;Suspended, 2&#x3D;Out Of Date, 3&#x3D;Deleted) | [optional] [default to 0]
 **ActiveUsers** | **Int32** |  | [optional] [readonly] 
 **InactiveUsers** | **Int32** |  | [optional] [readonly] 
-**SyncPolicy** | [**DomainCommonSyncPolicy**](DomainCommonSyncPolicy.md) |  | [optional] 
+**VirtualUsers** | **Int32** |  | [optional] [readonly] 
+**SyncPolicy** | [**SyncPolicy**](SyncPolicy.md) |  | [optional] 
 **Chat** | **Boolean** | Whether chat is enabled for this domain | [optional] 
 
 ## Examples
@@ -38,6 +39,7 @@ $DomainCommon = Initialize-GrommunioAdminDomainCommon  -ID null `
  -DomainStatus null `
  -ActiveUsers null `
  -InactiveUsers null `
+ -VirtualUsers null `
  -SyncPolicy null `
  -Chat null
 ```

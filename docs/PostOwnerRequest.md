@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Username** | **String** | Username (e-mail address) to add to member list | 
-**Permissions** | **Int32** | Bit mask of permissions to grant the user (defaults to folder owner) | [optional] 
+**Permissions** | **Int32** | Bit mask of permissions to grant the user (defaults to folder owner) | [optional] [default to 256]
 
 ## Examples
 

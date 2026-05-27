@@ -1,38 +1,43 @@
-# GrommunioAdmin.GrommunioAdmin/Api.GroAdminSystemAdminDBConfApi
+# GrommunioAdmin.GrommunioAdmin\Api.GroAdminSystemAdminDBConfApi
 
 All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Invoke-GroAdminDeleteConfigFile**](GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminDeleteConfigFile) | **DELETE** /system/dbconf/{service}/{file}/ | deleteConfigFile
-[**Invoke-GroAdminDeleteServiceConfig**](GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminDeleteServiceConfig) | **DELETE** /system/dbconf/{service}/ | deleteServiceConfig
-[**Get-GroAdminCommandList**](GroAdminSystemAdminDBConfApi.md#Get-GroAdminCommandList) | **GET** /system/dbconf/commands | getCommandList
-[**Get-GroAdminConfigFile**](GroAdminSystemAdminDBConfApi.md#Get-GroAdminConfigFile) | **GET** /system/dbconf/{service}/{file}/ | getConfigFile
-[**Get-GroAdminServiceFiles**](GroAdminSystemAdminDBConfApi.md#Get-GroAdminServiceFiles) | **GET** /system/dbconf/{service}/ | getServiceFiles
-[**Get-GroAdminServicesListDBConf**](GroAdminSystemAdminDBConfApi.md#Get-GroAdminServicesListDBConf) | **GET** /system/dbconf/ | getServicesListDBConf
-[**Invoke-GroAdminPatchConfigFile**](GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminPatchConfigFile) | **PATCH** /system/dbconf/{service}/{file}/ | patchConfigFile
-[**Invoke-GroAdminPatchServiceFiles**](GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminPatchServiceFiles) | **PATCH** /system/dbconf/{service}/ | patchServiceFiles
-[**Send-GroAdminConfigFile**](GroAdminSystemAdminDBConfApi.md#Send-GroAdminConfigFile) | **PUT** /system/dbconf/{service}/{file}/ | putConfigFile
+[**Invoke-GroAdminDeleteConfigFile**](GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminDeleteConfigFile) | **DELETE** /system/dbconf/{service}/{file}/ | Delete configuration file
+[**Invoke-GroAdminDeleteServiceConfig**](GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminDeleteServiceConfig) | **DELETE** /system/dbconf/{service}/ | Delete service configurations
+[**Get-GroAdminCommandList**](GroAdminSystemAdminDBConfApi.md#Get-GroAdminCommandList) | **GET** /system/dbconf/commands | Get lists of allowed commit commands
+[**Get-GroAdminConfigFile**](GroAdminSystemAdminDBConfApi.md#Get-GroAdminConfigFile) | **GET** /system/dbconf/{service}/{file}/ | Get configuration file
+[**Get-GroAdminServiceFiles**](GroAdminSystemAdminDBConfApi.md#Get-GroAdminServiceFiles) | **GET** /system/dbconf/{service}/ | Get list of configuration files for service
+[**Get-GroAdminServicesListDBConf**](GroAdminSystemAdminDBConfApi.md#Get-GroAdminServicesListDBConf) | **GET** /system/dbconf/ | Get list of services
+[**Invoke-GroAdminPatchConfigFile**](GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminPatchConfigFile) | **PATCH** /system/dbconf/{service}/{file}/ | Update or rename configuration file
+[**Invoke-GroAdminPatchServiceFiles**](GroAdminSystemAdminDBConfApi.md#Invoke-GroAdminPatchServiceFiles) | **PATCH** /system/dbconf/{service}/ | Rename or merge service
+[**Send-GroAdminConfigFile**](GroAdminSystemAdminDBConfApi.md#Send-GroAdminConfigFile) | **PUT** /system/dbconf/{service}/{file}/ | Upload configuration file. If the file exists it is overwritten
 
 
-<a name="Invoke-GroAdminDeleteConfigFile"></a>
+<a id="Invoke-GroAdminDeleteConfigFile"></a>
 # **Invoke-GroAdminDeleteConfigFile**
 > void Invoke-GroAdminDeleteConfigFile<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Service] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-File] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 
-deleteConfigFile
-
 Delete configuration file
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Service = "MyService" # String | Name of the service to configure
 $File = "MyFile" # String | Name of the configuration file
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 
-# deleteConfigFile
+# Delete configuration file
 try {
     $Result = Invoke-GroAdminDeleteConfigFile -Service $Service -File $File -XCsrfToken $XCsrfToken
 } catch {
@@ -55,7 +60,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -64,22 +69,27 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminDeleteServiceConfig"></a>
+<a id="Invoke-GroAdminDeleteServiceConfig"></a>
 # **Invoke-GroAdminDeleteServiceConfig**
 > void Invoke-GroAdminDeleteServiceConfig<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Service] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 
-deleteServiceConfig
-
 Delete service configurations
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Service = "MyService" # String | Name of the service to configure
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 
-# deleteServiceConfig
+# Delete service configurations
 try {
     $Result = Invoke-GroAdminDeleteServiceConfig -Service $Service -XCsrfToken $XCsrfToken
 } catch {
@@ -101,7 +111,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -110,18 +120,23 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminCommandList"></a>
+<a id="Get-GroAdminCommandList"></a>
 # **Get-GroAdminCommandList**
-> SystemDbconfCommandsResponse Get-GroAdminCommandList<br>
-
-getCommandList
+> GetCommandList200Response Get-GroAdminCommandList<br>
 
 Get lists of allowed commit commands
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
 
-# getCommandList
+
+# Get lists of allowed commit commands
 try {
     $Result = Get-GroAdminCommandList
 } catch {
@@ -135,11 +150,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SystemDbconfCommandsResponse**](SystemDbconfCommandsResponse.md) (PSCustomObject)
+[**GetCommandList200Response**](GetCommandList200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -148,22 +163,27 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminConfigFile"></a>
+<a id="Get-GroAdminConfigFile"></a>
 # **Get-GroAdminConfigFile**
-> SystemDbconfResponse2 Get-GroAdminConfigFile<br>
+> GetConfigFile200Response Get-GroAdminConfigFile<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Service] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-File] <String><br>
-
-getConfigFile
 
 Get configuration file
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Service = "MyService" # String | Name of the service to configure
 $File = "MyFile" # String | Name of the configuration file
 
-# getConfigFile
+# Get configuration file
 try {
     $Result = Get-GroAdminConfigFile -Service $Service -File $File
 } catch {
@@ -181,11 +201,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SystemDbconfResponse2**](SystemDbconfResponse2.md) (PSCustomObject)
+[**GetConfigFile200Response**](GetConfigFile200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -194,20 +214,25 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminServiceFiles"></a>
+<a id="Get-GroAdminServiceFiles"></a>
 # **Get-GroAdminServiceFiles**
-> SystemDbconfResponse Get-GroAdminServiceFiles<br>
+> GetServicesListDBConf200Response Get-GroAdminServiceFiles<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Service] <String><br>
-
-getServiceFiles
 
 Get list of configuration files for service
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Service = "MyService" # String | Name of the service to configure
 
-# getServiceFiles
+# Get list of configuration files for service
 try {
     $Result = Get-GroAdminServiceFiles -Service $Service
 } catch {
@@ -224,11 +249,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SystemDbconfResponse**](SystemDbconfResponse.md) (PSCustomObject)
+[**GetServicesListDBConf200Response**](GetServicesListDBConf200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -237,18 +262,23 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminServicesListDBConf"></a>
+<a id="Get-GroAdminServicesListDBConf"></a>
 # **Get-GroAdminServicesListDBConf**
-> SystemDbconfResponse Get-GroAdminServicesListDBConf<br>
-
-getServicesListDBConf
+> GetServicesListDBConf200Response Get-GroAdminServicesListDBConf<br>
 
 Get list of services
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
 
-# getServicesListDBConf
+
+# Get list of services
 try {
     $Result = Get-GroAdminServicesListDBConf
 } catch {
@@ -262,11 +292,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SystemDbconfResponse**](SystemDbconfResponse.md) (PSCustomObject)
+[**GetServicesListDBConf200Response**](GetServicesListDBConf200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -275,7 +305,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminPatchConfigFile"></a>
+<a id="Invoke-GroAdminPatchConfigFile"></a>
 # **Invoke-GroAdminPatchConfigFile**
 > void Invoke-GroAdminPatchConfigFile<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Service] <String><br>
@@ -283,18 +313,23 @@ No authorization required
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PatchConfigFileRequest] <PSCustomObject><br>
 
-patchConfigFile
-
 Update or rename configuration file
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Service = "MyService" # String | Name of the service to configure
 $File = "MyFile" # String | Name of the configuration file
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $PatchConfigFileRequest = Initialize-PatchConfigFileRequest -Name "MyName" -VarData @{ key_example = "MyInner" } # PatchConfigFileRequest |  (optional)
 
-# patchConfigFile
+# Update or rename configuration file
 try {
     $Result = Invoke-GroAdminPatchConfigFile -Service $Service -File $File -XCsrfToken $XCsrfToken -PatchConfigFileRequest $PatchConfigFileRequest
 } catch {
@@ -318,7 +353,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -327,24 +362,29 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminPatchServiceFiles"></a>
+<a id="Invoke-GroAdminPatchServiceFiles"></a>
 # **Invoke-GroAdminPatchServiceFiles**
 > void Invoke-GroAdminPatchServiceFiles<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Service] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PatchServiceFilesRequest] <PSCustomObject><br>
 
-patchServiceFiles
-
 Rename or merge service
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Service = "MyService" # String | Name of the service to configure
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $PatchServiceFilesRequest = Initialize-PatchServiceFilesRequest -Name "MyName" # PatchServiceFilesRequest |  (optional)
 
-# patchServiceFiles
+# Rename or merge service
 try {
     $Result = Invoke-GroAdminPatchServiceFiles -Service $Service -XCsrfToken $XCsrfToken -PatchServiceFilesRequest $PatchServiceFilesRequest
 } catch {
@@ -367,7 +407,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -376,28 +416,33 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Send-GroAdminConfigFile"></a>
+<a id="Send-GroAdminConfigFile"></a>
 # **Send-GroAdminConfigFile**
 > void Send-GroAdminConfigFile<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Service] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-File] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PutConfigFileRequest] <PSCustomObject><br>
-
-putConfigFile
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-GetConfigFile200Response] <PSCustomObject><br>
 
 Upload configuration file. If the file exists it is overwritten
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Service = "MyService" # String | Name of the service to configure
 $File = "MyFile" # String | Name of the configuration file
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
-$PutConfigFileRequest = Initialize-PutConfigFileRequest -VarData @{ key_example = "MyInner" } # PutConfigFileRequest |  (optional)
+$GetConfigFile200Response = Initialize-GetConfigFile200Response -VarData @{ key_example = "MyInner" } # GetConfigFile200Response |  (optional)
 
-# putConfigFile
+# Upload configuration file. If the file exists it is overwritten
 try {
-    $Result = Send-GroAdminConfigFile -Service $Service -File $File -XCsrfToken $XCsrfToken -PutConfigFileRequest $PutConfigFileRequest
+    $Result = Send-GroAdminConfigFile -Service $Service -File $File -XCsrfToken $XCsrfToken -GetConfigFile200Response $GetConfigFile200Response
 } catch {
     Write-Host ("Exception occurred when calling Send-GroAdminConfigFile: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -411,7 +456,7 @@ Name | Type | Description  | Notes
  **Service** | **String**| Name of the service to configure | 
  **File** | **String**| Name of the configuration file | 
  **XCsrfToken** | **String**| CSRF Token | [optional] 
- **PutConfigFileRequest** | [**PutConfigFileRequest**](PutConfigFileRequest.md)|  | [optional] 
+ **GetConfigFile200Response** | [**GetConfigFile200Response**](GetConfigFile200Response.md)|  | [optional] 
 
 ### Return type
 
@@ -419,7 +464,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 

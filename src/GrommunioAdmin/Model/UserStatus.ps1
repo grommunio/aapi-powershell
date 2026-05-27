@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -11,7 +11,7 @@ Enum UserStatus.
 
 .DESCRIPTION
 
-User status (0=Normal, 1=Suspended, 2=Out-of-date, 3=Deleted, 4=Shared Mailbox, 5=Contact)
+User status (0=Normal, 1=Suspended, 3=Deleted, 4=Shared Mailbox, 5=Contact)
 #>
 
 enum UserStatus {

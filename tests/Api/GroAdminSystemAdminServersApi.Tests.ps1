@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminServersApi' {
@@ -21,6 +21,14 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminServersApi' {
         }
     }
 
+    Context 'Get-GroAdminServerDnsCheck' {
+        It 'Test Get-GroAdminServerDnsCheck' {
+            #$TestResult = Get-GroAdminServerDnsCheck
+            #$TestResult | Should -BeOfType TODO
+            #$TestResult.property | Should -Be 0
+        }
+    }
+
     Context 'Get-GroAdminServers' {
         It 'Test Get-GroAdminServers' {
             #$TestResult = Get-GroAdminServers -Level "TEST_VALUE" -Limit "TEST_VALUE" -Offset "TEST_VALUE" -Match "TEST_VALUE" -MatchFields "TEST_VALUE" -Sort "TEST_VALUE" -Hostname "TEST_VALUE" -Description "TEST_VALUE" -Users "TEST_VALUE"
@@ -31,7 +39,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminServersApi' {
 
     Context 'Invoke-GroAdminPatchServer' {
         It 'Test Invoke-GroAdminPatchServer' {
-            #$TestResult = Invoke-GroAdminPatchServer -ID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -PostServersRequest "TEST_VALUE"
+            #$TestResult = Invoke-GroAdminPatchServer -ID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -Homeserver "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -39,7 +47,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminServersApi' {
 
     Context 'Submit-GroAdminServers' {
         It 'Test Submit-GroAdminServers' {
-            #$TestResult = Submit-GroAdminServers -XCsrfToken "TEST_VALUE" -PostServersRequest "TEST_VALUE"
+            #$TestResult = Submit-GroAdminServers -XCsrfToken "TEST_VALUE" -Homeserver "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

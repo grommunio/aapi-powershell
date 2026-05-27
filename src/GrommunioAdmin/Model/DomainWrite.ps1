@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -41,6 +41,8 @@ Domain status (0=Normal, 1=Suspended, 2=Out Of Date, 3=Deleted)
 No description available.
 .PARAMETER InactiveUsers
 No description available.
+.PARAMETER VirtualUsers
+No description available.
 .PARAMETER SyncPolicy
 No description available.
 .PARAMETER Chat
@@ -75,16 +77,16 @@ function Initialize-GroAdminDomainWrite {
         ${MaxUser},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Title},
+        ${Title} = "",
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Address},
+        ${Address} = "",
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${AdminName},
+        ${AdminName} = "",
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Tel},
+        ${Tel} = "",
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
         [ValidatePattern("^\d{4}-\d{2}-\d{2}$")]
         [String]
@@ -99,12 +101,15 @@ function Initialize-GroAdminDomainWrite {
         [System.Nullable[Int32]]
         ${InactiveUsers},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${VirtualUsers},
+        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${SyncPolicy},
-        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${Chat},
-        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
         ${Homeserver}
     )
@@ -139,23 +144,24 @@ function Initialize-GroAdminDomainWrite {
 
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "orgID" = ${OrgID}
-            "domainname" = ${Domainname}
-            "displayname" = ${Displayname}
-            "homedir" = ${Homedir}
-            "maxUser" = ${MaxUser}
-            "title" = ${Title}
-            "address" = ${Address}
-            "adminName" = ${AdminName}
-            "tel" = ${Tel}
-            "endDay" = ${EndDay}
-            "domainStatus" = ${DomainStatus}
-            "activeUsers" = ${ActiveUsers}
-            "inactiveUsers" = ${InactiveUsers}
-            "syncPolicy" = ${SyncPolicy}
-            "chat" = ${Chat}
-            "homeserver" = ${Homeserver}
+            'ID' = ${ID}
+            'orgID' = ${OrgID}
+            'domainname' = ${Domainname}
+            'displayname' = ${Displayname}
+            'homedir' = ${Homedir}
+            'maxUser' = ${MaxUser}
+            'title' = ${Title}
+            'address' = ${Address}
+            'adminName' = ${AdminName}
+            'tel' = ${Tel}
+            'endDay' = ${EndDay}
+            'domainStatus' = ${DomainStatus}
+            'activeUsers' = ${ActiveUsers}
+            'inactiveUsers' = ${InactiveUsers}
+            'virtualUsers' = ${VirtualUsers}
+            'syncPolicy' = ${SyncPolicy}
+            'chat' = ${Chat}
+            'homeserver' = ${Homeserver}
         }
 
 
@@ -193,133 +199,140 @@ function ConvertFrom-GroAdminJsonToDomainWrite {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminDomainWrite
-        $AllProperties = ("ID", "orgID", "domainname", "displayname", "homedir", "maxUser", "title", "address", "adminName", "tel", "endDay", "domainStatus", "activeUsers", "inactiveUsers", "syncPolicy", "chat", "homeserver")
+        $AllProperties = ('ID', 'orgID', 'domainname', 'displayname', 'homedir', 'maxUser', 'title', 'address', 'adminName', 'tel', 'endDay', 'domainStatus', 'activeUsers', 'inactiveUsers', 'virtualUsers', 'syncPolicy', 'chat', 'homeserver')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "ID"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'ID'))) { #optional property not found
             $ID = $null
         } else {
-            $ID = $JsonParameters.PSobject.Properties["ID"].value
+            $ID = $JsonParameters.PSobject.Properties['ID'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "orgID"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'orgID'))) { #optional property not found
             $OrgID = $null
         } else {
-            $OrgID = $JsonParameters.PSobject.Properties["orgID"].value
+            $OrgID = $JsonParameters.PSobject.Properties['orgID'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "domainname"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'domainname'))) { #optional property not found
             $Domainname = $null
         } else {
-            $Domainname = $JsonParameters.PSobject.Properties["domainname"].value
+            $Domainname = $JsonParameters.PSobject.Properties['domainname'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "displayname"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'displayname'))) { #optional property not found
             $Displayname = $null
         } else {
-            $Displayname = $JsonParameters.PSobject.Properties["displayname"].value
+            $Displayname = $JsonParameters.PSobject.Properties['displayname'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "homedir"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'homedir'))) { #optional property not found
             $Homedir = $null
         } else {
-            $Homedir = $JsonParameters.PSobject.Properties["homedir"].value
+            $Homedir = $JsonParameters.PSobject.Properties['homedir'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "maxUser"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'maxUser'))) { #optional property not found
             $MaxUser = $null
         } else {
-            $MaxUser = $JsonParameters.PSobject.Properties["maxUser"].value
+            $MaxUser = $JsonParameters.PSobject.Properties['maxUser'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "title"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'title'))) { #optional property not found
             $Title = $null
         } else {
-            $Title = $JsonParameters.PSobject.Properties["title"].value
+            $Title = $JsonParameters.PSobject.Properties['title'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "address"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'address'))) { #optional property not found
             $Address = $null
         } else {
-            $Address = $JsonParameters.PSobject.Properties["address"].value
+            $Address = $JsonParameters.PSobject.Properties['address'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "adminName"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'adminName'))) { #optional property not found
             $AdminName = $null
         } else {
-            $AdminName = $JsonParameters.PSobject.Properties["adminName"].value
+            $AdminName = $JsonParameters.PSobject.Properties['adminName'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "tel"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'tel'))) { #optional property not found
             $Tel = $null
         } else {
-            $Tel = $JsonParameters.PSobject.Properties["tel"].value
+            $Tel = $JsonParameters.PSobject.Properties['tel'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "endDay"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'endDay'))) { #optional property not found
             $EndDay = $null
         } else {
-            $EndDay = $JsonParameters.PSobject.Properties["endDay"].value
+            $EndDay = $JsonParameters.PSobject.Properties['endDay'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "domainStatus"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'domainStatus'))) { #optional property not found
             $DomainStatus = $null
         } else {
-            $DomainStatus = $JsonParameters.PSobject.Properties["domainStatus"].value
+            $DomainStatus = $JsonParameters.PSobject.Properties['domainStatus'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "activeUsers"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'activeUsers'))) { #optional property not found
             $ActiveUsers = $null
         } else {
-            $ActiveUsers = $JsonParameters.PSobject.Properties["activeUsers"].value
+            $ActiveUsers = $JsonParameters.PSobject.Properties['activeUsers'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "inactiveUsers"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'inactiveUsers'))) { #optional property not found
             $InactiveUsers = $null
         } else {
-            $InactiveUsers = $JsonParameters.PSobject.Properties["inactiveUsers"].value
+            $InactiveUsers = $JsonParameters.PSobject.Properties['inactiveUsers'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "syncPolicy"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'virtualUsers'))) { #optional property not found
+            $VirtualUsers = $null
+        } else {
+            $VirtualUsers = $JsonParameters.PSobject.Properties['virtualUsers'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'syncPolicy'))) { #optional property not found
             $SyncPolicy = $null
         } else {
-            $SyncPolicy = $JsonParameters.PSobject.Properties["syncPolicy"].value
+            $SyncPolicy = $JsonParameters.PSobject.Properties['syncPolicy'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "chat"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'chat'))) { #optional property not found
             $Chat = $null
         } else {
-            $Chat = $JsonParameters.PSobject.Properties["chat"].value
+            $Chat = $JsonParameters.PSobject.Properties['chat'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "homeserver"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'homeserver'))) { #optional property not found
             $Homeserver = $null
         } else {
-            $Homeserver = $JsonParameters.PSobject.Properties["homeserver"].value
+            $Homeserver = $JsonParameters.PSobject.Properties['homeserver'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "orgID" = ${OrgID}
-            "domainname" = ${Domainname}
-            "displayname" = ${Displayname}
-            "homedir" = ${Homedir}
-            "maxUser" = ${MaxUser}
-            "title" = ${Title}
-            "address" = ${Address}
-            "adminName" = ${AdminName}
-            "tel" = ${Tel}
-            "endDay" = ${EndDay}
-            "domainStatus" = ${DomainStatus}
-            "activeUsers" = ${ActiveUsers}
-            "inactiveUsers" = ${InactiveUsers}
-            "syncPolicy" = ${SyncPolicy}
-            "chat" = ${Chat}
-            "homeserver" = ${Homeserver}
+            'ID' = ${ID}
+            'orgID' = ${OrgID}
+            'domainname' = ${Domainname}
+            'displayname' = ${Displayname}
+            'homedir' = ${Homedir}
+            'maxUser' = ${MaxUser}
+            'title' = ${Title}
+            'address' = ${Address}
+            'adminName' = ${AdminName}
+            'tel' = ${Tel}
+            'endDay' = ${EndDay}
+            'domainStatus' = ${DomainStatus}
+            'activeUsers' = ${ActiveUsers}
+            'inactiveUsers' = ${InactiveUsers}
+            'virtualUsers' = ${VirtualUsers}
+            'syncPolicy' = ${SyncPolicy}
+            'chat' = ${Chat}
+            'homeserver' = ${Homeserver}
         }
 
         return $PSO

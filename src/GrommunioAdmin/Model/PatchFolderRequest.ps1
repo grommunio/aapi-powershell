@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -16,8 +16,10 @@ No description available.
 .PARAMETER Displayname
 Name of the folder
 .PARAMETER Container
-No description available.
+Container class
 .PARAMETER Comment
+No description available.
+.PARAMETER SyncToMobile
 No description available.
 .OUTPUTS
 
@@ -31,11 +33,15 @@ function Initialize-GroAdminPatchFolderRequest {
         [String]
         ${Displayname},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [ValidateSet("IPF.Note", "IPF.Contact", "IPF.Appointment", "IPF.Stickynote", "IPF.Task")]
+        [String]
         ${Container},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Comment}
+        ${Comment},
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${SyncToMobile}
     )
 
     Process {
@@ -44,9 +50,10 @@ function Initialize-GroAdminPatchFolderRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "displayname" = ${Displayname}
-            "container" = ${Container}
-            "comment" = ${Comment}
+            'displayname' = ${Displayname}
+            'container' = ${Container}
+            'comment' = ${Comment}
+            'syncToMobile' = ${SyncToMobile}
         }
 
 
@@ -84,35 +91,42 @@ function ConvertFrom-GroAdminJsonToPatchFolderRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminPatchFolderRequest
-        $AllProperties = ("displayname", "container", "comment")
+        $AllProperties = ('displayname', 'container', 'comment', 'syncToMobile')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "displayname"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'displayname'))) { #optional property not found
             $Displayname = $null
         } else {
-            $Displayname = $JsonParameters.PSobject.Properties["displayname"].value
+            $Displayname = $JsonParameters.PSobject.Properties['displayname'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "container"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'container'))) { #optional property not found
             $Container = $null
         } else {
-            $Container = $JsonParameters.PSobject.Properties["container"].value
+            $Container = $JsonParameters.PSobject.Properties['container'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "comment"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'comment'))) { #optional property not found
             $Comment = $null
         } else {
-            $Comment = $JsonParameters.PSobject.Properties["comment"].value
+            $Comment = $JsonParameters.PSobject.Properties['comment'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'syncToMobile'))) { #optional property not found
+            $SyncToMobile = $null
+        } else {
+            $SyncToMobile = $JsonParameters.PSobject.Properties['syncToMobile'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "displayname" = ${Displayname}
-            "container" = ${Container}
-            "comment" = ${Comment}
+            'displayname' = ${Displayname}
+            'container' = ${Container}
+            'comment' = ${Comment}
+            'syncToMobile' = ${SyncToMobile}
         }
 
         return $PSO

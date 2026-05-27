@@ -1,42 +1,47 @@
-# GrommunioAdmin.GrommunioAdmin/Api.GroAdminLDAPApi
+# GrommunioAdmin.GrommunioAdmin\Api.GroAdminLDAPApi
 
 All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Invoke-GroAdminCheckUsers**](GroAdminLDAPApi.md#Invoke-GroAdminCheckUsers) | **GET** /domains/ldap/check | checkUsers
-[**Invoke-GroAdminDeleteLDAPConf**](GroAdminLDAPApi.md#Invoke-GroAdminDeleteLDAPConf) | **DELETE** /system/mconf/ldap | deleteLDAPConf
-[**Invoke-GroAdminDeleteOrgLDAPConf**](GroAdminLDAPApi.md#Invoke-GroAdminDeleteOrgLDAPConf) | **DELETE** /system/orgs/{ID}/ldap | deleteOrgLDAPConf
-[**Invoke-GroAdminDeleteOrphaned**](GroAdminLDAPApi.md#Invoke-GroAdminDeleteOrphaned) | **DELETE** /domains/ldap/check | deleteOrphaned
-[**Get-GroAdminLDAP**](GroAdminLDAPApi.md#Get-GroAdminLDAP) | **GET** /domains/ldap/dump | dumpLDAP
-[**Get-GroAdminLDAPConf**](GroAdminLDAPApi.md#Get-GroAdminLDAPConf) | **GET** /system/mconf/ldap | getLDAPConf
-[**Get-GroAdminOrgLDAPConf**](GroAdminLDAPApi.md#Get-GroAdminOrgLDAPConf) | **GET** /system/orgs/{ID}/ldap | getOrgLDAPConf
-[**Import-GroAdminLdapUser**](GroAdminLDAPApi.md#Import-GroAdminLdapUser) | **POST** /domains/ldap/importUser | importLdapUser
-[**Send-GroAdminDownsync**](GroAdminLDAPApi.md#Send-GroAdminDownsync) | **PUT** /domains/{domainID}/users/{userID}/downsync | putDownsync
-[**Search-GroAdminLDAP**](GroAdminLDAPApi.md#Search-GroAdminLDAP) | **GET** /domains/ldap/search | searchLDAP
-[**Set-GroAdminLDAPConf**](GroAdminLDAPApi.md#Set-GroAdminLDAPConf) | **PUT** /system/mconf/ldap | setLDAPConf
-[**Set-GroAdminOrgLDAPConf**](GroAdminLDAPApi.md#Set-GroAdminOrgLDAPConf) | **PUT** /system/orgs/{ID}/ldap | setOrgLDAPConf
-[**Update-GroAdminAllDomainUsers**](GroAdminLDAPApi.md#Update-GroAdminAllDomainUsers) | **POST** /domains/{domainID}/ldap/downsync | updateAllDomainUsers
-[**Update-GroAdminAllUsers**](GroAdminLDAPApi.md#Update-GroAdminAllUsers) | **POST** /domains/ldap/downsync | updateAllUsers
-[**Update-GroAdminOrgLDAPUsers**](GroAdminLDAPApi.md#Update-GroAdminOrgLDAPUsers) | **POST** /system/orgs/{ID}/ldap/downsync | updateOrgLDAPUsers
+[**Invoke-GroAdminCheckUsers**](GroAdminLDAPApi.md#Invoke-GroAdminCheckUsers) | **GET** /domains/ldap/check | Check status of ldap imported users
+[**Invoke-GroAdminDeleteLDAPConf**](GroAdminLDAPApi.md#Invoke-GroAdminDeleteLDAPConf) | **DELETE** /system/mconf/ldap | Remove LDAP configuration and disable service
+[**Invoke-GroAdminDeleteOrgLDAPConf**](GroAdminLDAPApi.md#Invoke-GroAdminDeleteOrgLDAPConf) | **DELETE** /system/orgs/{ID}/ldap | Reset organization specific LDAP configuration
+[**Invoke-GroAdminDeleteOrphaned**](GroAdminLDAPApi.md#Invoke-GroAdminDeleteOrphaned) | **DELETE** /domains/ldap/check | Check status of ldap import users and delete orphaned
+[**Get-GroAdminLDAP**](GroAdminLDAPApi.md#Get-GroAdminLDAP) | **GET** /domains/ldap/dump | Dump LDAP object
+[**Get-GroAdminLDAPConf**](GroAdminLDAPApi.md#Get-GroAdminLDAPConf) | **GET** /system/mconf/ldap | Get the current LDAP configuration
+[**Get-GroAdminOrgLDAPConf**](GroAdminLDAPApi.md#Get-GroAdminOrgLDAPConf) | **GET** /system/orgs/{ID}/ldap | Get organization specific LDAP configuration
+[**Import-GroAdminLdapUser**](GroAdminLDAPApi.md#Import-GroAdminLdapUser) | **POST** /domains/ldap/importUser | Import user from ldap
+[**Send-GroAdminDownsync**](GroAdminLDAPApi.md#Send-GroAdminDownsync) | **PUT** /domains/{domainID}/users/{userID}/downsync | Update user from LDAP
+[**Search-GroAdminLDAP**](GroAdminLDAPApi.md#Search-GroAdminLDAP) | **GET** /domains/ldap/search | Perform LDAP user search
+[**Set-GroAdminLDAPConf**](GroAdminLDAPApi.md#Set-GroAdminLDAPConf) | **PUT** /system/mconf/ldap | Set new LDAP configuration
+[**Set-GroAdminOrgLDAPConf**](GroAdminLDAPApi.md#Set-GroAdminOrgLDAPConf) | **PUT** /system/orgs/{ID}/ldap | Set organization specific LDAP configuration
+[**Update-GroAdminAllDomainUsers**](GroAdminLDAPApi.md#Update-GroAdminAllDomainUsers) | **POST** /domains/{domainID}/ldap/downsync | Update all LDAP imported users in this domain
+[**Update-GroAdminAllUsers**](GroAdminLDAPApi.md#Update-GroAdminAllUsers) | **POST** /domains/ldap/downsync | Update all LDAP imported users
+[**Update-GroAdminOrgLDAPUsers**](GroAdminLDAPApi.md#Update-GroAdminOrgLDAPUsers) | **POST** /system/orgs/{ID}/ldap/downsync | Update all LDAP imported users in this organization
 
 
-<a name="Invoke-GroAdminCheckUsers"></a>
+<a id="Invoke-GroAdminCheckUsers"></a>
 # **Invoke-GroAdminCheckUsers**
-> DomainsLdapCheckResponse Invoke-GroAdminCheckUsers<br>
+> CheckUsers200Response Invoke-GroAdminCheckUsers<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Domain] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Organization] <System.Nullable[Int32]><br>
-
-checkUsers
 
 Check status of ldap imported users
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Domain = 56 # Int32 | ID of the domain (optional)
 $Organization = 56 # Int32 | ID of the organization (optional)
 
-# checkUsers
+# Check status of ldap imported users
 try {
     $Result = Invoke-GroAdminCheckUsers -Domain $Domain -Organization $Organization
 } catch {
@@ -54,11 +59,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainsLdapCheckResponse**](DomainsLdapCheckResponse.md) (PSCustomObject)
+[**CheckUsers200Response**](CheckUsers200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -67,20 +72,25 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminDeleteLDAPConf"></a>
+<a id="Invoke-GroAdminDeleteLDAPConf"></a>
 # **Invoke-GroAdminDeleteLDAPConf**
 > void Invoke-GroAdminDeleteLDAPConf<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
-
-deleteLDAPConf
 
 Remove LDAP configuration and disable service
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 
-# deleteLDAPConf
+# Remove LDAP configuration and disable service
 try {
     $Result = Invoke-GroAdminDeleteLDAPConf -XCsrfToken $XCsrfToken
 } catch {
@@ -101,7 +111,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -110,22 +120,27 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminDeleteOrgLDAPConf"></a>
+<a id="Invoke-GroAdminDeleteOrgLDAPConf"></a>
 # **Invoke-GroAdminDeleteOrgLDAPConf**
 > void Invoke-GroAdminDeleteOrgLDAPConf<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 
-deleteOrgLDAPConf
-
 Reset organization specific LDAP configuration
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $ID = 56 # Int32 | ID of the object
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 
-# deleteOrgLDAPConf
+# Reset organization specific LDAP configuration
 try {
     $Result = Invoke-GroAdminDeleteOrgLDAPConf -ID $ID -XCsrfToken $XCsrfToken
 } catch {
@@ -147,7 +162,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -156,24 +171,31 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminDeleteOrphaned"></a>
+<a id="Invoke-GroAdminDeleteOrphaned"></a>
 # **Invoke-GroAdminDeleteOrphaned**
-> DomainsLdapCheckResponse1 Invoke-GroAdminDeleteOrphaned<br>
+> DeleteOrphaned200Response Invoke-GroAdminDeleteOrphaned<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-UserID] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DeleteFiles] <System.Nullable[Boolean]><br>
-
-deleteOrphaned
 
 Check status of ldap import users and delete orphaned
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
+$UserID = 56 # Int32 | If set, only the according user will be deleted (optional)
 $DeleteFiles = $true # Boolean | Delete user files on disk (optional) (default to $false)
 
-# deleteOrphaned
+# Check status of ldap import users and delete orphaned
 try {
-    $Result = Invoke-GroAdminDeleteOrphaned -XCsrfToken $XCsrfToken -DeleteFiles $DeleteFiles
+    $Result = Invoke-GroAdminDeleteOrphaned -XCsrfToken $XCsrfToken -UserID $UserID -DeleteFiles $DeleteFiles
 } catch {
     Write-Host ("Exception occurred when calling Invoke-GroAdminDeleteOrphaned: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -185,15 +207,16 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **XCsrfToken** | **String**| CSRF Token | [optional] 
+ **UserID** | **Int32**| If set, only the according user will be deleted | [optional] 
  **DeleteFiles** | **Boolean**| Delete user files on disk | [optional] [default to $false]
 
 ### Return type
 
-[**DomainsLdapCheckResponse1**](DomainsLdapCheckResponse1.md) (PSCustomObject)
+[**DeleteOrphaned200Response**](DeleteOrphaned200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -202,24 +225,29 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminLDAP"></a>
+<a id="Get-GroAdminLDAP"></a>
 # **Get-GroAdminLDAP**
-> DomainsLdapDumpResponse Get-GroAdminLDAP<br>
+> DumpLDAP200Response Get-GroAdminLDAP<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Domain] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Organization] <System.Nullable[Int32]><br>
-
-dumpLDAP
 
 Dump LDAP object
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $ID = "MyID" # String | LDAP object ID of the person to import
 $Domain = 56 # Int32 | ID of the domain (optional)
 $Organization = 56 # Int32 | ID of the organization (optional)
 
-# dumpLDAP
+# Dump LDAP object
 try {
     $Result = Get-GroAdminLDAP -ID $ID -Domain $Domain -Organization $Organization
 } catch {
@@ -238,11 +266,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainsLdapDumpResponse**](DomainsLdapDumpResponse.md) (PSCustomObject)
+[**DumpLDAP200Response**](DumpLDAP200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -251,18 +279,23 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminLDAPConf"></a>
+<a id="Get-GroAdminLDAPConf"></a>
 # **Get-GroAdminLDAPConf**
-> SystemMconfLdapResponse Get-GroAdminLDAPConf<br>
-
-getLDAPConf
+> GetLDAPConf200Response Get-GroAdminLDAPConf<br>
 
 Get the current LDAP configuration
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
 
-# getLDAPConf
+
+# Get the current LDAP configuration
 try {
     $Result = Get-GroAdminLDAPConf
 } catch {
@@ -276,11 +309,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SystemMconfLdapResponse**](SystemMconfLdapResponse.md) (PSCustomObject)
+[**GetLDAPConf200Response**](GetLDAPConf200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -289,20 +322,25 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminOrgLDAPConf"></a>
+<a id="Get-GroAdminOrgLDAPConf"></a>
 # **Get-GroAdminOrgLDAPConf**
-> SystemOrgsLdapResponse Get-GroAdminOrgLDAPConf<br>
+> GetOrgLDAPConf200Response Get-GroAdminOrgLDAPConf<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <Int32><br>
-
-getOrgLDAPConf
 
 Get organization specific LDAP configuration
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $ID = 56 # Int32 | ID of the object
 
-# getOrgLDAPConf
+# Get organization specific LDAP configuration
 try {
     $Result = Get-GroAdminOrgLDAPConf -ID $ID
 } catch {
@@ -319,11 +357,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SystemOrgsLdapResponse**](SystemOrgsLdapResponse.md) (PSCustomObject)
+[**GetOrgLDAPConf200Response**](GetOrgLDAPConf200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -332,7 +370,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Import-GroAdminLdapUser"></a>
+<a id="Import-GroAdminLdapUser"></a>
 # **Import-GroAdminLdapUser**
 > ImportLdapUser200Response Import-GroAdminLdapUser<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <String><br>
@@ -342,20 +380,25 @@ No authorization required
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Domain] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Organization] <System.Nullable[Int32]><br>
 
-importLdapUser
-
 Import user from ldap
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $ID = "MyID" # String | LDAP object ID of the person to import
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $Force = $true # Boolean | Force update existing users that are not associated with the LDAP object (optional) (default to $false)
-$Lang = "MyLang" # String | Default language for imported users (optional)
+$Lang = "MyLang" # String | Default language for imported users (optional) (default to "")
 $Domain = 56 # Int32 | ID of the domain (optional)
 $Organization = 56 # Int32 | ID of the organization (optional)
 
-# importLdapUser
+# Import user from ldap
 try {
     $Result = Import-GroAdminLdapUser -ID $ID -XCsrfToken $XCsrfToken -Force $Force -Lang $Lang -Domain $Domain -Organization $Organization
 } catch {
@@ -371,7 +414,7 @@ Name | Type | Description  | Notes
  **ID** | **String**| LDAP object ID of the person to import | 
  **XCsrfToken** | **String**| CSRF Token | [optional] 
  **Force** | **Boolean**| Force update existing users that are not associated with the LDAP object | [optional] [default to $false]
- **Lang** | **String**| Default language for imported users | [optional] 
+ **Lang** | **String**| Default language for imported users | [optional] [default to &quot;&quot;]
  **Domain** | **Int32**| ID of the domain | [optional] 
  **Organization** | **Int32**| ID of the organization | [optional] 
 
@@ -381,7 +424,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -390,7 +433,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Send-GroAdminDownsync"></a>
+<a id="Send-GroAdminDownsync"></a>
 # **Send-GroAdminDownsync**
 > User Send-GroAdminDownsync<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
@@ -399,19 +442,24 @@ No authorization required
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Lang] <String><br>
 
-putDownsync
-
 Update user from LDAP
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $UserID = 56 # Int32 | ID of the user
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $ID = "MyID" # String | Optional LDAP object ID (optional)
-$Lang = "MyLang" # String | Default language for imported users (optional)
+$Lang = "MyLang" # String | Default language for imported users (optional) (default to "")
 
-# putDownsync
+# Update user from LDAP
 try {
     $Result = Send-GroAdminDownsync -DomainID $DomainID -UserID $UserID -XCsrfToken $XCsrfToken -ID $ID -Lang $Lang
 } catch {
@@ -428,7 +476,7 @@ Name | Type | Description  | Notes
  **UserID** | **Int32**| ID of the user | 
  **XCsrfToken** | **String**| CSRF Token | [optional] 
  **ID** | **String**| Optional LDAP object ID | [optional] 
- **Lang** | **String**| Default language for imported users | [optional] 
+ **Lang** | **String**| Default language for imported users | [optional] [default to &quot;&quot;]
 
 ### Return type
 
@@ -436,7 +484,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -445,28 +493,33 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Search-GroAdminLDAP"></a>
+<a id="Search-GroAdminLDAP"></a>
 # **Search-GroAdminLDAP**
-> DomainsLdapSearchResponse Search-GroAdminLDAP<br>
+> SearchLDAP200Response Search-GroAdminLDAP<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Query] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Limit] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Domain] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Organization] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ShowAll] <System.Nullable[Boolean]><br>
 
-searchLDAP
-
 Perform LDAP user search
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Query = "MyQuery" # String | Search term
 $Limit = 56 # Int32 | Maximum number of results to return (optional) (default to 50)
 $Domain = 56 # Int32 | ID of the domain (optional)
 $Organization = 56 # Int32 | ID of the organization (optional)
 $ShowAll = $true # Boolean | Do not filter un-importable results (optional) (default to $false)
 
-# searchLDAP
+# Perform LDAP user search
 try {
     $Result = Search-GroAdminLDAP -Query $Query -Limit $Limit -Domain $Domain -Organization $Organization -ShowAll $ShowAll
 } catch {
@@ -487,11 +540,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainsLdapSearchResponse**](DomainsLdapSearchResponse.md) (PSCustomObject)
+[**SearchLDAP200Response**](SearchLDAP200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -500,28 +553,34 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Set-GroAdminLDAPConf"></a>
+<a id="Set-GroAdminLDAPConf"></a>
 # **Set-GroAdminLDAPConf**
 > void Set-GroAdminLDAPConf<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Force] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SetOrgLDAPConfRequest] <PSCustomObject><br>
-
-setLDAPConf
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LdapConfig] <PSCustomObject><br>
 
 Set new LDAP configuration
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $Force = $true # Boolean | Update configuration even if validation failed (optional)
 $LdapConfigConnection = Initialize-LdapConfigConnection -Server "MyServer" -BindUser "MyBindUser" -BindPass "MyBindPass" -Starttls $false
-$LdapConfigUsers = Initialize-LdapConfigUsers -Username "MyUsername" -DisplayName "MyDisplayName" -Filters "MyFilters" -VarFilter "(&(objectclass=person)(mailPrimaryAddress=*))" -Templates "MyTemplates" -Attributes @{ key_example = "MyInner" } -DefaultQuota 0 -SearchAttributes "MySearchAttributes" -Aliases "MyAliases"
-$SetOrgLDAPConfRequest = Initialize-SetOrgLDAPConfRequest -Disabled $false -Connection $LdapConfigConnection -BaseDn "MyBaseDn" -ObjectID "MyObjectID" -Users $LdapConfigUsers # SetOrgLDAPConfRequest |  (optional)
+$LdapConfigUsers = Initialize-LdapConfigUsers -Username "MyUsername" -DisplayName "MyDisplayName" -Filters "objectclass=person" -VarFilter "(&(objectclass=person)(mailPrimaryAddress=*))" -Templates "MyTemplates" -Attributes @{ key_example = "MyInner" } -DefaultQuota 0 -SearchAttributes "MySearchAttributes" -Aliases "MyAliases"
+$LdapConfigGroups = Initialize-LdapConfigGroups -GroupMemberAttr "MyGroupMemberAttr" -Groupaddr "MyGroupaddr" -Groupfilter "MyGroupfilter" -Groupname "MyGroupname"
+$LdapConfig = Initialize-LdapConfig -Disabled $false -Connection $LdapConfigConnection -BaseDn "MyBaseDn" -ObjectID "MyObjectID" -Users $LdapConfigUsers -Groups $LdapConfigGroups # LdapConfig |  (optional)
 
-# setLDAPConf
+# Set new LDAP configuration
 try {
-    $Result = Set-GroAdminLDAPConf -XCsrfToken $XCsrfToken -Force $Force -SetOrgLDAPConfRequest $SetOrgLDAPConfRequest
+    $Result = Set-GroAdminLDAPConf -XCsrfToken $XCsrfToken -Force $Force -LdapConfig $LdapConfig
 } catch {
     Write-Host ("Exception occurred when calling Set-GroAdminLDAPConf: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -534,7 +593,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **XCsrfToken** | **String**| CSRF Token | [optional] 
  **Force** | **Boolean**| Update configuration even if validation failed | [optional] 
- **SetOrgLDAPConfRequest** | [**SetOrgLDAPConfRequest**](SetOrgLDAPConfRequest.md)|  | [optional] 
+ **LdapConfig** | [**LdapConfig**](LdapConfig.md)|  | [optional] 
 
 ### Return type
 
@@ -542,7 +601,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -551,28 +610,34 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Set-GroAdminOrgLDAPConf"></a>
+<a id="Set-GroAdminOrgLDAPConf"></a>
 # **Set-GroAdminOrgLDAPConf**
 > void Set-GroAdminOrgLDAPConf<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SetOrgLDAPConfRequest] <PSCustomObject><br>
-
-setOrgLDAPConf
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LdapConfig] <PSCustomObject><br>
 
 Set organization specific LDAP configuration
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $ID = 56 # Int32 | ID of the object
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $LdapConfigConnection = Initialize-LdapConfigConnection -Server "MyServer" -BindUser "MyBindUser" -BindPass "MyBindPass" -Starttls $false
-$LdapConfigUsers = Initialize-LdapConfigUsers -Username "MyUsername" -DisplayName "MyDisplayName" -Filters "MyFilters" -VarFilter "(&(objectclass=person)(mailPrimaryAddress=*))" -Templates "MyTemplates" -Attributes @{ key_example = "MyInner" } -DefaultQuota 0 -SearchAttributes "MySearchAttributes" -Aliases "MyAliases"
-$SetOrgLDAPConfRequest = Initialize-SetOrgLDAPConfRequest -Disabled $false -Connection $LdapConfigConnection -BaseDn "MyBaseDn" -ObjectID "MyObjectID" -Users $LdapConfigUsers # SetOrgLDAPConfRequest |  (optional)
+$LdapConfigUsers = Initialize-LdapConfigUsers -Username "MyUsername" -DisplayName "MyDisplayName" -Filters "objectclass=person" -VarFilter "(&(objectclass=person)(mailPrimaryAddress=*))" -Templates "MyTemplates" -Attributes @{ key_example = "MyInner" } -DefaultQuota 0 -SearchAttributes "MySearchAttributes" -Aliases "MyAliases"
+$LdapConfigGroups = Initialize-LdapConfigGroups -GroupMemberAttr "MyGroupMemberAttr" -Groupaddr "MyGroupaddr" -Groupfilter "MyGroupfilter" -Groupname "MyGroupname"
+$LdapConfig = Initialize-LdapConfig -Disabled $false -Connection $LdapConfigConnection -BaseDn "MyBaseDn" -ObjectID "MyObjectID" -Users $LdapConfigUsers -Groups $LdapConfigGroups # LdapConfig |  (optional)
 
-# setOrgLDAPConf
+# Set organization specific LDAP configuration
 try {
-    $Result = Set-GroAdminOrgLDAPConf -ID $ID -XCsrfToken $XCsrfToken -SetOrgLDAPConfRequest $SetOrgLDAPConfRequest
+    $Result = Set-GroAdminOrgLDAPConf -ID $ID -XCsrfToken $XCsrfToken -LdapConfig $LdapConfig
 } catch {
     Write-Host ("Exception occurred when calling Set-GroAdminOrgLDAPConf: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -585,7 +650,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ID** | **Int32**| ID of the object | 
  **XCsrfToken** | **String**| CSRF Token | [optional] 
- **SetOrgLDAPConfRequest** | [**SetOrgLDAPConfRequest**](SetOrgLDAPConfRequest.md)|  | [optional] 
+ **LdapConfig** | [**LdapConfig**](LdapConfig.md)|  | [optional] 
 
 ### Return type
 
@@ -593,7 +658,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -602,28 +667,33 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Update-GroAdminAllDomainUsers"></a>
+<a id="Update-GroAdminAllDomainUsers"></a>
 # **Update-GroAdminAllDomainUsers**
-> DomainsLdapDownsyncResponse Update-GroAdminAllDomainUsers<br>
+> UpdateAllUsers200Response Update-GroAdminAllDomainUsers<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Import] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Lang] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Timeout] <System.Nullable[Double]><br>
-
-updateAllDomainUsers
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Timeout] <System.Nullable[Decimal]><br>
 
 Update all LDAP imported users in this domain
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $Import = $true # Boolean | Import new users from LDAP (optional)
-$Lang = "MyLang" # String | Default language for imported users (optional)
-$Timeout = 1.2 # Double | Time in seconds to wait for completion (optional) (default to 1)
+$Lang = "MyLang" # String | Default language for imported users (optional) (default to "")
+$Timeout = 8.14 # Decimal | Time in seconds to wait for completion (optional) (default to 1.0)
 
-# updateAllDomainUsers
+# Update all LDAP imported users in this domain
 try {
     $Result = Update-GroAdminAllDomainUsers -DomainID $DomainID -XCsrfToken $XCsrfToken -Import $Import -Lang $Lang -Timeout $Timeout
 } catch {
@@ -639,16 +709,16 @@ Name | Type | Description  | Notes
  **DomainID** | **Int32**| ID of the domain | 
  **XCsrfToken** | **String**| CSRF Token | [optional] 
  **Import** | **Boolean**| Import new users from LDAP | [optional] 
- **Lang** | **String**| Default language for imported users | [optional] 
- **Timeout** | **Double**| Time in seconds to wait for completion | [optional] [default to 1]
+ **Lang** | **String**| Default language for imported users | [optional] [default to &quot;&quot;]
+ **Timeout** | **Decimal**| Time in seconds to wait for completion | [optional] [default to 1.0]
 
 ### Return type
 
-[**DomainsLdapDownsyncResponse**](DomainsLdapDownsyncResponse.md) (PSCustomObject)
+[**UpdateAllUsers200Response**](UpdateAllUsers200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -657,26 +727,31 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Update-GroAdminAllUsers"></a>
+<a id="Update-GroAdminAllUsers"></a>
 # **Update-GroAdminAllUsers**
-> DomainsLdapDownsyncResponse Update-GroAdminAllUsers<br>
+> UpdateAllUsers200Response Update-GroAdminAllUsers<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Import] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Lang] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Timeout] <System.Nullable[Double]><br>
-
-updateAllUsers
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Timeout] <System.Nullable[Decimal]><br>
 
 Update all LDAP imported users
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $Import = $true # Boolean | Import new users from LDAP (optional)
-$Lang = "MyLang" # String | Default language for imported users (optional)
-$Timeout = 1.2 # Double | Time in seconds to wait for completion (optional) (default to 1)
+$Lang = "MyLang" # String | Default language for imported users (optional) (default to "")
+$Timeout = 8.14 # Decimal | Time in seconds to wait for completion (optional) (default to 1.0)
 
-# updateAllUsers
+# Update all LDAP imported users
 try {
     $Result = Update-GroAdminAllUsers -XCsrfToken $XCsrfToken -Import $Import -Lang $Lang -Timeout $Timeout
 } catch {
@@ -691,16 +766,16 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **XCsrfToken** | **String**| CSRF Token | [optional] 
  **Import** | **Boolean**| Import new users from LDAP | [optional] 
- **Lang** | **String**| Default language for imported users | [optional] 
- **Timeout** | **Double**| Time in seconds to wait for completion | [optional] [default to 1]
+ **Lang** | **String**| Default language for imported users | [optional] [default to &quot;&quot;]
+ **Timeout** | **Decimal**| Time in seconds to wait for completion | [optional] [default to 1.0]
 
 ### Return type
 
-[**DomainsLdapDownsyncResponse**](DomainsLdapDownsyncResponse.md) (PSCustomObject)
+[**UpdateAllUsers200Response**](UpdateAllUsers200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -709,28 +784,33 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Update-GroAdminOrgLDAPUsers"></a>
+<a id="Update-GroAdminOrgLDAPUsers"></a>
 # **Update-GroAdminOrgLDAPUsers**
-> SystemOrgsLdapDownsyncResponse Update-GroAdminOrgLDAPUsers<br>
+> UpdateAllUsers200Response Update-GroAdminOrgLDAPUsers<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Import] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Lang] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Timeout] <System.Nullable[Double]><br>
-
-updateOrgLDAPUsers
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Timeout] <System.Nullable[Decimal]><br>
 
 Update all LDAP imported users in this organization
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $ID = 56 # Int32 | ID of the object
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $Import = $true # Boolean | Import new users from LDAP (optional)
-$Lang = "MyLang" # String | Default language for imported users (optional)
-$Timeout = 1.2 # Double | Time in seconds to wait for completion (optional) (default to 1)
+$Lang = "MyLang" # String | Default language for imported users (optional) (default to "")
+$Timeout = 8.14 # Decimal | Time in seconds to wait for completion (optional) (default to 1.0)
 
-# updateOrgLDAPUsers
+# Update all LDAP imported users in this organization
 try {
     $Result = Update-GroAdminOrgLDAPUsers -ID $ID -XCsrfToken $XCsrfToken -Import $Import -Lang $Lang -Timeout $Timeout
 } catch {
@@ -746,16 +826,16 @@ Name | Type | Description  | Notes
  **ID** | **Int32**| ID of the object | 
  **XCsrfToken** | **String**| CSRF Token | [optional] 
  **Import** | **Boolean**| Import new users from LDAP | [optional] 
- **Lang** | **String**| Default language for imported users | [optional] 
- **Timeout** | **Double**| Time in seconds to wait for completion | [optional] [default to 1]
+ **Lang** | **String**| Default language for imported users | [optional] [default to &quot;&quot;]
+ **Timeout** | **Decimal**| Time in seconds to wait for completion | [optional] [default to 1.0]
 
 ### Return type
 
-[**SystemOrgsLdapDownsyncResponse**](SystemOrgsLdapDownsyncResponse.md) (PSCustomObject)
+[**UpdateAllUsers200Response**](UpdateAllUsers200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 

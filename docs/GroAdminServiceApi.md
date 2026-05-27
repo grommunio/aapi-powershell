@@ -1,32 +1,89 @@
-# GrommunioAdmin.GrommunioAdmin/Api.GroAdminServiceApi
+# GrommunioAdmin.GrommunioAdmin\Api.GroAdminServiceApi
 
 All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Get-GroAdminUserDeviceWipeStatus**](GroAdminServiceApi.md#Get-GroAdminUserDeviceWipeStatus) | **GET** /service/wipe/{username} | getUserDeviceWipeStatus
-[**Get-GroAdminUserInformation**](GroAdminServiceApi.md#Get-GroAdminUserInformation) | **GET** /service/userinfo/{username} | getUserInformation
-[**Get-GroAdminUserSyncPolicy**](GroAdminServiceApi.md#Get-GroAdminUserSyncPolicy) | **GET** /service/syncPolicy/{username} | getUserSyncPolicy
-[**Send-GroAdminPasswd**](GroAdminServiceApi.md#Send-GroAdminPasswd) | **PUT** /passwd | putPasswd
-[**Set-GroAdminUserDeviceWipeStatus**](GroAdminServiceApi.md#Set-GroAdminUserDeviceWipeStatus) | **POST** /service/wipe/{username} | setUserDeviceWipeStatus
+[**Get-GroAdminUserDeviceLastConnect**](GroAdminServiceApi.md#Get-GroAdminUserDeviceLastConnect) | **GET** /service/lastconnect/{username} | Get device last connect time for user
+[**Get-GroAdminUserDeviceWipeStatus**](GroAdminServiceApi.md#Get-GroAdminUserDeviceWipeStatus) | **GET** /service/wipe/{username} | Get device wipe status for user
+[**Get-GroAdminUserInformation**](GroAdminServiceApi.md#Get-GroAdminUserInformation) | **GET** /service/userinfo/{username} | Get basic user information
+[**Get-GroAdminUserSyncPolicy**](GroAdminServiceApi.md#Get-GroAdminUserSyncPolicy) | **GET** /service/syncPolicy/{username} | Get sync policy for specific user
+[**Send-GroAdminPasswd**](GroAdminServiceApi.md#Send-GroAdminPasswd) | **PUT** /passwd | Change current users password
+[**Set-GroAdminUserDeviceWipeStatus**](GroAdminServiceApi.md#Set-GroAdminUserDeviceWipeStatus) | **POST** /service/wipe/{username} | Set device wipe status for user
 
 
-<a name="Get-GroAdminUserDeviceWipeStatus"></a>
-# **Get-GroAdminUserDeviceWipeStatus**
-> ServiceWipeResponse Get-GroAdminUserDeviceWipeStatus<br>
+<a id="Get-GroAdminUserDeviceLastConnect"></a>
+# **Get-GroAdminUserDeviceLastConnect**
+> GetUserDeviceWipeStatus200Response Get-GroAdminUserDeviceLastConnect<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Username] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Devices] <String[]><br>
 
-getUserDeviceWipeStatus
+Get device last connect time for user
+
+### Example
+```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
+$Username = "MyUsername" # String | E-mail address of the user
+$Devices = "MyDevices" # String[] | Restrict request to these device IDs (optional)
+
+# Get device last connect time for user
+try {
+    $Result = Get-GroAdminUserDeviceLastConnect -Username $Username -Devices $Devices
+} catch {
+    Write-Host ("Exception occurred when calling Get-GroAdminUserDeviceLastConnect: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **Username** | **String**| E-mail address of the user | 
+ **Devices** | [**String[]**](String.md)| Restrict request to these device IDs | [optional] 
+
+### Return type
+
+[**GetUserDeviceWipeStatus200Response**](GetUserDeviceWipeStatus200Response.md) (PSCustomObject)
+
+### Authorization
+
+[JWTCookie](../README.md#JWTCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="Get-GroAdminUserDeviceWipeStatus"></a>
+# **Get-GroAdminUserDeviceWipeStatus**
+> GetUserDeviceWipeStatus200Response Get-GroAdminUserDeviceWipeStatus<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Username] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Devices] <String[]><br>
 
 Get device wipe status for user
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Username = "MyUsername" # String | E-mail address of the user
 $Devices = "MyDevices" # String[] | Restrict request to these device IDs (optional)
 
-# getUserDeviceWipeStatus
+# Get device wipe status for user
 try {
     $Result = Get-GroAdminUserDeviceWipeStatus -Username $Username -Devices $Devices
 } catch {
@@ -44,11 +101,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServiceWipeResponse**](ServiceWipeResponse.md) (PSCustomObject)
+[**GetUserDeviceWipeStatus200Response**](GetUserDeviceWipeStatus200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -57,20 +114,25 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminUserInformation"></a>
+<a id="Get-GroAdminUserInformation"></a>
 # **Get-GroAdminUserInformation**
-> ServiceUserinfoResponse Get-GroAdminUserInformation<br>
+> GetUserInformation200Response Get-GroAdminUserInformation<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Username] <String><br>
-
-getUserInformation
 
 Get basic user information
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Username = "MyUsername" # String | E-mail address of the user
 
-# getUserInformation
+# Get basic user information
 try {
     $Result = Get-GroAdminUserInformation -Username $Username
 } catch {
@@ -87,11 +149,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServiceUserinfoResponse**](ServiceUserinfoResponse.md) (PSCustomObject)
+[**GetUserInformation200Response**](GetUserInformation200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -100,20 +162,25 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminUserSyncPolicy"></a>
+<a id="Get-GroAdminUserSyncPolicy"></a>
 # **Get-GroAdminUserSyncPolicy**
-> ServiceSyncPolicyResponse Get-GroAdminUserSyncPolicy<br>
+> GetUserSyncPolicy200Response Get-GroAdminUserSyncPolicy<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Username] <String><br>
-
-getUserSyncPolicy
 
 Get sync policy for specific user
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Username = "MyUsername" # String | E-mail address of the user
 
-# getUserSyncPolicy
+# Get sync policy for specific user
 try {
     $Result = Get-GroAdminUserSyncPolicy -Username $Username
 } catch {
@@ -130,11 +197,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServiceSyncPolicyResponse**](ServiceSyncPolicyResponse.md) (PSCustomObject)
+[**GetUserSyncPolicy200Response**](GetUserSyncPolicy200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -143,13 +210,11 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Send-GroAdminPasswd"></a>
+<a id="Send-GroAdminPasswd"></a>
 # **Send-GroAdminPasswd**
 > void Send-GroAdminPasswd<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PutPasswdRequest] <PSCustomObject><br>
-
-putPasswd
 
 Change current users password
 
@@ -158,7 +223,7 @@ Change current users password
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $PutPasswdRequest = Initialize-PutPasswdRequest -New "MyNew" -Old "MyOld" -User "MyUser" # PutPasswdRequest |  (optional)
 
-# putPasswd
+# Change current users password
 try {
     $Result = Send-GroAdminPasswd -XCsrfToken $XCsrfToken -PutPasswdRequest $PutPasswdRequest
 } catch {
@@ -189,7 +254,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Set-GroAdminUserDeviceWipeStatus"></a>
+<a id="Set-GroAdminUserDeviceWipeStatus"></a>
 # **Set-GroAdminUserDeviceWipeStatus**
 > void Set-GroAdminUserDeviceWipeStatus<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Username] <String><br>
@@ -197,19 +262,23 @@ No authorization required
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Devices] <String[]><br>
 
-setUserDeviceWipeStatus
-
 Set device wipe status for user
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $Username = "MyUsername" # String | E-mail address of the user
-$Status = Initialize-Status 
-$SetUserDeviceWipeStatusRequest = Initialize-SetUserDeviceWipeStatusRequest -Password "MyPassword" -RemoteIP "MyRemoteIP" -Status $Status -Time 0 # SetUserDeviceWipeStatusRequest | 
+$SetUserDeviceWipeStatusRequest = Initialize-SetUserDeviceWipeStatusRequest -Password "MyPassword" -RemoteIP "MyRemoteIP" -Status "0" -Time 0 # SetUserDeviceWipeStatusRequest | 
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $Devices = "MyDevices" # String[] | Restrict request to these device IDs (optional)
 
-# setUserDeviceWipeStatus
+# Set device wipe status for user
 try {
     $Result = Set-GroAdminUserDeviceWipeStatus -Username $Username -SetUserDeviceWipeStatusRequest $SetUserDeviceWipeStatusRequest -XCsrfToken $XCsrfToken -Devices $Devices
 } catch {
@@ -233,7 +302,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 

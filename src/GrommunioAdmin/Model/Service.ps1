@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -65,13 +65,13 @@ function Initialize-GroAdminService {
 
 
         $PSO = [PSCustomObject]@{
-            "state" = ${State}
-            "substate" = ${Substate}
-            "description" = ${Description}
-            "autostart" = ${Autostart}
-            "since" = ${Since}
-            "name" = ${Name}
-            "unit" = ${Unit}
+            'state' = ${State}
+            'substate' = ${Substate}
+            'description' = ${Description}
+            'autostart' = ${Autostart}
+            'since' = ${Since}
+            'name' = ${Name}
+            'unit' = ${Unit}
         }
 
 
@@ -109,63 +109,63 @@ function ConvertFrom-GroAdminJsonToService {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminService
-        $AllProperties = ("state", "substate", "description", "autostart", "since", "name", "unit")
+        $AllProperties = ('state', 'substate', 'description', 'autostart', 'since', 'name', 'unit')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "state"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'state'))) { #optional property not found
             $State = $null
         } else {
-            $State = $JsonParameters.PSobject.Properties["state"].value
+            $State = $JsonParameters.PSobject.Properties['state'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "substate"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'substate'))) { #optional property not found
             $Substate = $null
         } else {
-            $Substate = $JsonParameters.PSobject.Properties["substate"].value
+            $Substate = $JsonParameters.PSobject.Properties['substate'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "description"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'description'))) { #optional property not found
             $Description = $null
         } else {
-            $Description = $JsonParameters.PSobject.Properties["description"].value
+            $Description = $JsonParameters.PSobject.Properties['description'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "autostart"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'autostart'))) { #optional property not found
             $Autostart = $null
         } else {
-            $Autostart = $JsonParameters.PSobject.Properties["autostart"].value
+            $Autostart = $JsonParameters.PSobject.Properties['autostart'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "since"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'since'))) { #optional property not found
             $Since = $null
         } else {
-            $Since = $JsonParameters.PSobject.Properties["since"].value
+            $Since = $JsonParameters.PSobject.Properties['since'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "name"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'name'))) { #optional property not found
             $Name = $null
         } else {
-            $Name = $JsonParameters.PSobject.Properties["name"].value
+            $Name = $JsonParameters.PSobject.Properties['name'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "unit"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'unit'))) { #optional property not found
             $Unit = $null
         } else {
-            $Unit = $JsonParameters.PSobject.Properties["unit"].value
+            $Unit = $JsonParameters.PSobject.Properties['unit'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "state" = ${State}
-            "substate" = ${Substate}
-            "description" = ${Description}
-            "autostart" = ${Autostart}
-            "since" = ${Since}
-            "name" = ${Name}
-            "unit" = ${Unit}
+            'state' = ${State}
+            'substate' = ${Substate}
+            'description' = ${Description}
+            'autostart' = ${Autostart}
+            'since' = ${Since}
+            'name' = ${Name}
+            'unit' = ${Unit}
         }
 
         return $PSO

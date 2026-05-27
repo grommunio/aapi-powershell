@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -49,10 +49,10 @@ function Initialize-GroAdminPublicFolderRef {
 
 
         $PSO = [PSCustomObject]@{
-            "folderid" = ${Folderid}
-            "name" = ${Name}
-            "container" = ${Container}
-            "children" = ${Children}
+            'folderid' = ${Folderid}
+            'name' = ${Name}
+            'container' = ${Container}
+            'children' = ${Children}
         }
 
 
@@ -90,42 +90,42 @@ function ConvertFrom-GroAdminJsonToPublicFolderRef {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminPublicFolderRef
-        $AllProperties = ("folderid", "name", "container", "children")
+        $AllProperties = ('folderid', 'name', 'container', 'children')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "folderid"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'folderid'))) { #optional property not found
             $Folderid = $null
         } else {
-            $Folderid = $JsonParameters.PSobject.Properties["folderid"].value
+            $Folderid = $JsonParameters.PSobject.Properties['folderid'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "name"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'name'))) { #optional property not found
             $Name = $null
         } else {
-            $Name = $JsonParameters.PSobject.Properties["name"].value
+            $Name = $JsonParameters.PSobject.Properties['name'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "container"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'container'))) { #optional property not found
             $Container = $null
         } else {
-            $Container = $JsonParameters.PSobject.Properties["container"].value
+            $Container = $JsonParameters.PSobject.Properties['container'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "children"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'children'))) { #optional property not found
             $Children = $null
         } else {
-            $Children = $JsonParameters.PSobject.Properties["children"].value
+            $Children = $JsonParameters.PSobject.Properties['children'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "folderid" = ${Folderid}
-            "name" = ${Name}
-            "container" = ${Container}
-            "children" = ${Children}
+            'folderid' = ${Folderid}
+            'name' = ${Name}
+            'container' = ${Container}
+            'children' = ${Children}
         }
 
         return $PSO

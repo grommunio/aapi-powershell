@@ -4,7 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Username** | **String** |  | [optional] 
-**Properties** | [**SystemCollectionsHashtable**](.md) | User properties as name/value pairs | [optional] 
+**Properties** | [**System.Collections.Hashtable**](AnyType.md) | User properties as name/value pairs | [optional] 
+**Altnames** | [**AltnamesInner[]**](AltnamesInner.md) | List of alternative login names | [optional] 
 **Aliases** | **String[]** | List of aliases for this user | [optional] 
 **Status** | [**UserStatus**](UserStatus.md) |  | [optional] 
 **Pop3Imap** | **Boolean** | POP3/IMAP privilege | [optional] 
@@ -15,13 +16,16 @@ Name | Type | Description | Notes
 **PrivVideo** | **Boolean** | Meet privilege | [optional] 
 **PrivFiles** | **Boolean** | Files privilege | [optional] 
 **PrivArchive** | **Boolean** | Archive privilege | [optional] 
+**PrivWeb** | **Boolean** | Web privilege | [optional] 
+**PrivEas** | **Boolean** | EAS privilege | [optional] 
+**PrivDav** | **Boolean** | DAV privilege | [optional] 
 **LdapID** | **String** | Detach imported user from LDAP object | [optional] 
 **Fetchmail** | [**FetchmailEntry[]**](FetchmailEntry.md) | List of fetchmail entries for this user | [optional] 
-**SyncPolicy** | [**DomainCommonSyncPolicy**](DomainCommonSyncPolicy.md) |  | [optional] 
+**SyncPolicy** | [**SyncPolicy**](SyncPolicy.md) |  | [optional] 
 **Chat** | **Boolean** | Whether chat is enabled for this user | [optional] 
 **ChatAdmin** | **Boolean** | Whether this user has grommunio-chat admin permissions | [optional] 
 **Lang** | **String** | User language | [optional] 
-**Forward** | [**UserForward**](UserForward.md) |  | [optional] 
+**Forward** | [**Forward**](Forward.md) |  | [optional] 
 **Homeserver** | **Int32** | ID of the homeserver | [optional] 
 
 ## Examples
@@ -30,6 +34,7 @@ Name | Type | Description | Notes
 ```powershell
 $UserUpdate = Initialize-GrommunioAdminUserUpdate  -Username null `
  -Properties null `
+ -Altnames null `
  -Aliases null `
  -Status null `
  -Pop3Imap null `
@@ -40,6 +45,9 @@ $UserUpdate = Initialize-GrommunioAdminUserUpdate  -Username null `
  -PrivVideo null `
  -PrivFiles null `
  -PrivArchive null `
+ -PrivWeb null `
+ -PrivEas null `
+ -PrivDav null `
  -LdapID null `
  -Fetchmail null `
  -SyncPolicy null `

@@ -4,12 +4,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Password** | **String** | Password of the user requesting the wipe | [optional] 
+**Status** | **Int32** | New device wipe status | [optional] 
 
 ## Examples
 
 - Prepare the resource
 ```powershell
-$PostDeviceWipeRequest = Initialize-GrommunioAdminPostDeviceWipeRequest  -Password null
+$PostDeviceWipeRequest = Initialize-GrommunioAdminPostDeviceWipeRequest  -Password null `
+ -Status null
 ```
 
 - Convert the resource to JSON

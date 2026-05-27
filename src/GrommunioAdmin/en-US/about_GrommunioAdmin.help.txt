@@ -8,8 +8,8 @@ LONG DESCRIPTION
     grommunio administration REST API
 
 
-    - API version: 1.9.2
-    - SDK version: 1.9.2
+    - API version: 1.19.0
+    - SDK version: 1.19.0
 
     Frameworks supported:
 

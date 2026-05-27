@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -36,7 +36,8 @@ function Initialize-GroAdminSetUserDeviceWipeStatusRequest {
         [String]
         ${RemoteIP},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [ValidateSet("0", "1", "2", "4", "8", "16", "32", "64")]
+        [Int32]
         ${Status},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
@@ -53,10 +54,10 @@ function Initialize-GroAdminSetUserDeviceWipeStatusRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "password" = ${Password}
-            "remoteIP" = ${RemoteIP}
-            "status" = ${Status}
-            "time" = ${Time}
+            'password' = ${Password}
+            'remoteIP' = ${RemoteIP}
+            'status' = ${Status}
+            'time' = ${Time}
         }
 
 
@@ -94,7 +95,7 @@ function ConvertFrom-GroAdminJsonToSetUserDeviceWipeStatusRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminSetUserDeviceWipeStatusRequest
-        $AllProperties = ("password", "remoteIP", "status", "time")
+        $AllProperties = ('password', 'remoteIP', 'status', 'time')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -105,35 +106,35 @@ function ConvertFrom-GroAdminJsonToSetUserDeviceWipeStatusRequest {
             throw "Error! Empty JSON cannot be serialized due to the required property 'status' missing."
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "status"))) {
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'status'))) {
             throw "Error! JSON cannot be serialized due to the required property 'status' missing."
         } else {
-            $Status = $JsonParameters.PSobject.Properties["status"].value
+            $Status = $JsonParameters.PSobject.Properties['status'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "password"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'password'))) { #optional property not found
             $Password = $null
         } else {
-            $Password = $JsonParameters.PSobject.Properties["password"].value
+            $Password = $JsonParameters.PSobject.Properties['password'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "remoteIP"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'remoteIP'))) { #optional property not found
             $RemoteIP = $null
         } else {
-            $RemoteIP = $JsonParameters.PSobject.Properties["remoteIP"].value
+            $RemoteIP = $JsonParameters.PSobject.Properties['remoteIP'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "time"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'time'))) { #optional property not found
             $Time = $null
         } else {
-            $Time = $JsonParameters.PSobject.Properties["time"].value
+            $Time = $JsonParameters.PSobject.Properties['time'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "password" = ${Password}
-            "remoteIP" = ${RemoteIP}
-            "status" = ${Status}
-            "time" = ${Time}
+            'password' = ${Password}
+            'remoteIP' = ${RemoteIP}
+            'status' = ${Status}
+            'time' = ${Time}
         }
 
         return $PSO

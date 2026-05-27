@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -44,9 +44,9 @@ function Initialize-GroAdminOrgWrite {
 
 
         $PSO = [PSCustomObject]@{
-            "name" = ${Name}
-            "description" = ${Description}
-            "domains" = ${Domains}
+            'name' = ${Name}
+            'description' = ${Description}
+            'domains' = ${Domains}
         }
 
 
@@ -84,35 +84,35 @@ function ConvertFrom-GroAdminJsonToOrgWrite {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminOrgWrite
-        $AllProperties = ("name", "description", "domains")
+        $AllProperties = ('name', 'description', 'domains')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "name"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'name'))) { #optional property not found
             $Name = $null
         } else {
-            $Name = $JsonParameters.PSobject.Properties["name"].value
+            $Name = $JsonParameters.PSobject.Properties['name'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "description"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'description'))) { #optional property not found
             $Description = $null
         } else {
-            $Description = $JsonParameters.PSobject.Properties["description"].value
+            $Description = $JsonParameters.PSobject.Properties['description'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "domains"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'domains'))) { #optional property not found
             $Domains = $null
         } else {
-            $Domains = $JsonParameters.PSobject.Properties["domains"].value
+            $Domains = $JsonParameters.PSobject.Properties['domains'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "name" = ${Name}
-            "description" = ${Description}
-            "domains" = ${Domains}
+            'name' = ${Name}
+            'description' = ${Description}
+            'domains' = ${Domains}
         }
 
         return $PSO

@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -28,7 +28,7 @@ Password of the source user
 .PARAMETER Date
 Last modification time
 .PARAMETER SrcAuth
-No description available.
+Type auf authentication to use
 .PARAMETER SrcFolder
 Folder to sync from
 .PARAMETER Fetchall
@@ -36,7 +36,7 @@ Whether to fetch seen mails
 .PARAMETER Keep
 Keep original e-mails
 .PARAMETER Protocol
-No description available.
+Protocol to use
 .PARAMETER UseSSL
 Whether to use SSL
 .PARAMETER SslCertCheck
@@ -78,8 +78,9 @@ function Initialize-GroAdminFetchmailEntry {
         [String]
         ${Date},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
-        ${SrcAuth},
+        [ValidateSet("password", "kerberos_v5", "kerberos", "kerberos_v4", "gssapi", "cram-md5", "otp", "ntlm", "msn", "ssh", "any")]
+        [String]
+        ${SrcAuth} = "password",
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${SrcFolder},
@@ -90,7 +91,8 @@ function Initialize-GroAdminFetchmailEntry {
         [System.Nullable[Boolean]]
         ${Keep},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [ValidateSet("POP3", "IMAP", "POP2", "ETRN", "AUTO")]
+        [String]
         ${Protocol},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
@@ -116,23 +118,23 @@ function Initialize-GroAdminFetchmailEntry {
 
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "mailbox" = ${Mailbox}
-            "active" = ${Active}
-            "srcServer" = ${SrcServer}
-            "srcUser" = ${SrcUser}
-            "srcPassword" = ${SrcPassword}
-            "date" = ${Date}
-            "srcAuth" = ${SrcAuth}
-            "srcFolder" = ${SrcFolder}
-            "fetchall" = ${Fetchall}
-            "keep" = ${Keep}
-            "protocol" = ${Protocol}
-            "useSSL" = ${UseSSL}
-            "sslCertCheck" = ${SslCertCheck}
-            "sslCertPath" = ${SslCertPath}
-            "sslFingerprint" = ${SslFingerprint}
-            "extraOptions" = ${ExtraOptions}
+            'ID' = ${ID}
+            'mailbox' = ${Mailbox}
+            'active' = ${Active}
+            'srcServer' = ${SrcServer}
+            'srcUser' = ${SrcUser}
+            'srcPassword' = ${SrcPassword}
+            'date' = ${Date}
+            'srcAuth' = ${SrcAuth}
+            'srcFolder' = ${SrcFolder}
+            'fetchall' = ${Fetchall}
+            'keep' = ${Keep}
+            'protocol' = ${Protocol}
+            'useSSL' = ${UseSSL}
+            'sslCertCheck' = ${SslCertCheck}
+            'sslCertPath' = ${SslCertPath}
+            'sslFingerprint' = ${SslFingerprint}
+            'extraOptions' = ${ExtraOptions}
         }
 
 
@@ -170,133 +172,133 @@ function ConvertFrom-GroAdminJsonToFetchmailEntry {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminFetchmailEntry
-        $AllProperties = ("ID", "mailbox", "active", "srcServer", "srcUser", "srcPassword", "date", "srcAuth", "srcFolder", "fetchall", "keep", "protocol", "useSSL", "sslCertCheck", "sslCertPath", "sslFingerprint", "extraOptions")
+        $AllProperties = ('ID', 'mailbox', 'active', 'srcServer', 'srcUser', 'srcPassword', 'date', 'srcAuth', 'srcFolder', 'fetchall', 'keep', 'protocol', 'useSSL', 'sslCertCheck', 'sslCertPath', 'sslFingerprint', 'extraOptions')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "ID"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'ID'))) { #optional property not found
             $ID = $null
         } else {
-            $ID = $JsonParameters.PSobject.Properties["ID"].value
+            $ID = $JsonParameters.PSobject.Properties['ID'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "mailbox"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'mailbox'))) { #optional property not found
             $Mailbox = $null
         } else {
-            $Mailbox = $JsonParameters.PSobject.Properties["mailbox"].value
+            $Mailbox = $JsonParameters.PSobject.Properties['mailbox'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "active"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'active'))) { #optional property not found
             $Active = $null
         } else {
-            $Active = $JsonParameters.PSobject.Properties["active"].value
+            $Active = $JsonParameters.PSobject.Properties['active'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "srcServer"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'srcServer'))) { #optional property not found
             $SrcServer = $null
         } else {
-            $SrcServer = $JsonParameters.PSobject.Properties["srcServer"].value
+            $SrcServer = $JsonParameters.PSobject.Properties['srcServer'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "srcUser"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'srcUser'))) { #optional property not found
             $SrcUser = $null
         } else {
-            $SrcUser = $JsonParameters.PSobject.Properties["srcUser"].value
+            $SrcUser = $JsonParameters.PSobject.Properties['srcUser'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "srcPassword"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'srcPassword'))) { #optional property not found
             $SrcPassword = $null
         } else {
-            $SrcPassword = $JsonParameters.PSobject.Properties["srcPassword"].value
+            $SrcPassword = $JsonParameters.PSobject.Properties['srcPassword'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "date"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'date'))) { #optional property not found
             $Date = $null
         } else {
-            $Date = $JsonParameters.PSobject.Properties["date"].value
+            $Date = $JsonParameters.PSobject.Properties['date'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "srcAuth"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'srcAuth'))) { #optional property not found
             $SrcAuth = $null
         } else {
-            $SrcAuth = $JsonParameters.PSobject.Properties["srcAuth"].value
+            $SrcAuth = $JsonParameters.PSobject.Properties['srcAuth'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "srcFolder"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'srcFolder'))) { #optional property not found
             $SrcFolder = $null
         } else {
-            $SrcFolder = $JsonParameters.PSobject.Properties["srcFolder"].value
+            $SrcFolder = $JsonParameters.PSobject.Properties['srcFolder'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "fetchall"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'fetchall'))) { #optional property not found
             $Fetchall = $null
         } else {
-            $Fetchall = $JsonParameters.PSobject.Properties["fetchall"].value
+            $Fetchall = $JsonParameters.PSobject.Properties['fetchall'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "keep"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'keep'))) { #optional property not found
             $Keep = $null
         } else {
-            $Keep = $JsonParameters.PSobject.Properties["keep"].value
+            $Keep = $JsonParameters.PSobject.Properties['keep'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "protocol"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'protocol'))) { #optional property not found
             $Protocol = $null
         } else {
-            $Protocol = $JsonParameters.PSobject.Properties["protocol"].value
+            $Protocol = $JsonParameters.PSobject.Properties['protocol'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "useSSL"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'useSSL'))) { #optional property not found
             $UseSSL = $null
         } else {
-            $UseSSL = $JsonParameters.PSobject.Properties["useSSL"].value
+            $UseSSL = $JsonParameters.PSobject.Properties['useSSL'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "sslCertCheck"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'sslCertCheck'))) { #optional property not found
             $SslCertCheck = $null
         } else {
-            $SslCertCheck = $JsonParameters.PSobject.Properties["sslCertCheck"].value
+            $SslCertCheck = $JsonParameters.PSobject.Properties['sslCertCheck'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "sslCertPath"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'sslCertPath'))) { #optional property not found
             $SslCertPath = $null
         } else {
-            $SslCertPath = $JsonParameters.PSobject.Properties["sslCertPath"].value
+            $SslCertPath = $JsonParameters.PSobject.Properties['sslCertPath'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "sslFingerprint"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'sslFingerprint'))) { #optional property not found
             $SslFingerprint = $null
         } else {
-            $SslFingerprint = $JsonParameters.PSobject.Properties["sslFingerprint"].value
+            $SslFingerprint = $JsonParameters.PSobject.Properties['sslFingerprint'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "extraOptions"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'extraOptions'))) { #optional property not found
             $ExtraOptions = $null
         } else {
-            $ExtraOptions = $JsonParameters.PSobject.Properties["extraOptions"].value
+            $ExtraOptions = $JsonParameters.PSobject.Properties['extraOptions'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "mailbox" = ${Mailbox}
-            "active" = ${Active}
-            "srcServer" = ${SrcServer}
-            "srcUser" = ${SrcUser}
-            "srcPassword" = ${SrcPassword}
-            "date" = ${Date}
-            "srcAuth" = ${SrcAuth}
-            "srcFolder" = ${SrcFolder}
-            "fetchall" = ${Fetchall}
-            "keep" = ${Keep}
-            "protocol" = ${Protocol}
-            "useSSL" = ${UseSSL}
-            "sslCertCheck" = ${SslCertCheck}
-            "sslCertPath" = ${SslCertPath}
-            "sslFingerprint" = ${SslFingerprint}
-            "extraOptions" = ${ExtraOptions}
+            'ID' = ${ID}
+            'mailbox' = ${Mailbox}
+            'active' = ${Active}
+            'srcServer' = ${SrcServer}
+            'srcUser' = ${SrcUser}
+            'srcPassword' = ${SrcPassword}
+            'date' = ${Date}
+            'srcAuth' = ${SrcAuth}
+            'srcFolder' = ${SrcFolder}
+            'fetchall' = ${Fetchall}
+            'keep' = ${Keep}
+            'protocol' = ${Protocol}
+            'useSSL' = ${UseSSL}
+            'sslCertCheck' = ${SslCertCheck}
+            'sslCertPath' = ${SslCertPath}
+            'sslFingerprint' = ${SslFingerprint}
+            'extraOptions' = ${ExtraOptions}
         }
 
         return $PSO

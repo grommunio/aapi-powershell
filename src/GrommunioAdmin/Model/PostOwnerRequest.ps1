@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -30,7 +30,7 @@ function Initialize-GroAdminPostOwnerRequest {
         ${Username},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
-        ${Permissions}
+        ${Permissions} = 256
     )
 
     Process {
@@ -43,8 +43,8 @@ function Initialize-GroAdminPostOwnerRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "username" = ${Username}
-            "permissions" = ${Permissions}
+            'username' = ${Username}
+            'permissions' = ${Permissions}
         }
 
 
@@ -82,7 +82,7 @@ function ConvertFrom-GroAdminJsonToPostOwnerRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminPostOwnerRequest
-        $AllProperties = ("username", "permissions")
+        $AllProperties = ('username', 'permissions')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -93,21 +93,21 @@ function ConvertFrom-GroAdminJsonToPostOwnerRequest {
             throw "Error! Empty JSON cannot be serialized due to the required property 'username' missing."
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "username"))) {
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'username'))) {
             throw "Error! JSON cannot be serialized due to the required property 'username' missing."
         } else {
-            $Username = $JsonParameters.PSobject.Properties["username"].value
+            $Username = $JsonParameters.PSobject.Properties['username'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "permissions"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'permissions'))) { #optional property not found
             $Permissions = $null
         } else {
-            $Permissions = $JsonParameters.PSobject.Properties["permissions"].value
+            $Permissions = $JsonParameters.PSobject.Properties['permissions'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "username" = ${Username}
-            "permissions" = ${Permissions}
+            'username' = ${Username}
+            'permissions' = ${Permissions}
         }
 
         return $PSO

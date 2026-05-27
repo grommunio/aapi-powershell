@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -18,7 +18,7 @@ Unique ID of the object
 .PARAMETER Command
 Task command
 .PARAMETER State
-No description available.
+Task state (0=Queued, 1=Loaded, 2=Running, 3=Completed, 4=Error, 5=Cancelled)
 .PARAMETER Created
 Date string with time
 .PARAMETER Updated
@@ -42,7 +42,8 @@ function Initialize-GroAdminTasqTask {
         [String]
         ${Command},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [ValidateSet("0", "1", "2", "3", "4", "5")]
+        [System.Nullable[Int32]]
         ${State},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
         [ValidatePattern("^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$")]
@@ -66,13 +67,13 @@ function Initialize-GroAdminTasqTask {
 
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "command" = ${Command}
-            "state" = ${State}
-            "created" = ${Created}
-            "updated" = ${Updated}
-            "message" = ${Message}
-            "params" = ${Params}
+            'ID' = ${ID}
+            'command' = ${Command}
+            'state' = ${State}
+            'created' = ${Created}
+            'updated' = ${Updated}
+            'message' = ${Message}
+            'params' = ${Params}
         }
 
 
@@ -110,63 +111,63 @@ function ConvertFrom-GroAdminJsonToTasqTask {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminTasqTask
-        $AllProperties = ("ID", "command", "state", "created", "updated", "message", "params")
+        $AllProperties = ('ID', 'command', 'state', 'created', 'updated', 'message', 'params')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "ID"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'ID'))) { #optional property not found
             $ID = $null
         } else {
-            $ID = $JsonParameters.PSobject.Properties["ID"].value
+            $ID = $JsonParameters.PSobject.Properties['ID'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "command"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'command'))) { #optional property not found
             $Command = $null
         } else {
-            $Command = $JsonParameters.PSobject.Properties["command"].value
+            $Command = $JsonParameters.PSobject.Properties['command'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "state"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'state'))) { #optional property not found
             $State = $null
         } else {
-            $State = $JsonParameters.PSobject.Properties["state"].value
+            $State = $JsonParameters.PSobject.Properties['state'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "created"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'created'))) { #optional property not found
             $Created = $null
         } else {
-            $Created = $JsonParameters.PSobject.Properties["created"].value
+            $Created = $JsonParameters.PSobject.Properties['created'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "updated"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'updated'))) { #optional property not found
             $Updated = $null
         } else {
-            $Updated = $JsonParameters.PSobject.Properties["updated"].value
+            $Updated = $JsonParameters.PSobject.Properties['updated'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "message"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'message'))) { #optional property not found
             $Message = $null
         } else {
-            $Message = $JsonParameters.PSobject.Properties["message"].value
+            $Message = $JsonParameters.PSobject.Properties['message'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "params"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'params'))) { #optional property not found
             $Params = $null
         } else {
-            $Params = $JsonParameters.PSobject.Properties["params"].value
+            $Params = $JsonParameters.PSobject.Properties['params'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "command" = ${Command}
-            "state" = ${State}
-            "created" = ${Created}
-            "updated" = ${Updated}
-            "message" = ${Message}
-            "params" = ${Params}
+            'ID' = ${ID}
+            'command' = ${Command}
+            'state' = ${State}
+            'created' = ${Created}
+            'updated' = ${Updated}
+            'message' = ${Message}
+            'params' = ${Params}
         }
 
         return $PSO

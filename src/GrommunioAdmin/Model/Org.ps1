@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -19,6 +19,8 @@ Unique ID of the object
 No description available.
 .PARAMETER Description
 No description available.
+.PARAMETER DomainCount
+Number of domains in this organization
 .PARAMETER Domains
 List of domains belonging to the organization
 .OUTPUTS
@@ -39,6 +41,9 @@ function Initialize-GroAdminOrg {
         [String]
         ${Description},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${DomainCount},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Domains}
     )
@@ -49,10 +54,11 @@ function Initialize-GroAdminOrg {
 
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "name" = ${Name}
-            "description" = ${Description}
-            "domains" = ${Domains}
+            'ID' = ${ID}
+            'name' = ${Name}
+            'description' = ${Description}
+            'domainCount' = ${DomainCount}
+            'domains' = ${Domains}
         }
 
 
@@ -90,42 +96,49 @@ function ConvertFrom-GroAdminJsonToOrg {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminOrg
-        $AllProperties = ("ID", "name", "description", "domains")
+        $AllProperties = ('ID', 'name', 'description', 'domainCount', 'domains')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "ID"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'ID'))) { #optional property not found
             $ID = $null
         } else {
-            $ID = $JsonParameters.PSobject.Properties["ID"].value
+            $ID = $JsonParameters.PSobject.Properties['ID'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "name"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'name'))) { #optional property not found
             $Name = $null
         } else {
-            $Name = $JsonParameters.PSobject.Properties["name"].value
+            $Name = $JsonParameters.PSobject.Properties['name'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "description"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'description'))) { #optional property not found
             $Description = $null
         } else {
-            $Description = $JsonParameters.PSobject.Properties["description"].value
+            $Description = $JsonParameters.PSobject.Properties['description'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "domains"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'domainCount'))) { #optional property not found
+            $DomainCount = $null
+        } else {
+            $DomainCount = $JsonParameters.PSobject.Properties['domainCount'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'domains'))) { #optional property not found
             $Domains = $null
         } else {
-            $Domains = $JsonParameters.PSobject.Properties["domains"].value
+            $Domains = $JsonParameters.PSobject.Properties['domains'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "name" = ${Name}
-            "description" = ${Description}
-            "domains" = ${Domains}
+            'ID' = ${ID}
+            'name' = ${Name}
+            'description' = ${Description}
+            'domainCount' = ${DomainCount}
+            'domains' = ${Domains}
         }
 
         return $PSO

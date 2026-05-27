@@ -1,10 +1,26 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminTasQApi' {
+    Context 'Stop-GroAdminTask' {
+        It 'Test Stop-GroAdminTask' {
+            #$TestResult = Stop-GroAdminTask -ID "TEST_VALUE"
+            #$TestResult | Should -BeOfType TODO
+            #$TestResult.property | Should -Be 0
+        }
+    }
+
+    Context 'Invoke-GroAdminDeleteTask' {
+        It 'Test Invoke-GroAdminDeleteTask' {
+            #$TestResult = Invoke-GroAdminDeleteTask -ID "TEST_VALUE"
+            #$TestResult | Should -BeOfType TODO
+            #$TestResult.property | Should -Be 0
+        }
+    }
+
     Context 'Get-GroAdminTask' {
         It 'Test Get-GroAdminTask' {
             #$TestResult = Get-GroAdminTask -ID "TEST_VALUE"

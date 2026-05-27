@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -39,8 +39,8 @@ function Initialize-GroAdminAdminPermission {
 
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "permission" = ${Permission}
+            'ID' = ${ID}
+            'permission' = ${Permission}
         }
 
 
@@ -78,28 +78,28 @@ function ConvertFrom-GroAdminJsonToAdminPermission {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminAdminPermission
-        $AllProperties = ("ID", "permission")
+        $AllProperties = ('ID', 'permission')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "ID"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'ID'))) { #optional property not found
             $ID = $null
         } else {
-            $ID = $JsonParameters.PSobject.Properties["ID"].value
+            $ID = $JsonParameters.PSobject.Properties['ID'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "permission"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'permission'))) { #optional property not found
             $Permission = $null
         } else {
-            $Permission = $JsonParameters.PSobject.Properties["permission"].value
+            $Permission = $JsonParameters.PSobject.Properties['permission'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "ID" = ${ID}
-            "permission" = ${Permission}
+            'ID' = ${ID}
+            'permission' = ${Permission}
         }
 
         return $PSO

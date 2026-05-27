@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -34,7 +34,7 @@ function Initialize-GroAdminPostStoreAccessUserRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "username" = ${Username}
+            'username' = ${Username}
         }
 
 
@@ -72,21 +72,21 @@ function ConvertFrom-GroAdminJsonToPostStoreAccessUserRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminPostStoreAccessUserRequest
-        $AllProperties = ("username")
+        $AllProperties = ('username')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "username"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'username'))) { #optional property not found
             $Username = $null
         } else {
-            $Username = $JsonParameters.PSobject.Properties["username"].value
+            $Username = $JsonParameters.PSobject.Properties['username'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "username" = ${Username}
+            'username' = ${Username}
         }
 
         return $PSO

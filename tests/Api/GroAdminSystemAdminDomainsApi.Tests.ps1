@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminDomainsApi' {
@@ -15,7 +15,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminDomainsApi' {
 
     Context 'Get-GroAdminAllUsers' {
         It 'Test Get-GroAdminAllUsers' {
-            #$TestResult = Get-GroAdminAllUsers -Level "TEST_VALUE" -Limit "TEST_VALUE" -Offset "TEST_VALUE" -Match "TEST_VALUE" -MatchFields "TEST_VALUE" -Properties "TEST_VALUE"
+            #$TestResult = Get-GroAdminAllUsers -Level "TEST_VALUE" -Limit "TEST_VALUE" -Offset "TEST_VALUE" -Match "TEST_VALUE" -MatchFields "TEST_VALUE" -FilterProp "TEST_VALUE" -MatchProps "TEST_VALUE" -Properties "TEST_VALUE" -Mlist "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -39,7 +39,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminDomainsApi' {
 
     Context 'Invoke-GroAdminPatchDomain' {
         It 'Test Invoke-GroAdminPatchDomain' {
-            #$TestResult = Invoke-GroAdminPatchDomain -DomainID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -PostDomainRequest "TEST_VALUE"
+            #$TestResult = Invoke-GroAdminPatchDomain -DomainID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -DomainWrite "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -47,7 +47,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminDomainsApi' {
 
     Context 'Submit-GroAdminDomain' {
         It 'Test Submit-GroAdminDomain' {
-            #$TestResult = Submit-GroAdminDomain -XCsrfToken "TEST_VALUE" -CreateRole "TEST_VALUE" -PostDomainRequest "TEST_VALUE"
+            #$TestResult = Submit-GroAdminDomain -XCsrfToken "TEST_VALUE" -CreateRole "TEST_VALUE" -DomainWrite "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

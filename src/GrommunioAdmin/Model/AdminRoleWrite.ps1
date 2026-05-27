@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -18,7 +18,7 @@ No description available.
 .PARAMETER Description
 No description available.
 .PARAMETER Permissions
-
+No description available.
 .PARAMETER Users
 List of user IDs to associate with the role
 .OUTPUTS
@@ -49,10 +49,10 @@ function Initialize-GroAdminAdminRoleWrite {
 
 
         $PSO = [PSCustomObject]@{
-            "name" = ${Name}
-            "description" = ${Description}
-            "permissions" = ${Permissions}
-            "users" = ${Users}
+            'name' = ${Name}
+            'description' = ${Description}
+            'permissions' = ${Permissions}
+            'users' = ${Users}
         }
 
 
@@ -90,42 +90,42 @@ function ConvertFrom-GroAdminJsonToAdminRoleWrite {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminAdminRoleWrite
-        $AllProperties = ("name", "description", "permissions", "users")
+        $AllProperties = ('name', 'description', 'permissions', 'users')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "name"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'name'))) { #optional property not found
             $Name = $null
         } else {
-            $Name = $JsonParameters.PSobject.Properties["name"].value
+            $Name = $JsonParameters.PSobject.Properties['name'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "description"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'description'))) { #optional property not found
             $Description = $null
         } else {
-            $Description = $JsonParameters.PSobject.Properties["description"].value
+            $Description = $JsonParameters.PSobject.Properties['description'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "permissions"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'permissions'))) { #optional property not found
             $Permissions = $null
         } else {
-            $Permissions = $JsonParameters.PSobject.Properties["permissions"].value
+            $Permissions = $JsonParameters.PSobject.Properties['permissions'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "users"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'users'))) { #optional property not found
             $Users = $null
         } else {
-            $Users = $JsonParameters.PSobject.Properties["users"].value
+            $Users = $JsonParameters.PSobject.Properties['users'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "name" = ${Name}
-            "description" = ${Description}
-            "permissions" = ${Permissions}
-            "users" = ${Users}
+            'name' = ${Name}
+            'description' = ${Description}
+            'permissions' = ${Permissions}
+            'users' = ${Users}
         }
 
         return $PSO

@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminDBConfApi' {
@@ -71,7 +71,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminSystemAdminDBConfApi' {
 
     Context 'Send-GroAdminConfigFile' {
         It 'Test Send-GroAdminConfigFile' {
-            #$TestResult = Send-GroAdminConfigFile -Service "TEST_VALUE" -File "TEST_VALUE" -XCsrfToken "TEST_VALUE" -PutConfigFileRequest "TEST_VALUE"
+            #$TestResult = Send-GroAdminConfigFile -Service "TEST_VALUE" -File "TEST_VALUE" -XCsrfToken "TEST_VALUE" -GetConfigFile200Response "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

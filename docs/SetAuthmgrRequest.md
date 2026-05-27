@@ -3,7 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AuthBackendSelection** | [**AuthBackendSelection**](AuthBackendSelection.md) |  | [optional] 
+**AuthBackendSelection** | **String** |  | [optional] 
 
 ## Examples
 

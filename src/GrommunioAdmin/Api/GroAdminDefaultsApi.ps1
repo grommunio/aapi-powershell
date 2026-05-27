@@ -1,13 +1,13 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
 .SYNOPSIS
 
-getCreateParams
+Get default create parameters
 
 .DESCRIPTION
 
@@ -22,7 +22,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-DefaultsCreateParamsResponse
+GetCreateParams200Response
 #>
 function Get-GroAdminCreateParams {
     [CmdletBinding()]
@@ -57,6 +57,16 @@ function Get-GroAdminCreateParams {
             $LocalVarQueryParameters['domain'] = $Domain
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -66,7 +76,7 @@ function Get-GroAdminCreateParams {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "DefaultsCreateParamsResponse" `
+                                -ReturnType "GetCreateParams200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -80,7 +90,7 @@ function Get-GroAdminCreateParams {
 <#
 .SYNOPSIS
 
-getDomainDefaultParams
+Get default create parameter overrides for domain
 
 .DESCRIPTION
 
@@ -95,7 +105,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-DefaultsCreateParamsResponse
+GetCreateParams200Response
 #>
 function Get-GroAdminDomainDefaultParams {
     [CmdletBinding()]
@@ -130,6 +140,16 @@ function Get-GroAdminDomainDefaultParams {
         }
         $LocalVarUri = $LocalVarUri.replace('{domainID}', [System.Web.HTTPUtility]::UrlEncode($DomainID))
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -139,7 +159,7 @@ function Get-GroAdminDomainDefaultParams {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "DefaultsCreateParamsResponse" `
+                                -ReturnType "GetCreateParams200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -153,7 +173,7 @@ function Get-GroAdminDomainDefaultParams {
 <#
 .SYNOPSIS
 
-getStoreLangs
+Get list of available user store languages
 
 .DESCRIPTION
 
@@ -165,7 +185,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-DefaultsStoreLangsResponse
+GetStoreLangs200Response
 #>
 function Get-GroAdminStoreLangs {
     [CmdletBinding()]
@@ -202,7 +222,7 @@ function Get-GroAdminStoreLangs {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "DefaultsStoreLangsResponse" `
+                                -ReturnType "GetStoreLangs200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -216,7 +236,7 @@ function Get-GroAdminStoreLangs {
 <#
 .SYNOPSIS
 
-patchCreateParams
+Update create default parameters
 
 .DESCRIPTION
 
@@ -225,8 +245,8 @@ No description available.
 .PARAMETER XCsrfToken
 CSRF Token
 
-.PARAMETER PutCreateParamsRequest
-
+.PARAMETER CreateDefaults
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -244,7 +264,7 @@ function Invoke-GroAdminPatchCreateParams {
         ${XCsrfToken},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [PSCustomObject]
-        ${PutCreateParamsRequest},
+        ${CreateDefaults},
         [Switch]
         $WithHttpInfo
     )
@@ -275,7 +295,17 @@ function Invoke-GroAdminPatchCreateParams {
             $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
         }
 
-        $LocalVarBodyParameter = $PutCreateParamsRequest | ConvertTo-Json -Depth 100
+        $LocalVarBodyParameter = $CreateDefaults | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'PATCH' `
                                 -Uri $LocalVarUri `
@@ -300,7 +330,7 @@ function Invoke-GroAdminPatchCreateParams {
 <#
 .SYNOPSIS
 
-patchDomainDefaultParams
+Update create default parameter overrides for domain
 
 .DESCRIPTION
 
@@ -312,8 +342,8 @@ ID of the domain
 .PARAMETER XCsrfToken
 CSRF Token
 
-.PARAMETER PutCreateParamsRequest
-
+.PARAMETER CreateDefaults
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -334,7 +364,7 @@ function Invoke-GroAdminPatchDomainDefaultParams {
         ${XCsrfToken},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [PSCustomObject]
-        ${PutCreateParamsRequest},
+        ${CreateDefaults},
         [Switch]
         $WithHttpInfo
     )
@@ -369,7 +399,17 @@ function Invoke-GroAdminPatchDomainDefaultParams {
             $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
         }
 
-        $LocalVarBodyParameter = $PutCreateParamsRequest | ConvertTo-Json -Depth 100
+        $LocalVarBodyParameter = $CreateDefaults | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'PATCH' `
                                 -Uri $LocalVarUri `
@@ -394,7 +434,7 @@ function Invoke-GroAdminPatchDomainDefaultParams {
 <#
 .SYNOPSIS
 
-putCreateParams
+Replace create default parameters
 
 .DESCRIPTION
 
@@ -403,8 +443,8 @@ No description available.
 .PARAMETER XCsrfToken
 CSRF Token
 
-.PARAMETER PutCreateParamsRequest
-
+.PARAMETER CreateDefaults
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -422,7 +462,7 @@ function Send-GroAdminCreateParams {
         ${XCsrfToken},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [PSCustomObject]
-        ${PutCreateParamsRequest},
+        ${CreateDefaults},
         [Switch]
         $WithHttpInfo
     )
@@ -453,7 +493,17 @@ function Send-GroAdminCreateParams {
             $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
         }
 
-        $LocalVarBodyParameter = $PutCreateParamsRequest | ConvertTo-Json -Depth 100
+        $LocalVarBodyParameter = $CreateDefaults | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'PUT' `
                                 -Uri $LocalVarUri `
@@ -478,7 +528,7 @@ function Send-GroAdminCreateParams {
 <#
 .SYNOPSIS
 
-putDomainDefaultParams
+Replace create default parameter overrides for domain
 
 .DESCRIPTION
 
@@ -490,8 +540,8 @@ ID of the domain
 .PARAMETER XCsrfToken
 CSRF Token
 
-.PARAMETER PutCreateParamsRequest
-
+.PARAMETER CreateDefaults
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -512,7 +562,7 @@ function Send-GroAdminDomainDefaultParams {
         ${XCsrfToken},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [PSCustomObject]
-        ${PutCreateParamsRequest},
+        ${CreateDefaults},
         [Switch]
         $WithHttpInfo
     )
@@ -547,7 +597,17 @@ function Send-GroAdminDomainDefaultParams {
             $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
         }
 
-        $LocalVarBodyParameter = $PutCreateParamsRequest | ConvertTo-Json -Depth 100
+        $LocalVarBodyParameter = $CreateDefaults | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'PUT' `
                                 -Uri $LocalVarUri `

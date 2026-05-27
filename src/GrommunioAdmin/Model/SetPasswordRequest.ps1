@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -34,7 +34,7 @@ function Initialize-GroAdminSetPasswordRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "new" = ${New}
+            'new' = ${New}
         }
 
 
@@ -72,21 +72,21 @@ function ConvertFrom-GroAdminJsonToSetPasswordRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminSetPasswordRequest
-        $AllProperties = ("new")
+        $AllProperties = ('new')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "new"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'new'))) { #optional property not found
             $New = $null
         } else {
-            $New = $JsonParameters.PSobject.Properties["new"].value
+            $New = $JsonParameters.PSobject.Properties['new'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "new" = ${New}
+            'new' = ${New}
         }
 
         return $PSO

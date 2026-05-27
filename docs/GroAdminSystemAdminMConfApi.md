@@ -1,29 +1,34 @@
-# GrommunioAdmin.GrommunioAdmin/Api.GroAdminSystemAdminMConfApi
+# GrommunioAdmin.GrommunioAdmin\Api.GroAdminSystemAdminMConfApi
 
 All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Invoke-GroAdminDeleteAuthmgr**](GroAdminSystemAdminMConfApi.md#Invoke-GroAdminDeleteAuthmgr) | **DELETE** /system/mconf/authmgr | deleteAuthmgr
-[**Invoke-GroAdminDeleteLDAPConf**](GroAdminSystemAdminMConfApi.md#Invoke-GroAdminDeleteLDAPConf) | **DELETE** /system/mconf/ldap | deleteLDAPConf
-[**Get-GroAdminAuthmgr**](GroAdminSystemAdminMConfApi.md#Get-GroAdminAuthmgr) | **GET** /system/mconf/authmgr | getAuthmgr
-[**Get-GroAdminLDAPConf**](GroAdminSystemAdminMConfApi.md#Get-GroAdminLDAPConf) | **GET** /system/mconf/ldap | getLDAPConf
-[**Set-GroAdminAuthmgr**](GroAdminSystemAdminMConfApi.md#Set-GroAdminAuthmgr) | **PUT** /system/mconf/authmgr | setAuthmgr
-[**Set-GroAdminLDAPConf**](GroAdminSystemAdminMConfApi.md#Set-GroAdminLDAPConf) | **PUT** /system/mconf/ldap | setLDAPConf
+[**Invoke-GroAdminDeleteAuthmgr**](GroAdminSystemAdminMConfApi.md#Invoke-GroAdminDeleteAuthmgr) | **DELETE** /system/mconf/authmgr | Reset authmgr configuration to default
+[**Invoke-GroAdminDeleteLDAPConf**](GroAdminSystemAdminMConfApi.md#Invoke-GroAdminDeleteLDAPConf) | **DELETE** /system/mconf/ldap | Remove LDAP configuration and disable service
+[**Get-GroAdminAuthmgr**](GroAdminSystemAdminMConfApi.md#Get-GroAdminAuthmgr) | **GET** /system/mconf/authmgr | Get the current authmgr configuration
+[**Get-GroAdminLDAPConf**](GroAdminSystemAdminMConfApi.md#Get-GroAdminLDAPConf) | **GET** /system/mconf/ldap | Get the current LDAP configuration
+[**Set-GroAdminAuthmgr**](GroAdminSystemAdminMConfApi.md#Set-GroAdminAuthmgr) | **PUT** /system/mconf/authmgr | Set new authmgr configuration
+[**Set-GroAdminLDAPConf**](GroAdminSystemAdminMConfApi.md#Set-GroAdminLDAPConf) | **PUT** /system/mconf/ldap | Set new LDAP configuration
 
 
-<a name="Invoke-GroAdminDeleteAuthmgr"></a>
+<a id="Invoke-GroAdminDeleteAuthmgr"></a>
 # **Invoke-GroAdminDeleteAuthmgr**
 > void Invoke-GroAdminDeleteAuthmgr<br>
-
-deleteAuthmgr
 
 Reset authmgr configuration to default
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
 
-# deleteAuthmgr
+
+# Reset authmgr configuration to default
 try {
     $Result = Invoke-GroAdminDeleteAuthmgr
 } catch {
@@ -41,7 +46,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -50,20 +55,25 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminDeleteLDAPConf"></a>
+<a id="Invoke-GroAdminDeleteLDAPConf"></a>
 # **Invoke-GroAdminDeleteLDAPConf**
 > void Invoke-GroAdminDeleteLDAPConf<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
-
-deleteLDAPConf
 
 Remove LDAP configuration and disable service
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 
-# deleteLDAPConf
+# Remove LDAP configuration and disable service
 try {
     $Result = Invoke-GroAdminDeleteLDAPConf -XCsrfToken $XCsrfToken
 } catch {
@@ -84,7 +94,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -93,18 +103,23 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminAuthmgr"></a>
+<a id="Get-GroAdminAuthmgr"></a>
 # **Get-GroAdminAuthmgr**
-> SystemMconfAuthmgrResponse Get-GroAdminAuthmgr<br>
-
-getAuthmgr
+> GetAuthmgr200Response Get-GroAdminAuthmgr<br>
 
 Get the current authmgr configuration
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
 
-# getAuthmgr
+
+# Get the current authmgr configuration
 try {
     $Result = Get-GroAdminAuthmgr
 } catch {
@@ -118,11 +133,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SystemMconfAuthmgrResponse**](SystemMconfAuthmgrResponse.md) (PSCustomObject)
+[**GetAuthmgr200Response**](GetAuthmgr200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -131,18 +146,23 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminLDAPConf"></a>
+<a id="Get-GroAdminLDAPConf"></a>
 # **Get-GroAdminLDAPConf**
-> SystemMconfLdapResponse Get-GroAdminLDAPConf<br>
-
-getLDAPConf
+> GetLDAPConf200Response Get-GroAdminLDAPConf<br>
 
 Get the current LDAP configuration
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
 
-# getLDAPConf
+
+# Get the current LDAP configuration
 try {
     $Result = Get-GroAdminLDAPConf
 } catch {
@@ -156,11 +176,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SystemMconfLdapResponse**](SystemMconfLdapResponse.md) (PSCustomObject)
+[**GetLDAPConf200Response**](GetLDAPConf200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -169,23 +189,27 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Set-GroAdminAuthmgr"></a>
+<a id="Set-GroAdminAuthmgr"></a>
 # **Set-GroAdminAuthmgr**
 > void Set-GroAdminAuthmgr<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SetAuthmgrRequest] <PSCustomObject><br>
 
-setAuthmgr
-
 Set new authmgr configuration
 
 ### Example
 ```powershell
-$XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
-$AuthBackendSelection = Initialize-AuthBackendSelection 
-$SetAuthmgrRequest = Initialize-SetAuthmgrRequest -AuthBackendSelection $AuthBackendSelection # SetAuthmgrRequest |  (optional)
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
 
-# setAuthmgr
+$XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
+$SetAuthmgrRequest = Initialize-SetAuthmgrRequest -AuthBackendSelection "always_mysql" # SetAuthmgrRequest |  (optional)
+
+# Set new authmgr configuration
 try {
     $Result = Set-GroAdminAuthmgr -XCsrfToken $XCsrfToken -SetAuthmgrRequest $SetAuthmgrRequest
 } catch {
@@ -207,7 +231,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -216,28 +240,34 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Set-GroAdminLDAPConf"></a>
+<a id="Set-GroAdminLDAPConf"></a>
 # **Set-GroAdminLDAPConf**
 > void Set-GroAdminLDAPConf<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Force] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SetOrgLDAPConfRequest] <PSCustomObject><br>
-
-setLDAPConf
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LdapConfig] <PSCustomObject><br>
 
 Set new LDAP configuration
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $Force = $true # Boolean | Update configuration even if validation failed (optional)
 $LdapConfigConnection = Initialize-LdapConfigConnection -Server "MyServer" -BindUser "MyBindUser" -BindPass "MyBindPass" -Starttls $false
-$LdapConfigUsers = Initialize-LdapConfigUsers -Username "MyUsername" -DisplayName "MyDisplayName" -Filters "MyFilters" -VarFilter "(&(objectclass=person)(mailPrimaryAddress=*))" -Templates "MyTemplates" -Attributes @{ key_example = "MyInner" } -DefaultQuota 0 -SearchAttributes "MySearchAttributes" -Aliases "MyAliases"
-$SetOrgLDAPConfRequest = Initialize-SetOrgLDAPConfRequest -Disabled $false -Connection $LdapConfigConnection -BaseDn "MyBaseDn" -ObjectID "MyObjectID" -Users $LdapConfigUsers # SetOrgLDAPConfRequest |  (optional)
+$LdapConfigUsers = Initialize-LdapConfigUsers -Username "MyUsername" -DisplayName "MyDisplayName" -Filters "objectclass=person" -VarFilter "(&(objectclass=person)(mailPrimaryAddress=*))" -Templates "MyTemplates" -Attributes @{ key_example = "MyInner" } -DefaultQuota 0 -SearchAttributes "MySearchAttributes" -Aliases "MyAliases"
+$LdapConfigGroups = Initialize-LdapConfigGroups -GroupMemberAttr "MyGroupMemberAttr" -Groupaddr "MyGroupaddr" -Groupfilter "MyGroupfilter" -Groupname "MyGroupname"
+$LdapConfig = Initialize-LdapConfig -Disabled $false -Connection $LdapConfigConnection -BaseDn "MyBaseDn" -ObjectID "MyObjectID" -Users $LdapConfigUsers -Groups $LdapConfigGroups # LdapConfig |  (optional)
 
-# setLDAPConf
+# Set new LDAP configuration
 try {
-    $Result = Set-GroAdminLDAPConf -XCsrfToken $XCsrfToken -Force $Force -SetOrgLDAPConfRequest $SetOrgLDAPConfRequest
+    $Result = Set-GroAdminLDAPConf -XCsrfToken $XCsrfToken -Force $Force -LdapConfig $LdapConfig
 } catch {
     Write-Host ("Exception occurred when calling Set-GroAdminLDAPConf: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -250,7 +280,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **XCsrfToken** | **String**| CSRF Token | [optional] 
  **Force** | **Boolean**| Update configuration even if validation failed | [optional] 
- **SetOrgLDAPConfRequest** | [**SetOrgLDAPConfRequest**](SetOrgLDAPConfRequest.md)|  | [optional] 
+ **LdapConfig** | [**LdapConfig**](LdapConfig.md)|  | [optional] 
 
 ### Return type
 
@@ -258,7 +288,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 

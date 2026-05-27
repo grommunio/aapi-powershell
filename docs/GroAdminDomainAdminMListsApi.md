@@ -1,34 +1,39 @@
-# GrommunioAdmin.GrommunioAdmin/Api.GroAdminDomainAdminMListsApi
+# GrommunioAdmin.GrommunioAdmin\Api.GroAdminDomainAdminMListsApi
 
 All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Invoke-GroAdminDeleteMlist**](GroAdminDomainAdminMListsApi.md#Invoke-GroAdminDeleteMlist) | **DELETE** /domains/{domainID}/mlists/{ID} | deleteMlist
-[**Get-GroAdminMlist**](GroAdminDomainAdminMListsApi.md#Get-GroAdminMlist) | **GET** /domains/{domainID}/mlists/{ID} | getMlist
-[**Get-GroAdminMlists**](GroAdminDomainAdminMListsApi.md#Get-GroAdminMlists) | **GET** /domains/{domainID}/mlists | getMlists
-[**Invoke-GroAdminPatchMlist**](GroAdminDomainAdminMListsApi.md#Invoke-GroAdminPatchMlist) | **PATCH** /domains/{domainID}/mlists/{ID} | patchMlist
-[**Submit-GroAdminMlists**](GroAdminDomainAdminMListsApi.md#Submit-GroAdminMlists) | **POST** /domains/{domainID}/mlists | postMlists
+[**Invoke-GroAdminDeleteMlist**](GroAdminDomainAdminMListsApi.md#Invoke-GroAdminDeleteMlist) | **DELETE** /domains/{domainID}/mlists/{ID} | Delete mailing list
+[**Get-GroAdminMlist**](GroAdminDomainAdminMListsApi.md#Get-GroAdminMlist) | **GET** /domains/{domainID}/mlists/{ID} | Get information about a mailing list
+[**Get-GroAdminMlists**](GroAdminDomainAdminMListsApi.md#Get-GroAdminMlists) | **GET** /domains/{domainID}/mlists | Get list of mailing lists
+[**Invoke-GroAdminPatchMlist**](GroAdminDomainAdminMListsApi.md#Invoke-GroAdminPatchMlist) | **PATCH** /domains/{domainID}/mlists/{ID} | Update mailing list
+[**Submit-GroAdminMlists**](GroAdminDomainAdminMListsApi.md#Submit-GroAdminMlists) | **POST** /domains/{domainID}/mlists | Create new mailing list
 
 
-<a name="Invoke-GroAdminDeleteMlist"></a>
+<a id="Invoke-GroAdminDeleteMlist"></a>
 # **Invoke-GroAdminDeleteMlist**
 > void Invoke-GroAdminDeleteMlist<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 
-deleteMlist
-
 Delete mailing list
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $ID = 56 # Int32 | ID of the object
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 
-# deleteMlist
+# Delete mailing list
 try {
     $Result = Invoke-GroAdminDeleteMlist -DomainID $DomainID -ID $ID -XCsrfToken $XCsrfToken
 } catch {
@@ -51,7 +56,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -60,24 +65,29 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminMlist"></a>
+<a id="Get-GroAdminMlist"></a>
 # **Get-GroAdminMlist**
 > MlistRead Get-GroAdminMlist<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Level] <System.Nullable[Int32]><br>
 
-getMlist
-
 Get information about a mailing list
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $ID = 56 # Int32 | ID of the object
 $Level = 56 # Int32 | Set detail level of return value. Usually ranges from 0 to 2. (optional)
 
-# getMlist
+# Get information about a mailing list
 try {
     $Result = Get-GroAdminMlist -DomainID $DomainID -ID $ID -Level $Level
 } catch {
@@ -100,7 +110,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -109,9 +119,9 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminMlists"></a>
+<a id="Get-GroAdminMlists"></a>
 # **Get-GroAdminMlists**
-> DomainsMlistsResponse Get-GroAdminMlists<br>
+> GetMlists200Response Get-GroAdminMlists<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Level] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Limit] <System.Nullable[Int32]><br>
@@ -124,12 +134,17 @@ No authorization required
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ListType] <System.Nullable[Int32][]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ListPrivilege] <System.Nullable[Int32][]><br>
 
-getMlists
-
 Get list of mailing lists
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $Level = 56 # Int32 | Set detail level of return value. Usually ranges from 0 to 2. (optional)
 $Limit = 56 # Int32 | Maximum number of results to return (optional) (default to 50)
@@ -142,7 +157,7 @@ $Listname = "MyListname" # String | Filter by list name (optional)
 $ListType = 0 # Int32[] | Filter by one or more list types (optional)
 $ListPrivilege = 0 # Int32[] | Filter by one or more list privilege types (optional)
 
-# getMlists
+# Get list of mailing lists
 try {
     $Result = Get-GroAdminMlists -DomainID $DomainID -Level $Level -Limit $Limit -Offset $Offset -Match $Match -MatchFields $MatchFields -Sort $Sort -ID $ID -Listname $Listname -ListType $ListType -ListPrivilege $ListPrivilege
 } catch {
@@ -169,11 +184,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainsMlistsResponse**](DomainsMlistsResponse.md) (PSCustomObject)
+[**GetMlists200Response**](GetMlists200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -182,30 +197,33 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminPatchMlist"></a>
+<a id="Invoke-GroAdminPatchMlist"></a>
 # **Invoke-GroAdminPatchMlist**
 > MlistRead Invoke-GroAdminPatchMlist<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PostMlistsRequest] <PSCustomObject><br>
-
-patchMlist
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-MlistWrite] <PSCustomObject><br>
 
 Update mailing list
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $ID = 56 # Int32 | ID of the object
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
-$ListType1 = Initialize-ListType1 
-$ListPrivilege = Initialize-ListPrivilege 
-$PostMlistsRequest = Initialize-PostMlistsRequest -Listname "MyListname" -ListType $ListType1 -ListPrivilege $ListPrivilege -Associations "MyAssociations" -Specifieds "MySpecifieds" -Class 0 # PostMlistsRequest |  (optional)
+$MlistWrite = Initialize-MlistWrite -Listname "MyListname" -ListType "0" -ListPrivilege "0" -Associations "MyAssociations" -Specifieds "MySpecifieds" -DisplayName "MyDisplayName" -Hidden 0 # MlistWrite |  (optional)
 
-# patchMlist
+# Update mailing list
 try {
-    $Result = Invoke-GroAdminPatchMlist -DomainID $DomainID -ID $ID -XCsrfToken $XCsrfToken -PostMlistsRequest $PostMlistsRequest
+    $Result = Invoke-GroAdminPatchMlist -DomainID $DomainID -ID $ID -XCsrfToken $XCsrfToken -MlistWrite $MlistWrite
 } catch {
     Write-Host ("Exception occurred when calling Invoke-GroAdminPatchMlist: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -219,7 +237,7 @@ Name | Type | Description  | Notes
  **DomainID** | **Int32**| ID of the domain | 
  **ID** | **Int32**| ID of the object | 
  **XCsrfToken** | **String**| CSRF Token | [optional] 
- **PostMlistsRequest** | [**PostMlistsRequest**](PostMlistsRequest.md)|  | [optional] 
+ **MlistWrite** | [**MlistWrite**](MlistWrite.md)|  | [optional] 
 
 ### Return type
 
@@ -227,7 +245,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -236,28 +254,31 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-GroAdminMlists"></a>
+<a id="Submit-GroAdminMlists"></a>
 # **Submit-GroAdminMlists**
 > MlistRead Submit-GroAdminMlists<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PostMlistsRequest] <PSCustomObject><br>
-
-postMlists
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-MlistWrite] <PSCustomObject><br>
 
 Create new mailing list
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
-$ListType1 = Initialize-ListType1 
-$ListPrivilege = Initialize-ListPrivilege 
-$PostMlistsRequest = Initialize-PostMlistsRequest -Listname "MyListname" -ListType $ListType1 -ListPrivilege $ListPrivilege -Associations "MyAssociations" -Specifieds "MySpecifieds" -Class 0 # PostMlistsRequest |  (optional)
+$MlistWrite = Initialize-MlistWrite -Listname "MyListname" -ListType "0" -ListPrivilege "0" -Associations "MyAssociations" -Specifieds "MySpecifieds" -DisplayName "MyDisplayName" -Hidden 0 # MlistWrite |  (optional)
 
-# postMlists
+# Create new mailing list
 try {
-    $Result = Submit-GroAdminMlists -DomainID $DomainID -XCsrfToken $XCsrfToken -PostMlistsRequest $PostMlistsRequest
+    $Result = Submit-GroAdminMlists -DomainID $DomainID -XCsrfToken $XCsrfToken -MlistWrite $MlistWrite
 } catch {
     Write-Host ("Exception occurred when calling Submit-GroAdminMlists: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -270,7 +291,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **DomainID** | **Int32**| ID of the domain | 
  **XCsrfToken** | **String**| CSRF Token | [optional] 
- **PostMlistsRequest** | [**PostMlistsRequest**](PostMlistsRequest.md)|  | [optional] 
+ **MlistWrite** | [**MlistWrite**](MlistWrite.md)|  | [optional] 
 
 ### Return type
 
@@ -278,7 +299,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 

@@ -4,8 +4,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Displayname** | **String** | Name of the folder | [optional] 
-**Container** | [**Container**](Container.md) |  | [optional] 
+**Container** | **String** | Container class | [optional] 
 **Comment** | **String** |  | [optional] 
+**SyncToMobile** | **Boolean** |  | [optional] 
 
 ## Examples
 
@@ -13,7 +14,8 @@ Name | Type | Description | Notes
 ```powershell
 $PatchFolderRequest = Initialize-GrommunioAdminPatchFolderRequest  -Displayname null `
  -Container null `
- -Comment null
+ -Comment null `
+ -SyncToMobile null
 ```
 
 - Convert the resource to JSON

@@ -1,43 +1,48 @@
-# GrommunioAdmin.GrommunioAdmin/Api.GroAdminDomainAdminFoldersApi
+# GrommunioAdmin.GrommunioAdmin\Api.GroAdminDomainAdminFoldersApi
 
 All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Invoke-GroAdminDeleteFolder**](GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminDeleteFolder) | **DELETE** /domains/{domainID}/folders/{folderID} | deleteFolder
-[**Invoke-GroAdminDeleteMember**](GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminDeleteMember) | **DELETE** /domains/{domainID}/folders/{folderID}/owners/{memberID} | deleteMember
-[**Get-GroAdminFolder**](GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolder) | **GET** /domains/{domainID}/folders/{folderID} | getFolder
-[**Get-GroAdminFolderTree**](GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolderTree) | **GET** /domains/{domainID}/folders/tree | getFolderTree
-[**Get-GroAdminFolders**](GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolders) | **GET** /domains/{domainID}/folders | getFolders
-[**Get-GroAdminOwners**](GroAdminDomainAdminFoldersApi.md#Get-GroAdminOwners) | **GET** /domains/{domainID}/folders/{folderID}/owners | getOwners
-[**Invoke-GroAdminPatchFolder**](GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminPatchFolder) | **PATCH** /domains/{domainID}/folders/{folderID} | patchFolder
-[**Submit-GroAdminFolders**](GroAdminDomainAdminFoldersApi.md#Submit-GroAdminFolders) | **POST** /domains/{domainID}/folders | postFolders
-[**Submit-GroAdminOwner**](GroAdminDomainAdminFoldersApi.md#Submit-GroAdminOwner) | **POST** /domains/{domainID}/folders/{folderID}/owners | postOwner
-[**Set-GroAdminMember**](GroAdminDomainAdminFoldersApi.md#Set-GroAdminMember) | **PUT** /domains/{domainID}/folders/{folderID}/owners/{memberID} | setMember
+[**Invoke-GroAdminDeleteFolder**](GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminDeleteFolder) | **DELETE** /domains/{domainID}/folders/{folderID} | Delete public folder
+[**Invoke-GroAdminDeleteMember**](GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminDeleteMember) | **DELETE** /domains/{domainID}/folders/{folderID}/owners/{memberID} | Remove a user from the owner list
+[**Get-GroAdminFolder**](GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolder) | **GET** /domains/{domainID}/folders/{folderID} | Get public folder
+[**Get-GroAdminFolderTree**](GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolderTree) | **GET** /domains/{domainID}/folders/tree | Get hierarchical view of folders
+[**Get-GroAdminFolders**](GroAdminDomainAdminFoldersApi.md#Get-GroAdminFolders) | **GET** /domains/{domainID}/folders | Get list of public folders
+[**Get-GroAdminOwners**](GroAdminDomainAdminFoldersApi.md#Get-GroAdminOwners) | **GET** /domains/{domainID}/folders/{folderID}/owners | Get list of folder owners
+[**Invoke-GroAdminPatchFolder**](GroAdminDomainAdminFoldersApi.md#Invoke-GroAdminPatchFolder) | **PATCH** /domains/{domainID}/folders/{folderID} | Update public folder
+[**Submit-GroAdminFolders**](GroAdminDomainAdminFoldersApi.md#Submit-GroAdminFolders) | **POST** /domains/{domainID}/folders | Create a new public folder
+[**Submit-GroAdminOwner**](GroAdminDomainAdminFoldersApi.md#Submit-GroAdminOwner) | **POST** /domains/{domainID}/folders/{folderID}/owners | Add a user to the owner list
+[**Set-GroAdminMember**](GroAdminDomainAdminFoldersApi.md#Set-GroAdminMember) | **PUT** /domains/{domainID}/folders/{folderID}/owners/{memberID} | Set folder member permissions
 
 
-<a name="Invoke-GroAdminDeleteFolder"></a>
+<a id="Invoke-GroAdminDeleteFolder"></a>
 # **Invoke-GroAdminDeleteFolder**
-> DomainsFoldersResponse1 Invoke-GroAdminDeleteFolder<br>
+> ResetPasswd404Response Invoke-GroAdminDeleteFolder<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FolderID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Clear] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Timeout] <System.Nullable[Double]><br>
-
-deleteFolder
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Timeout] <System.Nullable[Decimal]><br>
 
 Delete public folder
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $FolderID = 56 # Int32 | ID of the folder
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 $Clear = $true # Boolean | Clear folder before deleting it (optional) (default to $false)
-$Timeout = 1.2 # Double | Time in seconds to wait for completion (optional) (default to 1)
+$Timeout = 8.14 # Decimal | Time in seconds to wait for completion (optional) (default to 1.0)
 
-# deleteFolder
+# Delete public folder
 try {
     $Result = Invoke-GroAdminDeleteFolder -DomainID $DomainID -FolderID $FolderID -XCsrfToken $XCsrfToken -Clear $Clear -Timeout $Timeout
 } catch {
@@ -54,15 +59,15 @@ Name | Type | Description  | Notes
  **FolderID** | **Int32**| ID of the folder | 
  **XCsrfToken** | **String**| CSRF Token | [optional] 
  **Clear** | **Boolean**| Clear folder before deleting it | [optional] [default to $false]
- **Timeout** | **Double**| Time in seconds to wait for completion | [optional] [default to 1]
+ **Timeout** | **Decimal**| Time in seconds to wait for completion | [optional] [default to 1.0]
 
 ### Return type
 
-[**DomainsFoldersResponse1**](DomainsFoldersResponse1.md) (PSCustomObject)
+[**ResetPasswd404Response**](ResetPasswd404Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -71,7 +76,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminDeleteMember"></a>
+<a id="Invoke-GroAdminDeleteMember"></a>
 # **Invoke-GroAdminDeleteMember**
 > void Invoke-GroAdminDeleteMember<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
@@ -79,18 +84,23 @@ No authorization required
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-MemberID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 
-deleteMember
-
 Remove a user from the owner list
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $FolderID = 56 # Int32 | ID of the folder
 $MemberID = 56 # Int32 | Member ID of the owner list
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 
-# deleteMember
+# Remove a user from the owner list
 try {
     $Result = Invoke-GroAdminDeleteMember -DomainID $DomainID -FolderID $FolderID -MemberID $MemberID -XCsrfToken $XCsrfToken
 } catch {
@@ -114,7 +124,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -123,22 +133,27 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminFolder"></a>
+<a id="Get-GroAdminFolder"></a>
 # **Get-GroAdminFolder**
 > PublicFolder Get-GroAdminFolder<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FolderID] <Int32><br>
 
-getFolder
-
 Get public folder
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $FolderID = 56 # Int32 | ID of the folder
 
-# getFolder
+# Get public folder
 try {
     $Result = Get-GroAdminFolder -DomainID $DomainID -FolderID $FolderID
 } catch {
@@ -160,7 +175,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -169,22 +184,27 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminFolderTree"></a>
+<a id="Get-GroAdminFolderTree"></a>
 # **Get-GroAdminFolderTree**
 > PublicFolderRef Get-GroAdminFolderTree<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FolderID] <System.Nullable[Int32]><br>
 
-getFolderTree
-
 Get hierarchical view of folders
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $FolderID = 56 # Int32 | ID of the root folder (optional)
 
-# getFolderTree
+# Get hierarchical view of folders
 try {
     $Result = Get-GroAdminFolderTree -DomainID $DomainID -FolderID $FolderID
 } catch {
@@ -206,7 +226,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -215,28 +235,33 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminFolders"></a>
+<a id="Get-GroAdminFolders"></a>
 # **Get-GroAdminFolders**
-> DomainsFoldersResponse Get-GroAdminFolders<br>
+> GetFolders200Response Get-GroAdminFolders<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Offset] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Limit] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Match] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ParentID] <System.Nullable[Int32]><br>
 
-getFolders
-
 Get list of public folders
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $Offset = 56 # Int32 | Index of the first element to return (optional) (default to 0)
 $Limit = 56 # Int32 | Maximum number of results to return (optional) (default to 50)
 $Match = "MyMatch" # String | Match by substring (optional)
 $ParentID = 56 # Int32 | ID of the parent folder (optional)
 
-# getFolders
+# Get list of public folders
 try {
     $Result = Get-GroAdminFolders -DomainID $DomainID -Offset $Offset -Limit $Limit -Match $Match -ParentID $ParentID
 } catch {
@@ -257,11 +282,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainsFoldersResponse**](DomainsFoldersResponse.md) (PSCustomObject)
+[**GetFolders200Response**](GetFolders200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -270,22 +295,27 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-GroAdminOwners"></a>
+<a id="Get-GroAdminOwners"></a>
 # **Get-GroAdminOwners**
-> DomainsFoldersOwnersResponse Get-GroAdminOwners<br>
+> GetStoreAccessUsers200Response Get-GroAdminOwners<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FolderID] <Int32><br>
-
-getOwners
 
 Get list of folder owners
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $FolderID = 56 # Int32 | ID of the folder
 
-# getOwners
+# Get list of folder owners
 try {
     $Result = Get-GroAdminOwners -DomainID $DomainID -FolderID $FolderID
 } catch {
@@ -303,11 +333,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainsFoldersOwnersResponse**](DomainsFoldersOwnersResponse.md) (PSCustomObject)
+[**GetStoreAccessUsers200Response**](GetStoreAccessUsers200Response.md) (PSCustomObject)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -316,7 +346,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-GroAdminPatchFolder"></a>
+<a id="Invoke-GroAdminPatchFolder"></a>
 # **Invoke-GroAdminPatchFolder**
 > void Invoke-GroAdminPatchFolder<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
@@ -324,19 +354,23 @@ No authorization required
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PatchFolderRequest] <PSCustomObject><br>
 
-patchFolder
-
 Update public folder
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $FolderID = 56 # Int32 | ID of the folder
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
-$Container = Initialize-Container 
-$PatchFolderRequest = Initialize-PatchFolderRequest -Displayname "MyDisplayname" -Container $Container -Comment "MyComment" # PatchFolderRequest |  (optional)
+$PatchFolderRequest = Initialize-PatchFolderRequest -Displayname "MyDisplayname" -Container "IPF.Note" -Comment "MyComment" -SyncToMobile $false # PatchFolderRequest |  (optional)
 
-# patchFolder
+# Update public folder
 try {
     $Result = Invoke-GroAdminPatchFolder -DomainID $DomainID -FolderID $FolderID -XCsrfToken $XCsrfToken -PatchFolderRequest $PatchFolderRequest
 } catch {
@@ -360,7 +394,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -369,25 +403,29 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-GroAdminFolders"></a>
+<a id="Submit-GroAdminFolders"></a>
 # **Submit-GroAdminFolders**
 > PublicFolder Submit-GroAdminFolders<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PostFoldersRequest] <PSCustomObject><br>
 
-postFolders
-
 Create a new public folder
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
-$Container = Initialize-Container 
-$PostFoldersRequest = Initialize-PostFoldersRequest -Displayname "MyDisplayname" -Container $Container -Comment "MyComment" -ParentID "MyParentID" # PostFoldersRequest |  (optional)
+$PostFoldersRequest = Initialize-PostFoldersRequest -Displayname "MyDisplayname" -Container "IPF.Note" -Comment "MyComment" -ParentID "MyParentID" -SyncToMobile $false # PostFoldersRequest |  (optional)
 
-# postFolders
+# Create a new public folder
 try {
     $Result = Submit-GroAdminFolders -DomainID $DomainID -XCsrfToken $XCsrfToken -PostFoldersRequest $PostFoldersRequest
 } catch {
@@ -410,7 +448,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -419,7 +457,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-GroAdminOwner"></a>
+<a id="Submit-GroAdminOwner"></a>
 # **Submit-GroAdminOwner**
 > void Submit-GroAdminOwner<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
@@ -427,18 +465,23 @@ No authorization required
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PostOwnerRequest] <PSCustomObject><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 
-postOwner
-
 Add a user to the owner list
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $FolderID = 56 # Int32 | ID of the folder
 $PostOwnerRequest = Initialize-PostOwnerRequest -Username "MyUsername" -Permissions 0 # PostOwnerRequest | 
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 
-# postOwner
+# Add a user to the owner list
 try {
     $Result = Submit-GroAdminOwner -DomainID $DomainID -FolderID $FolderID -PostOwnerRequest $PostOwnerRequest -XCsrfToken $XCsrfToken
 } catch {
@@ -462,7 +505,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 
@@ -471,7 +514,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Set-GroAdminMember"></a>
+<a id="Set-GroAdminMember"></a>
 # **Set-GroAdminMember**
 > void Set-GroAdminMember<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DomainID] <Int32><br>
@@ -480,19 +523,24 @@ No authorization required
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SetMemberRequest] <PSCustomObject><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-XCsrfToken] <String><br>
 
-setMember
-
 Set folder member permissions
 
 ### Example
 ```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: JWTCookie
+$Configuration.ApiKey.grommunioAuthJwt = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.grommunioAuthJwt = "Bearer"
+
 $DomainID = 56 # Int32 | ID of the domain
 $FolderID = 56 # Int32 | ID of the folder
 $MemberID = 56 # Int32 | Member ID of the owner list
 $SetMemberRequest = Initialize-SetMemberRequest -Permissions 0 # SetMemberRequest | 
 $XCsrfToken = "MyXCsrfToken" # String | CSRF Token (optional)
 
-# setMember
+# Set folder member permissions
 try {
     $Result = Set-GroAdminMember -DomainID $DomainID -FolderID $FolderID -MemberID $MemberID -SetMemberRequest $SetMemberRequest -XCsrfToken $XCsrfToken
 } catch {
@@ -517,7 +565,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JWTCookie](../README.md#JWTCookie)
 
 ### HTTP request headers
 

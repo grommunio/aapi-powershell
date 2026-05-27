@@ -1,13 +1,13 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
 .SYNOPSIS
 
-deleteRole
+Delete role
 
 .DESCRIPTION
 
@@ -67,6 +67,16 @@ function Invoke-GroAdminDeleteRole {
             $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'DELETE' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -90,7 +100,7 @@ function Invoke-GroAdminDeleteRole {
 <#
 .SYNOPSIS
 
-getPermissions
+Get list of available permissions
 
 .DESCRIPTION
 
@@ -102,7 +112,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-SystemRolesPermissionsResponse
+GetPermissions200Response
 #>
 function Get-GroAdminPermissions {
     [CmdletBinding()]
@@ -130,6 +140,16 @@ function Get-GroAdminPermissions {
 
         $LocalVarUri = '/system/roles/permissions'
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -139,7 +159,7 @@ function Get-GroAdminPermissions {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "SystemRolesPermissionsResponse" `
+                                -ReturnType "GetPermissions200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -153,7 +173,7 @@ function Get-GroAdminPermissions {
 <#
 .SYNOPSIS
 
-getRole
+Get role
 
 .DESCRIPTION
 
@@ -213,6 +233,16 @@ function Get-GroAdminRole {
             $LocalVarQueryParameters['level'] = $Level
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -236,7 +266,7 @@ function Get-GroAdminRole {
 <#
 .SYNOPSIS
 
-getRoles
+Get list of available roles
 
 .DESCRIPTION
 
@@ -269,7 +299,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-SystemRolesResponse
+GetRoles200Response
 #>
 function Get-GroAdminRoles {
     [CmdletBinding()]
@@ -346,6 +376,16 @@ function Get-GroAdminRoles {
             $LocalVarQueryParameters['description'] = $Description
         }
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'GET' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -355,7 +395,7 @@ function Get-GroAdminRoles {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "SystemRolesResponse" `
+                                -ReturnType "GetRoles200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -369,7 +409,7 @@ function Get-GroAdminRoles {
 <#
 .SYNOPSIS
 
-patchRole
+Update a role
 
 .DESCRIPTION
 
@@ -381,8 +421,8 @@ ID of the object
 .PARAMETER XCsrfToken
 CSRF Token
 
-.PARAMETER PostRoleRequest
-
+.PARAMETER AdminRoleWrite
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -403,7 +443,7 @@ function Invoke-GroAdminPatchRole {
         ${XCsrfToken},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [PSCustomObject]
-        ${PostRoleRequest},
+        ${AdminRoleWrite},
         [Switch]
         $WithHttpInfo
     )
@@ -438,7 +478,17 @@ function Invoke-GroAdminPatchRole {
             $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
         }
 
-        $LocalVarBodyParameter = $PostRoleRequest | ConvertTo-Json -Depth 100
+        $LocalVarBodyParameter = $AdminRoleWrite | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'PATCH' `
                                 -Uri $LocalVarUri `
@@ -463,7 +513,7 @@ function Invoke-GroAdminPatchRole {
 <#
 .SYNOPSIS
 
-patchUserRoles
+Update user roles
 
 .DESCRIPTION
 
@@ -479,7 +529,7 @@ ID of the user
 CSRF Token
 
 .PARAMETER PatchUserRolesRequest
-
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -487,7 +537,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-DomainsUsersRolesResponse
+PatchUserRoles200Response
 #>
 function Invoke-GroAdminPatchUserRoles {
     [CmdletBinding()]
@@ -544,6 +594,16 @@ function Invoke-GroAdminPatchUserRoles {
 
         $LocalVarBodyParameter = $PatchUserRolesRequest | ConvertTo-Json -Depth 100
 
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'PATCH' `
                                 -Uri $LocalVarUri `
                                 -Accepts $LocalVarAccepts `
@@ -553,7 +613,7 @@ function Invoke-GroAdminPatchUserRoles {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "DomainsUsersRolesResponse" `
+                                -ReturnType "PatchUserRoles200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -567,7 +627,7 @@ function Invoke-GroAdminPatchUserRoles {
 <#
 .SYNOPSIS
 
-postRole
+Create a new role
 
 .DESCRIPTION
 
@@ -576,8 +636,8 @@ No description available.
 .PARAMETER XCsrfToken
 CSRF Token
 
-.PARAMETER PostRoleRequest
-
+.PARAMETER AdminRoleWrite
+No description available.
 
 .PARAMETER WithHttpInfo
 
@@ -595,7 +655,7 @@ function Submit-GroAdminRole {
         ${XCsrfToken},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [PSCustomObject]
-        ${PostRoleRequest},
+        ${AdminRoleWrite},
         [Switch]
         $WithHttpInfo
     )
@@ -626,7 +686,17 @@ function Submit-GroAdminRole {
             $LocalVarHeaderParameters['X-Csrf-Token'] = $XCsrfToken
         }
 
-        $LocalVarBodyParameter = $PostRoleRequest | ConvertTo-Json -Depth 100
+        $LocalVarBodyParameter = $AdminRoleWrite | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["grommunioAuthJwt"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["Cookie"]) {
+            $LocalVarCookieParameters['JWTCookie'] = $Configuration["Cookie"]
+            Write-Verbose ("Using API key `JWTCookie` in the cookie for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
 
         $LocalVarResult = Invoke-GroAdminApiClient -Method 'POST' `
                                 -Uri $LocalVarUri `

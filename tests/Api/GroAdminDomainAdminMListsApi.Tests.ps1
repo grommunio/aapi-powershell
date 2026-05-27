@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDomainAdminMListsApi' {
@@ -31,7 +31,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDomainAdminMListsApi' {
 
     Context 'Invoke-GroAdminPatchMlist' {
         It 'Test Invoke-GroAdminPatchMlist' {
-            #$TestResult = Invoke-GroAdminPatchMlist -DomainID "TEST_VALUE" -ID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -PostMlistsRequest "TEST_VALUE"
+            #$TestResult = Invoke-GroAdminPatchMlist -DomainID "TEST_VALUE" -ID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -MlistWrite "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -39,7 +39,7 @@ Describe -tag 'GrommunioAdmin' -name 'GroAdminGroAdminDomainAdminMListsApi' {
 
     Context 'Submit-GroAdminMlists' {
         It 'Test Submit-GroAdminMlists' {
-            #$TestResult = Submit-GroAdminMlists -DomainID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -PostMlistsRequest "TEST_VALUE"
+            #$TestResult = Submit-GroAdminMlists -DomainID "TEST_VALUE" -XCsrfToken "TEST_VALUE" -MlistWrite "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

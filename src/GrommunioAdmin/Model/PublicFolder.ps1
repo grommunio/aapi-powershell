@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -22,6 +22,8 @@ No description available.
 .PARAMETER Creationtime
 Date string with time
 .PARAMETER Container
+No description available.
+.PARAMETER SyncToMobile
 No description available.
 .OUTPUTS
 
@@ -46,7 +48,10 @@ function Initialize-GroAdminPublicFolder {
         ${Creationtime},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Container}
+        ${Container},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${SyncToMobile}
     )
 
     Process {
@@ -55,11 +60,12 @@ function Initialize-GroAdminPublicFolder {
 
 
         $PSO = [PSCustomObject]@{
-            "folderid" = ${Folderid}
-            "displayname" = ${Displayname}
-            "comment" = ${Comment}
-            "creationtime" = ${Creationtime}
-            "container" = ${Container}
+            'folderid' = ${Folderid}
+            'displayname' = ${Displayname}
+            'comment' = ${Comment}
+            'creationtime' = ${Creationtime}
+            'container' = ${Container}
+            'syncToMobile' = ${SyncToMobile}
         }
 
 
@@ -97,49 +103,56 @@ function ConvertFrom-GroAdminJsonToPublicFolder {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminPublicFolder
-        $AllProperties = ("folderid", "displayname", "comment", "creationtime", "container")
+        $AllProperties = ('folderid', 'displayname', 'comment', 'creationtime', 'container', 'syncToMobile')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "folderid"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'folderid'))) { #optional property not found
             $Folderid = $null
         } else {
-            $Folderid = $JsonParameters.PSobject.Properties["folderid"].value
+            $Folderid = $JsonParameters.PSobject.Properties['folderid'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "displayname"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'displayname'))) { #optional property not found
             $Displayname = $null
         } else {
-            $Displayname = $JsonParameters.PSobject.Properties["displayname"].value
+            $Displayname = $JsonParameters.PSobject.Properties['displayname'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "comment"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'comment'))) { #optional property not found
             $Comment = $null
         } else {
-            $Comment = $JsonParameters.PSobject.Properties["comment"].value
+            $Comment = $JsonParameters.PSobject.Properties['comment'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "creationtime"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'creationtime'))) { #optional property not found
             $Creationtime = $null
         } else {
-            $Creationtime = $JsonParameters.PSobject.Properties["creationtime"].value
+            $Creationtime = $JsonParameters.PSobject.Properties['creationtime'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "container"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'container'))) { #optional property not found
             $Container = $null
         } else {
-            $Container = $JsonParameters.PSobject.Properties["container"].value
+            $Container = $JsonParameters.PSobject.Properties['container'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'syncToMobile'))) { #optional property not found
+            $SyncToMobile = $null
+        } else {
+            $SyncToMobile = $JsonParameters.PSobject.Properties['syncToMobile'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "folderid" = ${Folderid}
-            "displayname" = ${Displayname}
-            "comment" = ${Comment}
-            "creationtime" = ${Creationtime}
-            "container" = ${Container}
+            'folderid' = ${Folderid}
+            'displayname' = ${Displayname}
+            'comment' = ${Comment}
+            'creationtime' = ${Creationtime}
+            'container' = ${Container}
+            'syncToMobile' = ${SyncToMobile}
         }
 
         return $PSO

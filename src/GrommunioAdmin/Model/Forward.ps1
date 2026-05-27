@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -14,7 +14,7 @@ No summary available.
 No description available.
 
 .PARAMETER ForwardType
-No description available.
+Forward type (0=CC, 1=Redirect)
 .PARAMETER Destination
 Destination mail address
 .OUTPUTS
@@ -26,7 +26,8 @@ function Initialize-GroAdminForward {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
+        [ValidateSet("0", "1")]
+        [System.Nullable[Int32]]
         ${ForwardType},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
         [String]
@@ -39,8 +40,8 @@ function Initialize-GroAdminForward {
 
 
         $PSO = [PSCustomObject]@{
-            "forwardType" = ${ForwardType}
-            "destination" = ${Destination}
+            'forwardType' = ${ForwardType}
+            'destination' = ${Destination}
         }
 
 
@@ -78,28 +79,28 @@ function ConvertFrom-GroAdminJsonToForward {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminForward
-        $AllProperties = ("forwardType", "destination")
+        $AllProperties = ('forwardType', 'destination')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "forwardType"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'forwardType'))) { #optional property not found
             $ForwardType = $null
         } else {
-            $ForwardType = $JsonParameters.PSobject.Properties["forwardType"].value
+            $ForwardType = $JsonParameters.PSobject.Properties['forwardType'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "destination"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'destination'))) { #optional property not found
             $Destination = $null
         } else {
-            $Destination = $JsonParameters.PSobject.Properties["destination"].value
+            $Destination = $JsonParameters.PSobject.Properties['destination'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "forwardType" = ${ForwardType}
-            "destination" = ${Destination}
+            'forwardType' = ${ForwardType}
+            'destination' = ${Destination}
         }
 
         return $PSO

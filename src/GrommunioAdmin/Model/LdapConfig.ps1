@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -22,6 +22,8 @@ Base DN to use for user search
 .PARAMETER ObjectID
 Name of an attribute that uniquely identifies an LDAP object
 .PARAMETER Users
+No description available.
+.PARAMETER Groups
 No description available.
 .OUTPUTS
 
@@ -45,7 +47,10 @@ function Initialize-GroAdminLdapConfig {
         ${ObjectID},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
-        ${Users}
+        ${Users},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
+        [PSCustomObject]
+        ${Groups}
     )
 
     Process {
@@ -54,11 +59,12 @@ function Initialize-GroAdminLdapConfig {
 
 
         $PSO = [PSCustomObject]@{
-            "disabled" = ${Disabled}
-            "connection" = ${Connection}
-            "baseDn" = ${BaseDn}
-            "objectID" = ${ObjectID}
-            "users" = ${Users}
+            'disabled' = ${Disabled}
+            'connection' = ${Connection}
+            'baseDn' = ${BaseDn}
+            'objectID' = ${ObjectID}
+            'users' = ${Users}
+            'groups' = ${Groups}
         }
 
 
@@ -96,49 +102,56 @@ function ConvertFrom-GroAdminJsonToLdapConfig {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminLdapConfig
-        $AllProperties = ("disabled", "connection", "baseDn", "objectID", "users")
+        $AllProperties = ('disabled', 'connection', 'baseDn', 'objectID', 'users', 'groups')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "disabled"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'disabled'))) { #optional property not found
             $Disabled = $null
         } else {
-            $Disabled = $JsonParameters.PSobject.Properties["disabled"].value
+            $Disabled = $JsonParameters.PSobject.Properties['disabled'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "connection"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'connection'))) { #optional property not found
             $Connection = $null
         } else {
-            $Connection = $JsonParameters.PSobject.Properties["connection"].value
+            $Connection = $JsonParameters.PSobject.Properties['connection'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "baseDn"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'baseDn'))) { #optional property not found
             $BaseDn = $null
         } else {
-            $BaseDn = $JsonParameters.PSobject.Properties["baseDn"].value
+            $BaseDn = $JsonParameters.PSobject.Properties['baseDn'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "objectID"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'objectID'))) { #optional property not found
             $ObjectID = $null
         } else {
-            $ObjectID = $JsonParameters.PSobject.Properties["objectID"].value
+            $ObjectID = $JsonParameters.PSobject.Properties['objectID'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "users"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'users'))) { #optional property not found
             $Users = $null
         } else {
-            $Users = $JsonParameters.PSobject.Properties["users"].value
+            $Users = $JsonParameters.PSobject.Properties['users'].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'groups'))) { #optional property not found
+            $Groups = $null
+        } else {
+            $Groups = $JsonParameters.PSobject.Properties['groups'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "disabled" = ${Disabled}
-            "connection" = ${Connection}
-            "baseDn" = ${BaseDn}
-            "objectID" = ${ObjectID}
-            "users" = ${Users}
+            'disabled' = ${Disabled}
+            'connection' = ${Connection}
+            'baseDn' = ${BaseDn}
+            'objectID' = ${ObjectID}
+            'users' = ${Users}
+            'groups' = ${Groups}
         }
 
         return $PSO

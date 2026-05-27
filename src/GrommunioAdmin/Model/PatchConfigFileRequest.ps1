@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -39,8 +39,8 @@ function Initialize-GroAdminPatchConfigFileRequest {
 
 
         $PSO = [PSCustomObject]@{
-            "name" = ${Name}
-            "data" = ${VarData}
+            'name' = ${Name}
+            'data' = ${VarData}
         }
 
 
@@ -78,28 +78,28 @@ function ConvertFrom-GroAdminJsonToPatchConfigFileRequest {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminPatchConfigFileRequest
-        $AllProperties = ("name", "data")
+        $AllProperties = ('name', 'data')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "name"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'name'))) { #optional property not found
             $Name = $null
         } else {
-            $Name = $JsonParameters.PSobject.Properties["name"].value
+            $Name = $JsonParameters.PSobject.Properties['name'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "data"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'data'))) { #optional property not found
             $VarData = $null
         } else {
-            $VarData = $JsonParameters.PSobject.Properties["data"].value
+            $VarData = $JsonParameters.PSobject.Properties['data'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "name" = ${Name}
-            "data" = ${VarData}
+            'name' = ${Name}
+            'data' = ${VarData}
         }
 
         return $PSO

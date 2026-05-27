@@ -1,7 +1,7 @@
 #
 # grommunio Admin API
 # grommunio administration REST API
-# Version: 1.9.2
+# Version: 1.19.0
 #
 
 <#
@@ -49,10 +49,10 @@ function Initialize-GroAdminLdapConfigConnection {
 
 
         $PSO = [PSCustomObject]@{
-            "server" = ${Server}
-            "bindUser" = ${BindUser}
-            "bindPass" = ${BindPass}
-            "starttls" = ${Starttls}
+            'server' = ${Server}
+            'bindUser' = ${BindUser}
+            'bindPass' = ${BindPass}
+            'starttls' = ${Starttls}
         }
 
 
@@ -90,42 +90,42 @@ function ConvertFrom-GroAdminJsonToLdapConfigConnection {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in GroAdminLdapConfigConnection
-        $AllProperties = ("server", "bindUser", "bindPass", "starttls")
+        $AllProperties = ('server', 'bindUser', 'bindPass', 'starttls')
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "server"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'server'))) { #optional property not found
             $Server = $null
         } else {
-            $Server = $JsonParameters.PSobject.Properties["server"].value
+            $Server = $JsonParameters.PSobject.Properties['server'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bindUser"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'bindUser'))) { #optional property not found
             $BindUser = $null
         } else {
-            $BindUser = $JsonParameters.PSobject.Properties["bindUser"].value
+            $BindUser = $JsonParameters.PSobject.Properties['bindUser'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bindPass"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'bindPass'))) { #optional property not found
             $BindPass = $null
         } else {
-            $BindPass = $JsonParameters.PSobject.Properties["bindPass"].value
+            $BindPass = $JsonParameters.PSobject.Properties['bindPass'].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "starttls"))) { #optional property not found
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match 'starttls'))) { #optional property not found
             $Starttls = $null
         } else {
-            $Starttls = $JsonParameters.PSobject.Properties["starttls"].value
+            $Starttls = $JsonParameters.PSobject.Properties['starttls'].value
         }
 
         $PSO = [PSCustomObject]@{
-            "server" = ${Server}
-            "bindUser" = ${BindUser}
-            "bindPass" = ${BindPass}
-            "starttls" = ${Starttls}
+            'server' = ${Server}
+            'bindUser' = ${BindUser}
+            'bindPass' = ${BindPass}
+            'starttls' = ${Starttls}
         }
 
         return $PSO

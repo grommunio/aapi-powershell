@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Password** | **String** | Password of the logged in user (with login) or the device owner (without login). Required when initiating wipe. | [optional] 
 **RemoteIP** | **String** | Source IP of the status update (default is the request origin). | [optional] 
-**Status** | [**Status**](Status.md) |  | 
+**Status** | **Int32** |  | 
 **Time** | **Int32** | UNIX timestamp of the status update (default is time of the request) | [optional] 
 
 ## Examples

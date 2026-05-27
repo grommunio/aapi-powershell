@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ID** | **Int32** | Unique ID of the object | [optional] [readonly] 
 **Command** | **String** | Task command | [optional] 
-**State** | [**State**](State.md) |  | [optional] 
+**State** | **Int32** | Task state (0&#x3D;Queued, 1&#x3D;Loaded, 2&#x3D;Running, 3&#x3D;Completed, 4&#x3D;Error, 5&#x3D;Cancelled) | [optional] 
 **Created** | **String** | Date string with time | [optional] 
 **Updated** | **String** | Date string with time | [optional] 
 **Message** | **String** | Status message | [optional] 
